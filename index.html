@@ -135,7 +135,7 @@
                 <div class="company-description">
                   <p>We are a Nepal based software development company dedicated to delivering innovative solutions and exceptional experiences for our clients.</p>
                 </div>
-                <a href="career.html" class="career-link">Career
+                <a href="careers.html" class="career-link">Careers
                   <span>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                     <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -184,7 +184,7 @@
             <div class="hire">
               <h2>Get in touch</h2>
               <!-- checkout formspree.io for easy form setup -->
-              <form class="work-request">
+              <form class="work-request" onsubmit="sendMail(); return false;">
                 <div class="work-request--options">
                   <span class="options-a">
                     <input id="opt-1" type="checkbox" value="app design">
@@ -261,8 +261,9 @@
                     <label for="email">Email</label>
                   </div>
                 </div>
-                <input type="submit" value="Send Request">
+                <input type="submit" value="Send Request" >
               </form>
+              <div class="popup" id="popup-message"></div>
             </div>
           </li>
         </ul>
@@ -292,5 +293,88 @@
 <footer class="copyright">
   <p>&copy; 2024 Dobaato Info Tech. All rights reserved.</p>
 </footer>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script>
+    function sendMail() {
+    // Get values from form fields
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var services = [];
+    var checkboxes = document.querySelectorAll(".work-request--options input[type='checkbox']");
+    checkboxes.forEach(function(checkbox) {
+      if (checkbox.checked) {
+        services.push(checkbox.value);
+      }
+    });
+
+    // Set up EmailJS
+    emailjs.init("NuRgvRmQJIjLmwC9G");
+
+    // Create email template
+    var templateParams = {
+      from_name: name,
+      from_email: email,
+      services: services.join(", "),
+      to_name: "Dobaato Info Tech",
+      to_email: "info@dobaato.com"
+    };
+
+    // Send email using EmailJS
+    emailjs.send("service_xeirp5g", "template_mhn604v", templateParams)
+    .then(function(response) {
+      // Show success popup
+      // var popup = document.createElement("div");
+      // popup.className = "popup";
+      // popup.innerHTML = "<p>Email sent successfully!</p>";
+      // document.body.appendChild(popup);
+      // popup.classList.add("show"); // add the show class
+      document.getElementById("popup-message").innerHTML = "<p>Email sent successfully!</p>";
+      document.getElementById("popup-message").classList.add("show");
+      // Remove popup after 3 seconds
+      setTimeout(function() {
+        // popup.remove();
+        document.getElementById("popup-message").classList.remove("show");
+      }, 3000);
+    })
+    .catch(function(error) {
+      // Show error popup
+      var popup = document.createElement("div");
+      popup.className = "popup error";
+      popup.innerHTML = "<p>Error sending email: " + error.message + "</p>";
+      document.body.appendChild(popup);
+      popup.classList.add("show"); // add the show class
+      
+      // Remove popup after 3 seconds
+      setTimeout(function() {
+        popup.remove();
+      }, 3000);
+    });
+    // Clear the form fields
+    document.getElementById("from_name").value = "";
+    document.getElementById("to_email").value = "";
+    document.getElementById("message").value = "";
+  }
+</script>
+
+<style>
+  #popup-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none; /* hide by default */
+}
+
+#popup-message.show {
+  display: block; /* show the popup */
+}
+</style>
 </body>
 </html>
