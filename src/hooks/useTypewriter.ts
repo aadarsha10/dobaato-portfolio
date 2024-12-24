@@ -1,19 +1,35 @@
 import { useState, useEffect } from 'react';
 
-export function useTypewriter(text: string, speed: number = 100) {
+export function useTypewriter(textArray: string[], speed: number = 100, pause: number = 1000) {
   const [displayText, setDisplayText] = useState('');
+  const [index, setIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    if (displayText.length < text.length && isTyping) {
-      const timeout = setTimeout(() => {
-        setDisplayText(text.slice(0, displayText.length + 1));
-      }, speed);
-      return () => clearTimeout(timeout);
-    } else if (displayText.length === text.length) {
-      setIsTyping(false);
+    let timeout: NodeJS.Timeout;
+
+    if (isTyping) {
+      if (displayText.length < textArray[index].length) {
+        timeout = setTimeout(() => {
+          setDisplayText((prev) => textArray[index].slice(0, prev.length + 1));
+        }, speed);
+      } else {
+        setIsTyping(false);
+        timeout = setTimeout(() => setIsTyping(true), pause);
+      }
+    } else {
+      if (displayText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText((prev) => prev.slice(0, -1));
+        }, speed);
+      } else {
+        setIndex((prev) => (prev + 1) % textArray.length);
+        setIsTyping(true);
+      }
     }
-  }, [displayText, text, speed, isTyping]);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isTyping, textArray, index, speed, pause]);
 
   return displayText;
 }
