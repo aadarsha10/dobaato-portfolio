@@ -1,15 +1,17 @@
-import { Facebook, Twitter, Linkedin, Github } from 'lucide-react';
 import FooterLinks from '../ui/FooterLinks';
 import FooterSocial from '../ui/FooterSocial';
 import FooterNewsletter from '../ui/FooterNewsletter';
-
+import Logo from '../../assets/svg/logo.svg'
+import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
-    <footer className="bg-dark-100 pt-16 pb-8">
+    <footer className="bg-[#1B1D1E] dark:bg-dark-100 pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">Dobaato</h3>
+            <Link to="/">
+            <img src={Logo} alt="Logo" className="w-32 mb-4" />
+            </Link>
             <p className="text-gray-400 mb-6">
               Transforming ideas into digital reality through innovative IT solutions and exceptional service delivery.
             </p>

@@ -7,7 +7,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="name" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
           Name
         </label>
         <input
@@ -15,12 +15,12 @@ export default function ContactForm() {
           id="name"
           name="name"
           required
-          className="mt-1 block w-full rounded-lg bg-dark-100 border-dark-100 text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="email" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
           Email
         </label>
         <input
@@ -28,12 +28,12 @@ export default function ContactForm() {
           id="email"
           name="email"
           required
-          className="mt-1 block w-full rounded-lg bg-dark-100 border-dark-100 text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="subject" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
           Subject
         </label>
         <input
@@ -41,12 +41,12 @@ export default function ContactForm() {
           id="subject"
           name="subject"
           required
-          className="mt-1 block w-full rounded-lg bg-dark-100 border-dark-100 text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="message" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
           Message
         </label>
         <textarea
@@ -54,7 +54,7 @@ export default function ContactForm() {
           name="message"
           rows={4}
           required
-          className="mt-1 block w-full rounded-lg bg-dark-100 border-dark-100 text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 

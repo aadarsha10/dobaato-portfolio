@@ -27,7 +27,7 @@ export function JobFilters({ filters, setFilters }: JobFiltersProps) {
   return (
     <aside className="w-full md:w-64 space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-white mb-4">Job Type</h3>
+        <h3 className="text-lg font-semibold text-gray-600 dark:text-white mb-4">Job Type</h3>
         <div className="space-y-2">
           {jobTypes.map(type => (
             <label key={type} className="flex items-center gap-2">
@@ -44,7 +44,7 @@ export function JobFilters({ filters, setFilters }: JobFiltersProps) {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-white mb-4">Location</h3>
+        <h3 className="text-lg font-semibold text-gray-600 dark:text-white mb-4">Location</h3>
         <div className="space-y-2">
           {locations.map(location => (
             <label key={location} className="flex items-center gap-2">

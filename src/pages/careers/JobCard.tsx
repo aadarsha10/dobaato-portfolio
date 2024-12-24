@@ -7,11 +7,11 @@ interface JobCardProps {
 
 export function JobCard({ job }: JobCardProps) {
   return (
-    <div className="bg-dark-100 rounded-lg p-6 hover:bg-dark-200 transition-colors">
+    <div className="bg-blue-100 dark:bg-dark-100 rounded-lg p-6 hover:dark:bg-dark-200 transition-colors">
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="text-xl font-semibold text-white">{job.title}</h3>
-          <div className="flex gap-4 mt-2 text-gray-400">
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{job.title}</h3>
+          <div className="flex gap-4 mt-2 text-gray-500 dark:text-gray-400">
             <span className="flex items-center gap-1">
               <Briefcase className="h-4 w-4" />
               {job.type}
@@ -30,7 +30,7 @@ export function JobCard({ job }: JobCardProps) {
           Apply Now
         </button>
       </div>
-      <p className="mt-4 text-gray-400">{job.description}</p>
+      <p className="mt-4 text-gray-600 dark:text-gray-400">{job.description}</p>
     </div>
   );
 }

@@ -19,7 +19,7 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section id="testimonials" className="py-24 bg-dark-200">
+    <section id="testimonials" className="py-24 bg-[#F5F6FA] dark:bg-dark-200">
       <div className="container mx-auto px-6">
         <SectionTitle
           title="Client Testimonials"
@@ -41,14 +41,14 @@ export default function Testimonials() {
           
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-white hover:text-[#0A45EC]"
+            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-gray-800 dark:text-white hover:text-[#0A45EC]"
           >
             <ChevronLeft className="h-8 w-8" />
           </button>
           
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-white hover:text-[#0A45EC]"
+            className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-800 dark:text-white hover:text-[#0A45EC]"
           >
             <ChevronRight className="h-8 w-8" />
           </button>

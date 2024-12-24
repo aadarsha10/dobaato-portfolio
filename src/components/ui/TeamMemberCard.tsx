@@ -14,7 +14,7 @@ export default function TeamMemberCard({ name, role, image, linkedin, twitter }:
       <div className="absolute inset-0 bg-gradient-to-t from-dark-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <h3 className="text-lg font-semibold text-white mb-1">{name}</h3>
-          <p className="text-[#0A45EC] mb-4">{role}</p>
+          <p className="text-gray-100 mb-4">{role}</p>
           <div className="flex gap-4">
             {linkedin && (
               <a
