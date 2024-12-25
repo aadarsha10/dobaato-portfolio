@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import MobileNav from "./ui/MobileNav";
-import Logo from "../assets/svg/logo.svg";
 import { Link } from "react-router-dom";
 import SunSvg from "../assets/svg/sun.svg";
 import MoonSvg from "../assets/svg/moon.svg";
+import { cn } from "../utils";
 
 const navigation = [
   { name: "Home", href: "#home" },
@@ -67,7 +67,10 @@ export default function Navbar() {
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
           aria-label="Global"
         >
-          <Link to={"/"} className="text-gray-800 dark:text-white">
+          <Link
+            to={"/"}
+            className={cn(isScrolled && "text-gray-800 dark:text-white")}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="153"
@@ -103,7 +106,10 @@ export default function Navbar() {
                 className={`text-sm font-medium transition-colors ${
                   activeSection === item.href.slice(1)
                     ? "text-[#0A45EC]"
-                    : "dark:text-white text-gray-400 hover:text-blue-800"
+                    : cn(
+                        " hover:text-blue-800",
+                        isScrolled && " text-gray-400 dark:text-white"
+                      )
                 }`}
               >
                 {item.name}
@@ -115,7 +121,9 @@ export default function Navbar() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium  text-gray-400 dark:text-white hover:text-blue-800 transition-colors"
+                className={`text-sm font-medium  hover:text-blue-800 transition-colors ${
+                  isScrolled && " text-gray-400 dark:text-white"
+                }`}
               >
                 {item.name}
               </a>
