@@ -50,10 +50,45 @@ export default function Navbar() {
     const href = e.currentTarget.getAttribute("href");
     if (href?.startsWith("#")) {
       e.preventDefault();
-      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+
+      if (typeof window !== "undefined") {
+        // Navigate to the homepage if not already on it
+        if (window.location.pathname !== "/") {
+          window.location.href = `/${href}`;
+          // Delay smooth scrolling until the page has loaded
+          window.addEventListener("load", () => {
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+          return;
+        }
+
+        // If already on the homepage, perform smooth scrolling
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        } else {
+          // Retry in case the element is dynamically loaded
+          const observer = new MutationObserver(() => {
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth" });
+              observer.disconnect(); // Stop observing once found
+            }
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+        }
+      }
     }
   };
-
+  const handleTheme = () => {
+    if (typeof window !== "undefined") {
+      if (window?.location?.pathname !== "/") return true;
+    }
+    return false;
+  };
   return (
     <>
       <header
@@ -70,7 +105,10 @@ export default function Navbar() {
           <div className="flex  justify-between w-full">
             <Link
               to={"/"}
-              className={cn(isScrolled && "text-gray-800 dark:text-white")}
+              className={cn(
+                isScrolled && "text-gray-800 dark:text-white",
+                handleTheme() && "text-gray-800 dark:text-white"
+              )}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +158,8 @@ export default function Navbar() {
                     ? "text-[#0A45EC]"
                     : cn(
                         " hover:text-blue-800",
-                        isScrolled && " text-gray-400 dark:text-white"
+                        isScrolled && " text-gray-400 dark:text-white",
+                        handleTheme() && "text-gray-400"
                       )
                 }`}
               >
@@ -134,7 +173,8 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 className={`text-sm font-medium  hover:text-blue-800 transition-colors ${
-                  isScrolled && " text-gray-400 dark:text-white"
+                  (isScrolled || handleTheme()) &&
+                  " text-gray-400 dark:text-white"
                 }`}
               >
                 {item.name}
@@ -151,7 +191,7 @@ export default function Navbar() {
                     id="theme-toggle-dark-icon"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill={isScrolled ? "#9BA3AF":'white'}
+                    fill={(isScrolled || handleTheme()) ? "#9BA3AF" : "white"}
                     className="w-4 h-4"
                     viewBox="0 0 18 20"
                   >
