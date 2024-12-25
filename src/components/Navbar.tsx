@@ -81,7 +81,8 @@ export default function Navbar() {
                 {item.name}
               </a>
             ))}
-            <div className="h-6 w-px bg-gray-600" />
+            <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
+
             {externalLinks.map((item) => (
               <a
                 key={item.name}
@@ -92,7 +93,7 @@ export default function Navbar() {
               </a>
             ))}
             <div className="flex items-center gap-5">
-              <div className="h-6 w-px bg-gray-600" />
+              <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
               <button
                 onClick={() => setIsDark((prev) => !prev)}
                 className="hover:bg-gray-300 p-2 rounded-md transition-all ease-in-out duration-200"

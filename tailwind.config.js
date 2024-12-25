@@ -24,7 +24,7 @@ export default {
           300: "#121212",
         },
         green:{
-          1000: "#07351E",
+          1000: "#1976D2",
         }
       },
       fontFamily: {
