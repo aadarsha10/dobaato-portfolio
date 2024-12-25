@@ -54,7 +54,7 @@ export default function ProjectJourney() {
         <div className="mt-16 relative">
           {/* Animated Line */}
           <motion.div
-            className="absolute top-[20%] left-[10%] h-1 bg-primary-500 -translate-y-1/2 hidden md:block z-10"
+            className="absolute top-[20%] left-[10%] h-0.5 bg-primary-500 -translate-y-1/2 hidden md:block z-10"
             initial={{ width: 0 }}
             animate={controls}
             variants={{
