@@ -151,7 +151,7 @@ export default function Navbar() {
                     id="theme-toggle-dark-icon"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="#1E293B"
+                    fill={isScrolled ? "#9BA3AF":'white'}
                     className="w-4 h-4"
                     viewBox="0 0 18 20"
                   >

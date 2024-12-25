@@ -3,6 +3,9 @@ import * as THREE from "three";
 import BIRDS from "vanta/dist/vanta.clouds.min.js";
 import { useTypewriter } from "../hooks/useTypewriter";
 import { ArrowRight } from "lucide-react";
+import NetworkSphere from "./three/NetworkSphere";
+import CrossroadsScene from "./three/CrossroadsScene";
+import ThreeBackground from "./three/falling-stars";
 
 export default function Hero() {
   const vantaRef = useRef<HTMLDivElement | null>(null);
@@ -35,19 +38,24 @@ export default function Hero() {
   return (
     <section
       id="home"
-      ref={vantaRef}
+      // ref={vantaRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
+      <ThreeBackground />
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center">
-          <h1 className="text-4xl sm:text-6xl font-bold text-gray-800 dark:text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6">
             The Crossroads of{" "}
             <span className="text-[#0A45EC] inline-block min-w-[2ch]">
               {typedText}
               <span className="animate-pulse">|</span>
             </span>
           </h1>
-          <p className={("text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto")}>
+          <p
+            className={
+              "text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            }
+          >
             Where innovation meets excellence in digital transformation
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -3,7 +3,7 @@ import NetworkSphere from './NetworkSphere';
 
 export default function CrossroadsScene() {
   return (
-    <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0  h-screen">
       <Canvas
         camera={{ position: [0, 0, 10], fov: 50 }}
         style={{ background: 'transparent' }}
