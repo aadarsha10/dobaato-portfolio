@@ -7,7 +7,7 @@ interface JobCardProps {
 
 export function JobCard({ job }: JobCardProps) {
   return (
-    <div className="bg-blue-100 dark:bg-dark-100 rounded-lg p-6 hover:dark:bg-dark-200 transition-colors">
+    <div className="bg-blue-100 dark:bg-[#1E293B]  rounded-lg p-6 hover:dark:bg-dark-200 transition-colors">
       <div className="flex justify-between items-start">
         <div>
           <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{job.title}</h3>

@@ -5,7 +5,7 @@ import { teamMembers } from '../../data/team';
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 bg-[#F5F6FA] dark:bg-dark-200">
+    <section id="team" className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
       <div className="container mx-auto px-6">
         <SectionTitle
           title="Our Team"

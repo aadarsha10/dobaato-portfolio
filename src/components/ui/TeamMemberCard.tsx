@@ -3,7 +3,7 @@ import { TeamMember } from '../../types';
 
 export default function TeamMemberCard({ name, role, image, linkedin, twitter }: TeamMember) {
   return (
-    <div className="group relative rounded-lg overflow-hidden bg-dark-100">
+    <div className="group relative rounded-lg overflow-hidden bg-[#1E293B] ">
       <div className="aspect-square overflow-hidden">
         <img
           src={image}

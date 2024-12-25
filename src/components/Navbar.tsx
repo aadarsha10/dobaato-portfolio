@@ -59,7 +59,7 @@ export default function Navbar() {
       <header
         className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-gray-100 dark:bg-dark-300/95 backdrop-blur-sm shadow-lg"
+            ? "bg-gray-100 dark:bg-[#10172A] backdrop-blur-sm shadow-lg"
             : "bg-transparent"
         }`}
       >

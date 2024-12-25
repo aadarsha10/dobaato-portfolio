@@ -1,44 +1,52 @@
-import { motion } from 'framer-motion';
-import { BarChart3, Globe, Smartphone, Palette } from 'lucide-react';
-import SectionTitle from '../ui/SectionTitle';
-import ServiceCard from '../ui/ServiceCard';
+import { motion } from "framer-motion";
+import { BarChart3, Globe, Smartphone, Palette } from "lucide-react";
+import SectionTitle from "../ui/SectionTitle";
+import ServiceCard from "../ui/ServiceCard";
 
 const services = [
   {
-    title: 'Data Analytics',
-    description: 'Transform your data into actionable insights with our advanced analytics solutions.',
+    title: "Data Analytics",
+    description:
+      "Transform your data into actionable insights with our advanced analytics solutions.",
     icon: BarChart3,
-    color: 'from-blue-600 to-cyan-500',
+    color: "from-blue-600 to-cyan-500",
   },
   {
-    title: 'Web Development',
-    description: 'Create powerful web applications using cutting-edge technologies.',
+    title: "Web Development",
+    description:
+      "Create powerful web applications using cutting-edge technologies.",
     icon: Globe,
-    color: 'from-purple-600 to-blue-500',
+    color: "from-purple-600 to-blue-500",
   },
   {
-    title: 'Mobile Development',
-    description: 'Build native and cross-platform mobile applications that users love.',
+    title: "Mobile Development",
+    description:
+      "Build native and cross-platform mobile applications that users love.",
     icon: Smartphone,
-    color: 'from-pink-600 to-purple-500',
+    color: "from-pink-600 to-purple-500",
   },
   {
-    title: 'UI/UX Design',
-    description: 'Design intuitive and beautiful user interfaces that enhance user experience.',
+    title: "UI/UX Design",
+    description:
+      "Design intuitive and beautiful user interfaces that enhance user experience.",
     icon: Palette,
-    color: 'from-orange-600 to-pink-500',
+    color: "from-orange-600 to-pink-500",
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-[#F5F6FA] dark:bg-dark-200">
+    <section
+      id="services"
+      className="py-24 bg-gray-100 dark:bg-[#10172A] overflow-hidden"
+   
+    >
       <div className="container mx-auto px-6">
         <SectionTitle
           title="Our Services"
           subtitle="Comprehensive IT Solutions"
         />
-        
+
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
             <motion.div

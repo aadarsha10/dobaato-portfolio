@@ -3,7 +3,7 @@ import { Project } from '../../types';
 
 export default function ProjectCard({ title, description, image, demoUrl, githubUrl }: Project) {
   return (
-    <div className="group relative rounded-lg overflow-hidden bg-gray-200 dark:bg-dark-100">
+    <div className="group relative rounded-lg overflow-hidden bg-gray-200 dark:bg-[#1E293B] ">
       <div className="aspect-video overflow-hidden">
         <img
           src={image}

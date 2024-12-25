@@ -24,7 +24,7 @@ export default function MobileNav() {
     <motion.nav
       initial={{ y: 100 }}
       animate={{ y: 0 }}
-      className="lg:hidden fixed bottom-0 left-0 right-0 bg-dark-100/95 backdrop-blur-sm border-t border-dark-200 z-50"
+      className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#1E293B] /95 backdrop-blur-sm border-t border-dark-200 z-50"
     >
       <div className="flex justify-around py-2">
         {navItems.map(({ icon: Icon, label, href }) => (

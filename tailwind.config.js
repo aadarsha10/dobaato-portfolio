@@ -23,9 +23,11 @@ export default {
           200: "#171717",
           300: "#121212",
         },
-        green:{
+        green: {
           1000: "#1976D2",
-        }
+        },
+        "custom-blue-start": "#a1c4fd",
+        "custom-blue-end": "#c2e9fb",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

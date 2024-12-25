@@ -5,7 +5,7 @@ import Logo from '../../assets/svg/logo.svg'
 import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
-    <footer className="bg-[#1B1D1E] dark:bg-dark-100 pt-16 pb-8">
+    <footer className="bg-[#1B1D1E] dark:bg-[#1E293B]  pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>

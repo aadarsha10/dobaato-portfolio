@@ -23,7 +23,7 @@ const features = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-[#F5F6FA] dark:bg-dark-200">
+    <section id="about" className="py-24 bg-gray-50 dark:bg-[#10172A]">
       <div className="container mx-auto px-6">
         <SectionTitle
           title="About Us"

@@ -44,7 +44,7 @@ const highlights = [
 
 export default function CompanyHighlights() {
   return (
-    <section id="highlights" className="py-24 bg-[#F5F6FA] dark:bg-dark-200">
+    <section id="highlights" className="py-24 bg-white dark:bg-[#10172A]">
       <div className="container mx-auto px-6">
         <SectionTitle
           title="Why Choose Us"

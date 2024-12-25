@@ -13,7 +13,7 @@ export default function Portfolio() {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="portfolio" className="py-24 bg-[#F5F6FA] dark:bg-dark-200">
+    <section id="portfolio" className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
       <div className="container mx-auto px-6">
         <SectionTitle
           title="Our Portfolio"
@@ -28,7 +28,7 @@ export default function Portfolio() {
               className={`px-4 py-2 rounded-lg capitalize ${
                 activeFilter === category
                   ? 'bg-primary-500 text-white'
-                  : 'bg-gray-200 dark:bg-dark-100 text-gray-500 dark:text-gray-400 hover:dark:bg-dark-300 hover:bg-gray-300'
+                  : 'bg-gray-200 dark:bg-[#1E293B]  text-gray-500 dark:text-gray-400 hover:dark:bg-dark-300 hover:bg-gray-300'
               }`}
             >
               {category}

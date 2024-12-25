@@ -44,7 +44,7 @@ export default function ProjectJourney() {
   }, [inView, controls]);
 
   return (
-    <section id="journey" className="py-24 bg-[#F5F6FA] dark:bg-dark-200" ref={ref}>
+    <section id="journey" className="py-24 bg-white dark:bg-[#10172A]" ref={ref}>
       <div className="container mx-auto px-6">
         <SectionTitle
           title="Project Journey"

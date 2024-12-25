@@ -15,7 +15,7 @@ export default function ContactForm() {
           id="name"
           name="name"
           required
-          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-[#1E293B]  border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 
@@ -28,7 +28,7 @@ export default function ContactForm() {
           id="email"
           name="email"
           required
-          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-[#1E293B]  border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 
@@ -41,7 +41,7 @@ export default function ContactForm() {
           id="subject"
           name="subject"
           required
-          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-[#1E293B]  border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 
@@ -54,7 +54,7 @@ export default function ContactForm() {
           name="message"
           rows={4}
           required
-          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-dark-100 border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
+          className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-[#1E293B]  border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
 
