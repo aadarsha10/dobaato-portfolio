@@ -1,6 +1,6 @@
 interface SectionTitleProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }
 
 export default function SectionTitle({ title, subtitle }: SectionTitleProps) {
@@ -9,9 +9,11 @@ export default function SectionTitle({ title, subtitle }: SectionTitleProps) {
       <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
         {title}
       </h2>
-      <p className="mt-4 text-xl text-gray-500 dark:text-gray-400">
-        {subtitle}
-      </p>
+      {subtitle && (
+        <p className="mt-4 text-xl text-gray-500 dark:text-gray-400">
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }

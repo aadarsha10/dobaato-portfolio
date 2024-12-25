@@ -8,29 +8,25 @@ import { useEffect } from "react";
 const steps = [
   {
     icon: Search,
-    title: "Research & Consultation",
-    description: "In-depth analysis and requirement gathering",
+    title: "Consultation and Research",
+    description: "Tailoring solutions to meet client-specific needs.",
   },
   {
     icon: Code2,
     title: "Agile Development",
-    description: "Iterative development with regular feedback",
+    description: "Ensuring adaptability and rapid iterations.",
   },
   {
     icon: TestTube2,
-    title: "Testing",
-    description: "Comprehensive testing and quality assurance",
+    title: "Rigorous Testing",
+    description: "Delivering reliable and high-performing solutions.",
   },
   {
     icon: Rocket,
-    title: "Deployment",
-    description: "Seamless deployment and integration",
+    title: "Seamless Delivery and Support",
+    description: "Providing ongoing maintenance and optimization",
   },
-  {
-    icon: Headphones,
-    title: "Support",
-    description: "Ongoing maintenance and support",
-  },
+
 ];
 
 export default function ProjectJourney() {
@@ -47,7 +43,7 @@ export default function ProjectJourney() {
     <section id="journey" className="py-24 bg-white dark:bg-[#10172A]" ref={ref}>
       <div className="container mx-auto px-6">
         <SectionTitle
-          title="Project Journey"
+          title="Our Project Approach"
           subtitle="Our Proven Development Process"
         />
 
@@ -64,7 +60,7 @@ export default function ProjectJourney() {
             transition={{ duration: 5, ease: "easeInOut" }}
           />
 
-          <div className="grid gap-8 md:grid-cols-5 relative z-10">
+          <div className="grid gap-8 md:grid-cols-4 relative z-10">
             {steps.map((step, index) => (
               <motion.div
                 key={step.title}

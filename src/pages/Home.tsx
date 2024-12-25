@@ -11,18 +11,24 @@ import Team from '../components/sections/Team';
 import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
 import Footer from '../components/sections/Footer';
+import Introduction from '../components/sections/Introduction';
+import WelcomeMessage from '../components/sections/WelcomeMessage';
+import UniqueAspect from '../components/sections/UniqueAspect';
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <Hero />
+      <Introduction/>
+      <WelcomeMessage/>
       <About />
       <Services />
+      <ProjectJourney />
+      <UniqueAspect/>
+      <Portfolio />
       <Industries />
       <Experience />
-      <ProjectJourney />
-      <Portfolio />
       <CompanyHighlights />
       <Team />
       <Testimonials />

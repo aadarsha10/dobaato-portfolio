@@ -1,28 +1,12 @@
+import img_src from "../assets/images/saahitt.png";
 export const projects = [
   {
-    id: '1',
-    title: 'E-Commerce Platform',
-    description: 'A modern e-commerce platform built with React and Node.js',
-    image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80&w=800',
-    category: 'web',
-    demoUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-  },
-  {
-    id: '2',
-    title: 'Analytics Dashboard',
-    description: 'Real-time analytics dashboard for business intelligence',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800',
-    category: 'analytics',
-    demoUrl: 'https://example.com',
-  },
-  {
-    id: '3',
-    title: 'Mobile Banking App',
-    description: 'Secure and intuitive mobile banking application',
-    image: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&q=80&w=800',
-    category: 'mobile',
-    demoUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
+    id: "1",
+    title: "Saahitt",
+    description:
+      "Saahitt is Dobaato's cutting-edge data project that transforms Nepal’s events and wedding industry, leveraging insights to streamline bookings and enhance user experiences. Using a tech stack that includes Python, Flask, PostgreSQL, and custom data parsing tools, Saahitt simplifies tasks from filling booked dates to managing unavailability, ensuring precision in every detail.",
+    image: img_src,
+    category: "all",
+    demoUrl: "https://saahitt.com/",
   },
 ];
