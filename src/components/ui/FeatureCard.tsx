@@ -4,7 +4,7 @@ import { cn } from "../../utils";
 interface FeatureCardProps {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: LucideIcon | React.ElementType;
   image?: boolean;
 }
 
@@ -20,7 +20,7 @@ export default function FeatureCard({
         {!image && (
           <Icon className="h-6 w-6 text-gray-50 dark:text-primary-1000" />
         )}
-        {image && Icon}
+        {image && (Icon as React.ElementType)}
       </div>
       <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
       <p className="text-gray-200 dark:text-gray-400">{description}</p>

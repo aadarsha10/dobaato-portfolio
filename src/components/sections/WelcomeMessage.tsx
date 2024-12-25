@@ -1,38 +1,22 @@
-import { Code2, Gem, Users } from "lucide-react";
 import SectionTitle from "../ui/SectionTitle";
-
-const features = [
-  {
-    title: "Modular Development",
-    description:
-      "We build scalable solutions using modern, modular architecture for maximum flexibility and maintainability.",
-    icon: Code2,
-  },
-  {
-    title: "Client-Focused",
-    description:
-      "Our approach prioritizes clear communication and understanding of client needs throughout the development process.",
-    icon: Users,
-  },
-  {
-    title: "Quality First",
-    description:
-      "Rigorous testing and attention to detail ensure delivery of robust, production-ready solutions.",
-    icon: Gem,
-  },
-];
+import image from "../../assets/images/WhatsApp Image 2024-12-25 at 12.12.11 PM.jpeg";
 
 export default function WelcomeMessage() {
   return (
-    <section id="about" className="py-24 bg-gray-50 dark:bg-[#10172A]">
+    <section id="about" className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
       <div className="container mx-auto px-6">
         <SectionTitle
           title="CEO Welcome Message"
           subtitle="Mr. Aadarsha Man Shrestha"
         />
       </div>
-      <div className="flex flex-col gap-6 px-6  md:flex-row w-full md:w-[60%]  items-center justify-between md:mx-auto pl-6 md:pl-4 ">
-        <p className="text-gray-600 text-[18px] mx-auto mt-12 w-full md:w-[65%]">
+      <div className="flex items-center flex-col md:flex-row w-full md:w-[70%]  gap-10 mx-auto mt-12 px-6 md:px-0">
+        <img
+          src={image}
+          alt="adrash-man-shrestha"
+          className="max-w-[100px] aspect-square md:aspect-auto rounded-full md:max-w-[360px] md:rounded-lg"
+        />
+        <p className="text-gray-600 dark:text-gray-200 text-[18px] mx-auto w-full md:w-[50%]">
           At Dobaato, we bring together a team with decades of collective
           experience in data-centric projects across a range of industries. From
           previous work with Banking and Financial Institutions (BFIs) to our

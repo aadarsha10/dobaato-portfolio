@@ -66,7 +66,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-24 bg-gray-100 dark:bg-[#10172A] overflow-hidden"
+      className="py-24 bg-[#F5F6FA] dark:bg-[#10172A] overflow-hidden"
     >
       <div className="container mx-auto px-6">
         <SectionTitle

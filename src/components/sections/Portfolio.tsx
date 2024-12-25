@@ -13,7 +13,7 @@ export default function Portfolio() {
   //   : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="portfolio" className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
+    <section id="portfolio" className="py-24 bg-white dark:bg-[#10172A]">
       <div className="container mx-auto px-6">
         <SectionTitle
           title="Our Portfolio"

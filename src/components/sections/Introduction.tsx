@@ -29,7 +29,7 @@ export default function Introduction() {
         <SectionTitle title="Introduction" />
       </div>
       <div className="flex flex-col gap-6 px-6  md:flex-row w-full md:w-[60%]  items-center justify-between md:mx-auto pl-6 md:pl-4 ">
-        <p className="text-gray-800 text-[20px] mx-auto mt-12 w-full md:w-[65%]">
+        <p className="text-gray-800 dark:text-gray-200 text-[20px] mx-auto mt-12 w-full md:w-[65%]">
           <span className="font-semibold">Dobaato</span> is a leading IT
           services company, committed to delivering high-quality, innovative
           solutions tailored to the unique needs of our clients. With over 9

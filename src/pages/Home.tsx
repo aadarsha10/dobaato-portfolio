@@ -29,8 +29,8 @@ export default function Home() {
       <Portfolio />
       <Industries />
       <Experience />
-      <CompanyHighlights />
       <Team />
+      <CompanyHighlights />
       <Testimonials />
       <Contact />
       <Footer />

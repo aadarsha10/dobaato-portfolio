@@ -1,0 +1,14 @@
+.text {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  .text:before,
+  .text:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid #e2e4e9;
+    margin: auto;
+  }
+  
