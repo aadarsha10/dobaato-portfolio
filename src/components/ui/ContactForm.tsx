@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    services: "",
+    message: "",
   });
   const [status, setStatus] = useState({
     isSubmitting: false,
     error: null,
-    success: false
+    success: false,
   });
 
   // Initialize EmailJS on component mount
   useEffect(() => {
     // Load EmailJS SDK
-    const script = document.createElement('script');
-    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
     script.async = true;
     document.body.appendChild(script);
 
@@ -33,7 +35,7 @@ const ContactForm = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -45,10 +47,11 @@ const ContactForm = () => {
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
-        subject: formData.subject,
+        services: formData.services,
         message: formData.message,
+        from_phone: formData.phone,
         to_name: "Dobaato Info Tech",
-        to_email: "info@dobaato.com"
+        to_email: "info@dobaato.com",
       };
 
       await window.emailjs.send(
@@ -60,27 +63,27 @@ const ContactForm = () => {
       setStatus({
         isSubmitting: false,
         error: null,
-        success: true
+        success: true,
       });
 
       // Reset form
       setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+        name: "",
+        email: "",
+        services: "",
+        message: "",
+        phone: "",
       });
 
       // Reset success message after 3 seconds
       setTimeout(() => {
-        setStatus(prev => ({ ...prev, success: false }));
+        setStatus((prev) => ({ ...prev, success: false }));
       }, 3000);
-
     } catch (error) {
       setStatus({
         isSubmitting: false,
         error: "Failed to send message. Please try again.",
-        success: false
+        success: false,
       });
     }
   };
@@ -89,7 +92,10 @@ const ContactForm = () => {
     <div className="w-full mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
+          <label
+            htmlFor="name"
+            className="block text-sm font-normal text-gray-500 dark:text-gray-300"
+          >
             Name
           </label>
           <input
@@ -104,7 +110,27 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-normal text-gray-500 dark:text-gray-300"
+          >
+            Phone Number
+          </label>
+          <input
+            type="phone"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-[#1E293B] border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-normal text-gray-500 dark:text-gray-300"
+          >
             Email
           </label>
           <input
@@ -119,22 +145,36 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="subject" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
-            Subject
+          <label
+            htmlFor="services"
+            className="block text-sm font-normal text-gray-500 dark:text-gray-300"
+          >
+            Services
           </label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
+          <select
+            id="services"
+            name="services"
+            value={formData.services}
             onChange={handleChange}
             required
             className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-[#1E293B] border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
-          />
+          >
+            <option value="Web Development">Web Development</option>
+            <option value="Mobile App Development">
+              Mobile App Development
+            </option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="Digital Marketing">Digital Marketing</option>
+            <option value="Data Analysis">Data Analysis</option>
+            <option value="Content Writing">Content Writing</option>
+          </select>
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-normal text-gray-500 dark:text-gray-300">
+          <label
+            htmlFor="message"
+            className="block text-sm font-normal text-gray-500 dark:text-gray-300"
+          >
             Message
           </label>
           <textarea
@@ -148,9 +188,7 @@ const ContactForm = () => {
           />
         </div>
 
-        {status.error && (
-          <p className="text-red-500 text-sm">{status.error}</p>
-        )}
+        {status.error && <p className="text-red-500 text-sm">{status.error}</p>}
 
         {status.success && (
           <p className="text-green-500 text-sm">Message sent successfully!</p>
@@ -161,7 +199,7 @@ const ContactForm = () => {
           disabled={status.isSubmitting}
           className="w-full px-6 py-3 rounded-lg bg-primary-500 text-white font-semibold hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          {status.isSubmitting ? 'Sending...' : 'Send Message'}
+          {status.isSubmitting ? "Sending..." : "Send Message"}
         </button>
       </form>
     </div>

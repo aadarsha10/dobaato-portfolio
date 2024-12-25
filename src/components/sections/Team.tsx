@@ -101,10 +101,10 @@ export default function Team() {
             ))}
           </div>
           {!showAll && (
-            <div className="flex mt-6 w-full flex-col max-h-[118px] overflow-hidden bg-top relative fade-after">
+            <div className="flex mt-6 w-full flex-col max-h-[118px] overflow-hidden bg-top relative fade-after dark:fade-dark-after">
               <LineThrough
                 text={allTeams?.[0].title}
-                className="text-gray-700 font-semibold"
+                className="text-gray-700 dark:text-gray-200 font-semibold"
               />
               <div className="mt-6 flex flex-row gap-8 flex-wrap justify-center">
                 {allTeams?.[0].members.map((member, idx) => (
@@ -162,7 +162,7 @@ export default function Team() {
 
           <button
             onClick={toggleShowAll}
-            className=" text-gray-700 font-semibold absolute bottom-4 right-[50%] translate-x-1/2 "
+            className=" text-gray-700 dark:text-gray-200 font-semibold absolute bottom-4 right-[50%] translate-x-1/2 "
           >
             {showAll ? <></> : <ChevronDown />}
           </button>

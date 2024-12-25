@@ -24,7 +24,7 @@ export default function Introduction() {
             to redefine IT services in Nepal and expand our global footprint
             with impactful solutions.
           </p>
-          <div className="text-gray-900">
+          <div className="text-gray-900 dark:text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="153"

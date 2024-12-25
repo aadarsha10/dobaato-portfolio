@@ -14,7 +14,7 @@ export default function ServiceCard({
   color,
 }: ServiceCardProps) {
   return (
-    <div className="group relative p-6 rounded-lg  bg-green-1000 dark:bg-[#1E293B]  hover:dark:bg-dark-200 hover:opacity-90 overflow-hidden">
+    <div className="group relative p-6 rounded-lg h-full bg-green-1000 dark:bg-[#1E293B]  hover:dark:bg-dark-200 hover:opacity-90 overflow-hidden">
       <div
         className={`absolute inset-0 bg-gradient-to-r ${color} opacity-0 group-hover:opacity-10 transition-opacity`}
       />
