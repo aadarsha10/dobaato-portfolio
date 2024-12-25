@@ -1,6 +1,6 @@
 import SectionTitle from "../ui/SectionTitle";
 import image from "../../assets/images/WhatsApp Image 2024-12-25 at 12.12.11 PM.jpeg";
-
+import { motion } from "framer-motion";
 export default function WelcomeMessage() {
   return (
     <section id="about" className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
@@ -10,13 +10,19 @@ export default function WelcomeMessage() {
           subtitle="Mr. Aadarsha Man Shrestha"
         />
       </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
       <div className="flex items-center flex-col md:flex-row w-full md:w-[70%]  gap-10 mx-auto mt-12 px-6 md:px-0">
         <img
           src={image}
           alt="adrash-man-shrestha"
           className="max-w-[100px] aspect-square md:aspect-auto rounded-full md:max-w-[360px] md:rounded-lg"
         />
-        <p className="text-gray-600 dark:text-gray-200 text-[18px] mx-auto w-full md:w-[50%]">
+        <p className="text-gray-600 dark:text-gray-200 text-[16px] md:text-[18px] mx-auto w-full md:w-[50%]">
           At Dobaato, we bring together a team with decades of collective
           experience in data-centric projects across a range of industries. From
           previous work with Banking and Financial Institutions (BFIs) to our
@@ -38,6 +44,7 @@ export default function WelcomeMessage() {
           diverse industries, and make a lasting difference.
         </p>
       </div>
+      </motion.div>
     </section>
   );
 }

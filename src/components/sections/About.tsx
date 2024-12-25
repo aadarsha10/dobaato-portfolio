@@ -32,25 +32,35 @@ export default function About() {
           title="About Us"
           subtitle="Delivering Excellence in IT Solutions"
         />
-
-        <div className="flex flex-col md:grid grid-cols-2 gap-6 md:gap-12 mt-12">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-[25px] text-gray-600 dark:text-gray-100 font-bold">Our Vision</h2>
-            <p className="text-[16px] text-gray-700 dark:text-gray-200">
-              To be the leading digital transformation partner in Nepal and a
-              global player, delivering innovative solutions that redefine
-              industries and empower businesses to achieve unprecedented growth
-              and success.
-            </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col md:grid grid-cols-2 gap-6 md:gap-12 mt-12">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-[25px] text-gray-600 dark:text-gray-100 font-bold">
+                Our Vision
+              </h2>
+              <p className="text-[16px] text-gray-700 dark:text-gray-200">
+                To be the leading digital transformation partner in Nepal and a
+                global player, delivering innovative solutions that redefine
+                industries and empower businesses to achieve unprecedented
+                growth and success.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h2 className="text-[25px] text-gray-600 dark:text-gray-100 font-bold">
+                Our Mission
+              </h2>
+              <p className="text-[16px] text-gray-700 dark:text-gray-200">
+                Our mission is to redefine IT services in Nepal and expand our
+                global footprint with impactful solutions.
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <h2 className="text-[25px] text-gray-600 dark:text-gray-100 font-bold">Our Mission</h2>
-            <p className="text-[16px] text-gray-700 dark:text-gray-200">
-              Our mission is to redefine IT services in Nepal and expand our
-              global footprint with impactful solutions.
-            </p>
-          </div>
-        </div>
+        </motion.div>
         <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <motion.div
