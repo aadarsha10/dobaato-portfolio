@@ -21,7 +21,7 @@ export default function Team() {
     },
     {
       src: Member1,
-      name: "Anish Shrestha",
+      name: "Anish Paudel",
       role: "Co-founder & Senior Developer",
     },
     {

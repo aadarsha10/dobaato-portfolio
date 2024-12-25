@@ -2,10 +2,10 @@ import { Facebook, Twitter, Linkedin, Github } from 'lucide-react';
 
 export default function FooterSocial() {
   const socialLinks = [
-    { icon: Facebook, href: 'https://facebook.com' },
-    { icon: Twitter, href: 'https://twitter.com' },
-    { icon: Linkedin, href: 'https://linkedin.com' },
-    { icon: Github, href: 'https://github.com' },
+    // { icon: Facebook, href: 'https://facebook.com' },
+    // { icon: Twitter, href: 'https://twitter.com' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/dobaato/' },
+    { icon: Github, href: 'https://github.com/Dobaato' },
   ];
 
   return (

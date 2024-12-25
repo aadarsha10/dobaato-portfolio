@@ -45,7 +45,7 @@ export default function ContactInfo() {
           <p className="text-gray-400">Mon - Fri: 9:00 AM - 6:00 PM</p>
         </div>
       </div>
-      <div className="flex items-start gap-4">
+      {/* <div className="flex items-start gap-4">
         <Handshake className="h-5 w-5 mt-1 text-[#0A45EC] flex-shrink-0" />
         <div>
           <h3 className="font-medium text-gray-500 dark:text-white mb-1">
@@ -60,7 +60,7 @@ export default function ContactInfo() {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
