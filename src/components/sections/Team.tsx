@@ -36,7 +36,7 @@ export default function Team() {
       title: "Development Teams",
       members: [
         { name: "Aadarsha Man Shrestha ", exp: "4+" },
-        { name: "Anish Poudel", exp: "2+" },
+        { name: "Anish Paudel", exp: "2+" },
         { name: "Dilip Bam", exp: "3+" },
         { name: "Rajan Raj Shah", exp: "3+" },
         { name: "Kundan Bhattarai", exp: "6+" },
