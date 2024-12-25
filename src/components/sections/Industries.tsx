@@ -47,7 +47,7 @@ const industries = [
 export default function Industries() {
   return (
     <section id="industries" className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle
           title="Industries We Serve"
           subtitle="Specialized Solutions for Diverse Sectors"

@@ -15,7 +15,7 @@ export default function JourneyStep({
 }: JourneyStepProps) {
   return (
     <div className="relative text-center">
-      <div className="w-16 h-16 rounded-full bg-gray-200 dark:bg-[#171C2D] flex items-center justify-center mx-auto mb-4 z-20 ">
+      <div className="w-16 h-16 rounded-full bg-gray-200 dark:bg-[#1D2C4D] flex items-center justify-center mx-auto mb-4 z-20 ">
         <Icon className="h-8 w-8 text-primary-1000 dark:text-primary-1000 z-30" />
       </div>
 

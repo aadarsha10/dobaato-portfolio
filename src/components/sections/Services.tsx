@@ -68,13 +68,13 @@ export default function Services() {
       id="services"
       className="py-24 bg-[#F5F6FA] dark:bg-[#10172A] overflow-hidden"
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle
           title="Our Services"
           subtitle="Comprehensive IT Solutions"
         />
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <motion.div
               key={service.title}

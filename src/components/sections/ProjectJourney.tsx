@@ -41,7 +41,7 @@ export default function ProjectJourney() {
 
   return (
     <section id="journey" className="py-24 bg-white dark:bg-[#10172A]" ref={ref}>
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 w-full md:w-[70%]">
         <SectionTitle
           title="Our Project Approach"
           subtitle="Our Proven Development Process"

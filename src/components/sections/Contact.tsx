@@ -5,7 +5,7 @@ import ContactInfo from '../ui/ContactInfo';
 export default function Contact() {
   return (
     <section id="contact" className="py-24 bg-white dark:bg-[#10172A]">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle
           title="Get in Touch"
           subtitle="Let's Discuss Your Next Project"

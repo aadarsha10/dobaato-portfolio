@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Introduction() {
   return (
     <section id="about" className="py-24 bg-gray-50 dark:bg-[#10172A]">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle title="Introduction" />
       </div>
       <motion.div
@@ -14,8 +14,8 @@ export default function Introduction() {
         transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        <div className="flex flex-col gap-6 px-6  md:flex-row w-full md:w-[60%]  items-center justify-between md:mx-auto pl-6 md:pl-4 ">
-          <p className="text-gray-700 dark:text-gray-200 text-[16px] md:text-[20px] mx-auto mt-12 w-full md:w-[65%]">
+        <div className="flex flex-col gap-8 px-6 md:px-0  md:flex-row w-full md:w-[70%] md:gap-20 md:mx-auto mt-12  items-center">
+          <p className="text-gray-700 dark:text-gray-200 text-[16px] md:text-[20px] w-full md:max-w-[600px] text-start ">
             <span className="font-semibold">Dobaato</span> is a leading IT
             services company, committed to delivering high-quality, innovative
             solutions tailored to the unique needs of our clients. With over 9

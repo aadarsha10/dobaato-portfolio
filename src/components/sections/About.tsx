@@ -26,8 +26,8 @@ const features = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-gray-50 dark:bg-[#10172A]">
-      <div className="container mx-auto px-6">
+    <section id="about" className="py-24 bg-gray-50 dark:bg-[#10172A] ">
+      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle
           title="About Us"
           subtitle="Delivering Excellence in IT Solutions"
@@ -61,7 +61,7 @@ export default function About() {
             </div>
           </div>
         </motion.div>
-        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
