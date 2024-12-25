@@ -16,8 +16,8 @@ export default function Team() {
   const teams = [
     {
       src: Member2,
-      name: "Sagun Shrestha",
-      role: "CEO & Founder",
+      name: "Sagun Aryal",
+      role: "Co-founder & CBO",
     },
     {
       src: Member1,
