@@ -26,7 +26,7 @@ export default function MobileNav() {
       animate={{ y: 0 }}
       className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#1E293B] /95 backdrop-blur-sm border-t border-dark-200 z-50"
     >
-      <div className="flex justify-around py-2">
+      <div className="flex justify-around py-2 overflow-auto">
         {navItems.map(({ icon: Icon, label, href }) => (
           <a
             key={href}
