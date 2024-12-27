@@ -20,7 +20,7 @@
     left: 0;
     right: 0;
     height: 40px; /* Adjust the height of the fade effect */
-    background: linear-gradient(to top, #10172A, transparent) !important;
+    background: linear-gradient(to top, #ccc, transparent) !important;
     pointer-events: none; /* Ensure it doesn't block interactions */
   }
   

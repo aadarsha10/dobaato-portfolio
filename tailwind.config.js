@@ -34,5 +34,31 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".fade-after::after": {
+          content: "''",
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          height: "40px",
+          background: "linear-gradient(to top, #F5F6FA, transparent)",
+          pointerEvents: "none",
+        },
+        ".fade-dark-after::after": {
+          content: "''",
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          height: "40px",
+          background:
+            "linear-gradient(to top, black, transparent) !important",
+          pointerEvents: "none",
+        },
+      });
+    },
+  ],
 };

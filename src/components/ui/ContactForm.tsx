@@ -55,7 +55,7 @@ const ContactForm = () => {
       };
 
       await window.emailjs.send(
-        "service_xeirp5g",
+        "service_d3pnvop",
         "template_mhn604v",
         templateParams
       );
