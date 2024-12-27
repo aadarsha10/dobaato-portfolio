@@ -5,7 +5,7 @@ const ContactForm = () => {
     name: "",
     email: "",
     phone: "",
-    services: "",
+    services: "Web Development",
     message: "",
   });
   const [status, setStatus] = useState({
