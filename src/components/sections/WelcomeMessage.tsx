@@ -3,7 +3,7 @@ import image from "../../assets/images/WhatsApp Image 2024-12-25 at 12.12.11 PM.
 import { motion } from "framer-motion";
 export default function WelcomeMessage() {
   return (
-    <section id="about" className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
+    <section className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
       <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle
           title="CEO Welcome Message"

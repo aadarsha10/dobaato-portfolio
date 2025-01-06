@@ -8,7 +8,6 @@ import ProjectJourney from '../components/sections/ProjectJourney';
 import Portfolio from '../components/sections/Portfolio';
 import CompanyHighlights from '../components/sections/CompanyHighlights';
 import Team from '../components/sections/Team';
-import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
 import Footer from '../components/sections/Footer';
 import Introduction from '../components/sections/Introduction';

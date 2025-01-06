@@ -1,10 +1,9 @@
-import { Code2, Gem, Users } from "lucide-react";
 import SectionTitle from "../ui/SectionTitle";
 import { motion } from "framer-motion";
 
 export default function Introduction() {
   return (
-    <section id="about" className="py-24 bg-gray-50 dark:bg-[#10172A]">
+    <section className="py-24 bg-gray-50 dark:bg-[#10172A]">
       <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle title="Introduction" />
       </div>

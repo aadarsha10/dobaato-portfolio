@@ -5,8 +5,8 @@ const navItems = [
   { icon: Home, label: 'Home', href: '#home' },
   { icon: Info, label: 'About', href: '#about' },
   { icon: Briefcase, label: 'Services', href: '#services' },
-  { icon: Building2, label: 'Industries', href: '#industries' },
   { icon: FolderOpen, label: 'Portfolio', href: '#portfolio' },
+  { icon: Building2, label: 'Industries', href: '#industries' },
   { icon: Phone, label: 'Contact', href: '#contact' },
   { icon: GraduationCap, label: 'Careers', href: '/careers' },
 ];
