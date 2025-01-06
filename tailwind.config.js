@@ -55,7 +55,7 @@ export default {
           right: "0",
           height: "40px",
           background:
-            "linear-gradient(to top, black, transparent) !important",
+            "linear-gradient(to top, #10172A, transparent) !important",
           pointerEvents: "none",
         },
       });

@@ -26,7 +26,7 @@ const features = [
 
 export default function UniqueAspect() {
   return (
-    <section id="about" className="py-24 bg-gray-50 dark:bg-[#10172A]">
+    <section className="py-24 bg-gray-50 dark:bg-[#10172A]">
       <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle title="Unique Aspects of Dobaato" />
 
