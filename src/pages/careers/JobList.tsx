@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Search, Briefcase, MapPin, Clock } from "lucide-react";
+// import { Search, Briefcase, MapPin, Clock } from "lucide-react";
 import { JobFilters } from "./JobFilters";
 import { JobCard } from "./JobCard";
 import { jobs as dummyJobs } from "../../data/jobs";
@@ -14,9 +14,8 @@ export default function JobList() {
 		if (!storedJobs) {
 			// If no jobs are stored, set the jobs to the dummy jobs
 			localStorage.setItem("jobs_data", JSON.stringify(dummyJobs));
-			setJobs(dummyJobs); // Initialize jobs state with dummyJobs
+			setJobs(dummyJobs);
 		} else {
-			// If jobs are stored, load them into state
 			setJobs(JSON.parse(storedJobs));
 		}
 	}, []);
