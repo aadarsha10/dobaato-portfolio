@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
-import { useToast } from "../../components/ui/use-toast";
 import type { Job, JobType, LocationType } from "../../types/careers";
+import toast from "react-hot-toast";
 
 const LOCAL_STORAGE_KEY = "jobs_data";
 
@@ -16,8 +16,6 @@ export default function CareersManager() {
 		description: "",
 		requirements: [""],
 	});
-
-	const { toast } = useToast();
 
 	// Load jobs from localStorage on mount
 	useEffect(() => {
@@ -41,17 +39,13 @@ export default function CareersManager() {
 			!newJob.location ||
 			!newJob.description
 		) {
-			toast({
-				title: "Error",
-				description: "Please fill in all fields before adding a job.",
-				variant: "destructive",
-			});
+			toast.error("Please fill in all fields before adding a job.");
 			return;
 		}
 
 		const filteredRequirements = newJob.requirements.filter(
 			(req) => req.trim() !== ""
-		); // Remove empty fields
+		);
 
 		const job: Job = {
 			...newJob,
@@ -71,10 +65,7 @@ export default function CareersManager() {
 			requirements: [""],
 		});
 
-		toast({
-			title: "Job Added",
-			description: `${job.title} has been added successfully!`,
-		});
+		toast.success(`${job.title} has been added successfully!`);
 	};
 
 	const handleRequirementChange = (index: number, value: string) => {
