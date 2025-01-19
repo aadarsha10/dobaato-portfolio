@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
-// import { Search, Briefcase, MapPin, Clock } from "lucide-react";
 import { JobFilters } from "./JobFilters";
 import { JobCard } from "./JobCard";
-import { jobs as dummyJobs } from "../../data/jobs";
 import type { Job, JobType, LocationType } from "../../types/careers";
+import { supabase } from "../../SupabaseClient";
 
 export default function JobList() {
 	const [jobs, setJobs] = useState<Job[]>([]);
 
 	useEffect(() => {
-		const storedJobs = localStorage.getItem("jobs_data");
+		const fetchJobs = async () => {
+			const { data, error } = await supabase.from("Job").select("*");
 
-		if (!storedJobs) {
-			// If no jobs are stored, set the jobs to the dummy jobs
-			localStorage.setItem("jobs_data", JSON.stringify(dummyJobs));
-			setJobs(dummyJobs);
-		} else {
-			setJobs(JSON.parse(storedJobs));
-		}
+			if (error) {
+				console.error("Error fetching jobs:", error);
+				return;
+			}
+
+			setJobs(data);
+		};
+
+		fetchJobs();
 	}, []);
 	const [filters, setFilters] = useState({
 		type: [] as JobType[],

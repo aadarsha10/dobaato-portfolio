@@ -4,6 +4,8 @@ import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
 import type { Job, JobType, LocationType } from "../../types/careers";
 import toast from "react-hot-toast";
+import { supabase } from "../../SupabaseClient";
+import { v4 as uuid } from "uuid";
 
 const LOCAL_STORAGE_KEY = "jobs_data";
 
@@ -23,16 +25,9 @@ export default function CareersManager() {
 		if (storedJobs) {
 			setJobs(JSON.parse(storedJobs));
 		}
-	}, []); // Empty dependency array ensures this runs only on mount
+	}, []);
 
-	// Save jobs to localStorage whenever they change
-	useEffect(() => {
-		if (jobs.length > 0) {
-			localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(jobs));
-		}
-	}, [jobs]);
-
-	const handleAddJob = () => {
+	const handleAddJob = async () => {
 		if (
 			!newJob.title ||
 			!newJob.type ||
@@ -50,7 +45,7 @@ export default function CareersManager() {
 		const job: Job = {
 			...newJob,
 			requirements: filteredRequirements,
-			id: Date.now().toString(),
+			id: uuid(),
 			postedAt: new Date().toLocaleDateString(),
 		};
 
@@ -64,6 +59,17 @@ export default function CareersManager() {
 			description: "",
 			requirements: [""],
 		});
+
+		const { data, error } = await supabase
+			.from("Job") // Replace 'jobs' with your actual table name
+			.insert([job]);
+		console.log(await data);
+
+		if (error) {
+			toast.error("Error adding job: " + error);
+			console.log(error);
+			return;
+		}
 
 		toast.success(`${job.title} has been added successfully!`);
 	};
@@ -91,7 +97,7 @@ export default function CareersManager() {
 			<div className="grid gap-4">
 				<Input
 					placeholder="Job Title"
-					className="text-gray-800 dark:text-white"
+					className="text-gray-800"
 					value={newJob.title}
 					onChange={(e) =>
 						setNewJob({ ...newJob, title: e.target.value })
@@ -99,7 +105,7 @@ export default function CareersManager() {
 				/>
 				<Input
 					placeholder="Job Type (e.g., Full-time, Part-time, Contract, Remote)"
-					className="text-gray-800 dark:text-white"
+					className="text-gray-800"
 					value={newJob.type}
 					onChange={(e) =>
 						setNewJob({
@@ -110,7 +116,7 @@ export default function CareersManager() {
 				/>
 				<Input
 					placeholder="Location (e.g., On-site, Remote, Hybrid)"
-					className="text-gray-800 dark:text-white"
+					className="text-gray-800"
 					value={newJob.location}
 					onChange={(e) =>
 						setNewJob({
@@ -121,7 +127,7 @@ export default function CareersManager() {
 				/>
 				<Textarea
 					placeholder="Job Description"
-					className="text-gray-800 dark:text-white"
+					className="text-gray-800"
 					value={newJob.description}
 					onChange={(e) =>
 						setNewJob({ ...newJob, description: e.target.value })
@@ -133,7 +139,7 @@ export default function CareersManager() {
 						<div key={index} className="flex items-center gap-2">
 							<Input
 								placeholder="Requirement"
-								className="text-gray-800 dark:text-white"
+								className="text-gray-800"
 								value={req}
 								onChange={(e) =>
 									handleRequirementChange(
@@ -154,7 +160,9 @@ export default function CareersManager() {
 						Add Requirement
 					</Button>
 				</div>
-				<Button onClick={handleAddJob}>Add Job</Button>
+				<Button variant="outline" onClick={handleAddJob}>
+					Add Job
+				</Button>
 			</div>
 		</div>
 	);
