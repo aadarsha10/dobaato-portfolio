@@ -8,9 +8,9 @@ export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
   const categories = ['all', 'web', 'mobile', 'analytics'];
 
-  // const filteredProjects = activeFilter === 'all' 
-  //   ? projects 
-  //   : projects.filter(project => project.category === activeFilter);
+  const filteredProjects = activeFilter === 'all' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
 
   return (
     <section id="portfolio" className="py-24 bg-white dark:bg-[#10172A]">
@@ -36,13 +36,25 @@ export default function Portfolio() {
           ))}
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.3 }}
+            >
+              <ProjectCard {...project} />
+            </motion.div>
+          ))}
+        </div> */}
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <ProjectCard {...project} />
             </motion.div>
