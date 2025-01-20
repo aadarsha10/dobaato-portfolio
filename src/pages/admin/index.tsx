@@ -4,7 +4,7 @@ import AdminPage from "./AdminPage";
 export default function Admin() {
 	return (
 		<>
-			<main className="pt-24 min-h-screen bg-[#F5F6FA] dark:bg-[#10172A]">
+			<main className=" min-h-screen bg-[#F5F6FA] dark:bg-[#10172A]">
 				<div className="container mx-auto px-6 text-gray-800 dark:text-white">
 					<AdminPage />
 				</div>
