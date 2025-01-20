@@ -14,6 +14,7 @@ export default function PortfolioManager() {
 		description: "",
 		image: "",
 		category: "web",
+		demoUrl: "",
 	});
 
 	const handleAddItem = async () => {
@@ -21,7 +22,8 @@ export default function PortfolioManager() {
 			!newItem.title ||
 			!newItem.description ||
 			!newItem.image ||
-			!newItem.category
+			!newItem.category ||
+			!newItem.demoUrl
 		) {
 			toast.error(
 				"Please fill in all fields before adding a portfolio item."
@@ -42,7 +44,13 @@ export default function PortfolioManager() {
 		}
 
 		setPortfolioItems([...portfolioItems, item]);
-		setNewItem({ title: "", description: "", image: "", category: "web" }); // Reset form
+		setNewItem({
+			title: "",
+			description: "",
+			image: "",
+			category: "web",
+			demoUrl: "",
+		}); // Reset form
 
 		toast.success(`${item.title} has been added to the portfolio.`);
 	};
@@ -89,6 +97,15 @@ export default function PortfolioManager() {
 						})
 					}
 				/>
+
+				<Input
+					placeholder="demo url (Optional)"
+					value={newItem.demoUrl}
+					onChange={(e) =>
+						setNewItem({ ...newItem, demoUrl: e.target.value })
+					}
+				/>
+
 				<Button variant={"outline"} onClick={handleAddItem}>
 					Add Portfolio Item
 				</Button>
