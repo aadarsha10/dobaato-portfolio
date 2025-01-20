@@ -2,63 +2,67 @@ import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
-import { useToast } from "../../components/ui/use-toast";
-
-interface BlogPost {
-	id: number;
-	title: string;
-	content: string;
-	author: string;
-	date: string;
-}
-
-const initialBlogPosts: BlogPost[] = [
-	{
-		id: 1,
-		title: "First Blog Post",
-		content: "This is the content of the first blog post...",
-		author: "John Doe",
-		date: "2023-06-01",
-	},
-	{
-		id: 2,
-		title: "Second Blog Post",
-		content: "This is the content of the second blog post...",
-		author: "Jane Smith",
-		date: "2023-06-15",
-	},
-];
+import { supabase } from "../../SupabaseClient";
+import { v4 as uuid } from "uuid";
+import { BlogPost } from "../../types/blog";
+import toast from "react-hot-toast";
 
 export default function BlogManager() {
-	const [blogPosts, setBlogPosts] = useState<BlogPost[]>(initialBlogPosts);
+	const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 	const [newPost, setNewPost] = useState<Omit<BlogPost, "id" | "date">>({
 		title: "",
+		slug: "",
+		excerpt: "",
 		content: "",
-		author: "",
+		coverImage: "",
+		readTime: 0,
+		author: {
+			name: "",
+			avatar: "",
+		},
 	});
-	const { toast } = useToast();
 
-	const handleAddPost = () => {
-		const post = {
+	const handleAddPost = async () => {
+		if (
+			!newPost.title ||
+			!newPost.slug ||
+			!newPost.excerpt ||
+			!newPost.content ||
+			!newPost.coverImage ||
+			!newPost.author.name
+		) {
+			toast.error("Please fill in all fields before adding a post.");
+			return;
+		}
+
+		const post: BlogPost = {
 			...newPost,
-			id: Date.now(),
+			id: uuid(),
 			date: new Date().toISOString().split("T")[0],
+			readTime: Math.ceil(newPost.content.split(" ").length / 100), // Assuming 100 words per minute reading speed
 		};
-		setBlogPosts([...blogPosts, post]);
-		setNewPost({ title: "", content: "", author: "" });
-		toast({
-			title: "Blog Post Added",
-			description: `${post.title} has been added to the blog.`,
-		});
-	};
 
-	const handleDeletePost = (id: number) => {
-		setBlogPosts(blogPosts.filter((post) => post.id !== id));
-		toast({
-			title: "Blog Post Deleted",
-			description: "The post has been removed from the blog.",
-			variant: "destructive",
+		const { error } = await supabase.from("BlogPost").insert([post]);
+
+		if (error) {
+			toast.error("Error adding post: " + error.message);
+			return;
+		}
+
+		setBlogPosts([...blogPosts, post]);
+		setNewPost({
+			title: "",
+			slug: "",
+			excerpt: "",
+			content: "",
+			coverImage: "",
+			readTime: 0,
+			author: {
+				name: "",
+				avatar: "",
+			},
 		});
+		toast.success(`${post.title} has been added successfully!`);
 	};
 
 	return (
@@ -68,11 +72,29 @@ export default function BlogManager() {
 				<Input
 					placeholder="Post Title"
 					value={newPost.title}
+					className="text-black"
 					onChange={(e) =>
 						setNewPost({ ...newPost, title: e.target.value })
 					}
 				/>
+				<Input
+					className="text-black"
+					placeholder="Post Slug"
+					value={newPost.slug}
+					onChange={(e) =>
+						setNewPost({ ...newPost, slug: e.target.value })
+					}
+				/>
 				<Textarea
+					className="text-black"
+					placeholder="Post Excerpt"
+					value={newPost.excerpt}
+					onChange={(e) =>
+						setNewPost({ ...newPost, excerpt: e.target.value })
+					}
+				/>
+				<Textarea
+					className="text-black"
 					placeholder="Post Content"
 					value={newPost.content}
 					onChange={(e) =>
@@ -80,33 +102,39 @@ export default function BlogManager() {
 					}
 				/>
 				<Input
-					placeholder="Author"
-					value={newPost.author}
+					className="text-black"
+					placeholder="Cover Image URL"
+					value={newPost.coverImage}
 					onChange={(e) =>
-						setNewPost({ ...newPost, author: e.target.value })
+						setNewPost({ ...newPost, coverImage: e.target.value })
+					}
+				/>
+				<Input
+					className="text-black"
+					placeholder="Author Name"
+					value={newPost.author.name}
+					onChange={(e) =>
+						setNewPost({
+							...newPost,
+							author: { ...newPost.author, name: e.target.value },
+						})
+					}
+				/>
+				<Input
+					className="text-black"
+					placeholder="Author Avatar URL"
+					value={newPost.author.avatar}
+					onChange={(e) =>
+						setNewPost({
+							...newPost,
+							author: {
+								...newPost.author,
+								avatar: e.target.value,
+							},
+						})
 					}
 				/>
 				<Button onClick={handleAddPost}>Add Blog Post</Button>
-			</div>
-			<div className="space-y-4">
-				{blogPosts.map((post) => (
-					<div key={post.id} className="border p-4 rounded-lg">
-						<h3 className="text-xl font-semibold">{post.title}</h3>
-						<p className="text-sm text-gray-500">
-							By {post.author} on {post.date}
-						</p>
-						<p className="mt-2">
-							{post.content.substring(0, 150)}...
-						</p>
-						<Button
-							variant="destructive"
-							className="mt-2"
-							onClick={() => handleDeletePost(post.id)}
-						>
-							Delete
-						</Button>
-					</div>
-				))}
 			</div>
 		</div>
 	);
