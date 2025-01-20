@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
@@ -15,21 +15,6 @@ export default function PortfolioManager() {
 		image: "",
 		category: "web",
 	});
-
-	useEffect(() => {
-		const fetchPortfolioItems = async () => {
-			const { data, error } = await supabase
-				.from("Portfolio")
-				.select("*");
-			if (error) {
-				toast.error("Error fetching portfolio items: " + error.message);
-			} else {
-				setPortfolioItems(data);
-			}
-		};
-
-		fetchPortfolioItems();
-	}, []);
 
 	const handleAddItem = async () => {
 		if (
