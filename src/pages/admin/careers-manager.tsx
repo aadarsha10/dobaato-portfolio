@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
@@ -6,11 +6,11 @@ import type { Job, JobType, LocationType } from "../../types/careers";
 import toast from "react-hot-toast";
 import { supabase } from "../../SupabaseClient";
 import { v4 as uuid } from "uuid";
-
-const LOCAL_STORAGE_KEY = "jobs_data";
+import { Spinner } from "../../components/ui/spinner";
 
 export default function CareersManager() {
 	const [jobs, setJobs] = useState<Job[]>([]);
+	const [loading, setLoading] = useState<boolean>(false);
 	const [newJob, setNewJob] = useState<Omit<Job, "id" | "postedAt">>({
 		title: "",
 		type: "Full-time",
@@ -18,14 +18,6 @@ export default function CareersManager() {
 		description: "",
 		requirements: [""],
 	});
-
-	// Load jobs from localStorage on mount
-	useEffect(() => {
-		const storedJobs = localStorage.getItem(LOCAL_STORAGE_KEY);
-		if (storedJobs) {
-			setJobs(JSON.parse(storedJobs));
-		}
-	}, []);
 
 	const handleAddJob = async () => {
 		if (
@@ -35,8 +27,10 @@ export default function CareersManager() {
 			!newJob.description
 		) {
 			toast.error("Please fill in all fields before adding a job.");
+
 			return;
 		}
+		setLoading(true);
 
 		const filteredRequirements = newJob.requirements.filter(
 			(req) => req.trim() !== ""
@@ -68,10 +62,12 @@ export default function CareersManager() {
 		if (error) {
 			toast.error("Error adding job: " + error);
 			console.log(error);
+			setLoading(false);
 			return;
 		}
 
 		toast.success(`${job.title} has been added successfully!`);
+		setLoading(false);
 	};
 
 	const handleRequirementChange = (index: number, value: string) => {
@@ -161,7 +157,7 @@ export default function CareersManager() {
 					</Button>
 				</div>
 				<Button variant="outline" onClick={handleAddJob}>
-					Add Job
+					{loading ? <Spinner /> : "Add Job"}
 				</Button>
 			</div>
 		</div>
