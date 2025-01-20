@@ -22,19 +22,34 @@ export default function AdminPage() {
 				<h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
 
 				<TabsList className="flex flex-col mt-40">
-					<TabsTrigger value="careers" className="text-xl">
+					<TabsTrigger
+						value="careers"
+						className="text-xl transition-colors duration-200 hover:bg-gray-200 data-[state=active]:bg-gray-300"
+					>
 						Careers
 					</TabsTrigger>
-					<TabsTrigger value="portfolio" className="text-xl">
+					<TabsTrigger
+						value="portfolio"
+						className="text-xl transition-colors duration-200 hover:bg-gray-200 data-[state=active]:bg-gray-300"
+					>
 						Portfolio
 					</TabsTrigger>
-					<TabsTrigger value="faq" className="text-xl">
+					<TabsTrigger
+						value="faq"
+						className="text-xl transition-colors duration-200 hover:bg-gray-200 data-[state=active]:bg-gray-300"
+					>
 						FAQ
 					</TabsTrigger>
-					<TabsTrigger value="testimonials" className="text-xl">
+					<TabsTrigger
+						value="testimonials"
+						className="text-xl transition-colors duration-200 hover:bg-gray-200 data-[state=active]:bg-gray-300"
+					>
 						Testimonials
 					</TabsTrigger>
-					<TabsTrigger value="blog" className="text-xl">
+					<TabsTrigger
+						value="blog"
+						className="text-xl transition-colors duration-200 hover:bg-gray-200 data-[state=active]:bg-gray-300"
+					>
 						Blog
 					</TabsTrigger>
 				</TabsList>
