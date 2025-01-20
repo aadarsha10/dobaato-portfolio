@@ -1,61 +1,65 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
-import { useToast } from "../../components/ui/use-toast";
-
-interface PortfolioItem {
-	id: number;
-	title: string;
-	description: string;
-	imageUrl: string;
-}
-
-const initialPortfolioItems: PortfolioItem[] = [
-	{
-		id: 1,
-		title: "Project A",
-		description: "A web application for managing tasks",
-		imageUrl: "https://example.com/projectA.jpg",
-	},
-	{
-		id: 2,
-		title: "Project B",
-		description: "An e-commerce platform",
-		imageUrl: "https://example.com/projectB.jpg",
-	},
-];
+import { Project } from "../../types";
+import { v4 as uuid } from "uuid";
+import { supabase } from "../../SupabaseClient";
+import { toast } from "react-hot-toast";
 
 export default function PortfolioManager() {
-	const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>(
-		initialPortfolioItems
-	);
-	const [newItem, setNewItem] = useState<Omit<PortfolioItem, "id">>({
+	const [portfolioItems, setPortfolioItems] = useState<Project[]>([]);
+	const [newItem, setNewItem] = useState<Omit<Project, "id">>({
 		title: "",
 		description: "",
-		imageUrl: "",
+		image: "",
+		category: "web",
 	});
-	const { toast } = useToast();
 
-	const handleAddItem = () => {
-		const item = { ...newItem, id: Date.now() };
+	useEffect(() => {
+		const fetchPortfolioItems = async () => {
+			const { data, error } = await supabase
+				.from("Portfolio")
+				.select("*");
+			if (error) {
+				toast.error("Error fetching portfolio items: " + error.message);
+			} else {
+				setPortfolioItems(data);
+			}
+		};
+
+		fetchPortfolioItems();
+	}, []);
+
+	const handleAddItem = async () => {
+		if (
+			!newItem.title ||
+			!newItem.description ||
+			!newItem.image ||
+			!newItem.category
+		) {
+			toast.error(
+				"Please fill in all fields before adding a portfolio item."
+			);
+			return;
+		}
+
+		const item: Project = {
+			...newItem,
+			id: uuid(),
+		};
+
+		const { error } = await supabase.from("Portfolio").insert([item]);
+
+		if (error) {
+			toast.error("Error adding portfolio item: " + error.message);
+			return;
+		}
+
 		setPortfolioItems([...portfolioItems, item]);
-		setNewItem({ title: "", description: "", imageUrl: "" });
-		toast({
-			title: "Portfolio Item Added",
-			description: `${item.title} has been added to the portfolio.`,
-		});
-	};
+		setNewItem({ title: "", description: "", image: "", category: "web" }); // Reset form
 
-	const handleDeleteItem = (id: number) => {
-		setPortfolioItems(portfolioItems.filter((item) => item.id !== id));
-		toast({
-			title: "Portfolio Item Deleted",
-			description: "The item has been removed from the portfolio.",
-			variant: "destructive",
-		});
+		toast.success(`${item.title} has been added to the portfolio.`);
 	};
 
 	return (
@@ -65,6 +69,7 @@ export default function PortfolioManager() {
 				<Input
 					placeholder="Project Title"
 					value={newItem.title}
+					className="text-black"
 					onChange={(e) =>
 						setNewItem({ ...newItem, title: e.target.value })
 					}
@@ -72,40 +77,36 @@ export default function PortfolioManager() {
 				<Textarea
 					placeholder="Project Description"
 					value={newItem.description}
+					className="text-black"
 					onChange={(e) =>
 						setNewItem({ ...newItem, description: e.target.value })
 					}
 				/>
 				<Input
 					placeholder="Image URL"
-					value={newItem.imageUrl}
+					value={newItem.image}
+					className="text-black"
 					onChange={(e) =>
-						setNewItem({ ...newItem, imageUrl: e.target.value })
+						setNewItem({ ...newItem, image: e.target.value })
 					}
 				/>
-				<Button onClick={handleAddItem}>Add Portfolio Item</Button>
-			</div>
-			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-				{portfolioItems.map((item) => (
-					<div key={item.id} className="border p-4 rounded-lg">
-						<img
-							src={item.imageUrl || "/placeholder.svg"}
-							alt={item.title}
-							className="w-full h-48 object-cover rounded-md mb-2"
-						/>
-						<h3 className="text-xl font-semibold">{item.title}</h3>
-						<p className="text-sm text-gray-500">
-							{item.description}
-						</p>
-						<Button
-							variant="destructive"
-							className="mt-2"
-							onClick={() => handleDeleteItem(item.id)}
-						>
-							Delete
-						</Button>
-					</div>
-				))}
+				<Input
+					placeholder="Category (web, mobile, analytics)"
+					value={newItem.category}
+					className="text-black"
+					onChange={(e) =>
+						setNewItem({
+							...newItem,
+							category: e.target.value as
+								| "web"
+								| "mobile"
+								| "analytics",
+						})
+					}
+				/>
+				<Button variant={"outline"} onClick={handleAddItem}>
+					Add Portfolio Item
+				</Button>
 			</div>
 		</div>
 	);
