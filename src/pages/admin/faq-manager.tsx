@@ -1,54 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
-import { useToast } from "../../components/ui/use-toast";
-
-interface FAQ {
-	id: number;
-	question: string;
-	answer: string;
-}
-
-const initialFAQs: FAQ[] = [
-	{
-		id: 1,
-		question: "What services do you offer?",
-		answer: "We offer web development, mobile app development, and UI/UX design services.",
-	},
-	{
-		id: 2,
-		question: "How can I contact support?",
-		answer: "You can reach our support team via email at support@example.com or by phone at (123) 456-7890.",
-	},
-];
+import { supabase } from "../../SupabaseClient";
+import { FAQ } from "../../types";
+import toast from "react-hot-toast";
+import { Spinner } from "../../components/ui/spinner";
 
 export default function FAQManager() {
-	const [faqs, setFAQs] = useState<FAQ[]>(initialFAQs);
+	const [faqs, setFAQs] = useState<FAQ[]>([]);
+	const [loading, setLoading] = useState<boolean>(false);
 	const [newFAQ, setNewFAQ] = useState<Omit<FAQ, "id">>({
 		question: "",
 		answer: "",
 	});
-	const { toast } = useToast();
 
-	const handleAddFAQ = () => {
-		const faq = { ...newFAQ, id: Date.now() };
-		setFAQs([...faqs, faq]);
-		setNewFAQ({ question: "", answer: "" });
-		toast({
-			title: "FAQ Added",
-			description: "The new FAQ has been added to the list.",
-		});
+	// Fetch FAQs from Supabase
+	const fetchFAQs = async () => {
+		const { data, error } = await supabase.from("faq").select("*");
+		if (error) {
+			toast.error(error.message);
+		} else {
+			setFAQs(data || []);
+		}
 	};
 
-	const handleDeleteFAQ = (id: number) => {
-		setFAQs(faqs.filter((faq) => faq.id !== id));
-		toast({
-			title: "FAQ Deleted",
-			description: "The FAQ has been removed from the list.",
-			variant: "destructive",
-		});
+	// Add a new FAQ to Supabase
+	const handleAddFAQ = async () => {
+		setLoading(true);
+		const { data, error } = await supabase
+			.from("faq")
+			.insert([{ question: newFAQ.question, answer: newFAQ.answer }])
+			.select();
+		if (error) {
+			toast.error(error.message);
+			setLoading(false);
+		} else {
+			toast.success("FAQ added successfully");
+			setFAQs((prev) => [...prev, data[0]]);
+			setNewFAQ({ question: "", answer: "" });
+			setLoading(false);
+		}
+		setLoading(false);
 	};
+
+	// Delete an FAQ from Supabase
+	const handleDeleteFAQ = async (id: string) => {
+		const { error } = await supabase.from("faq").delete().eq("id", id);
+		if (error) {
+			toast.error(error.message);
+		} else {
+			toast.success("FAQ deleted successfully");
+			setFAQs((prev) => prev.filter((faq) => faq.id !== id));
+		}
+	};
+
+	// Fetch FAQs on component mount
+	useEffect(() => {
+		fetchFAQs();
+	}, []);
 
 	return (
 		<div className="space-y-4">
@@ -56,19 +66,24 @@ export default function FAQManager() {
 			<div className="grid gap-4">
 				<Input
 					placeholder="Question"
+					className="text-gray-700"
 					value={newFAQ.question}
 					onChange={(e) =>
 						setNewFAQ({ ...newFAQ, question: e.target.value })
 					}
 				/>
 				<Textarea
+					className="text-gray-700"
 					placeholder="Answer"
 					value={newFAQ.answer}
 					onChange={(e) =>
 						setNewFAQ({ ...newFAQ, answer: e.target.value })
 					}
 				/>
-				<Button onClick={handleAddFAQ}>Add FAQ</Button>
+				<Button onClick={handleAddFAQ}>
+					{" "}
+					{loading ? <Spinner /> : "Add FAQ"}{" "}
+				</Button>
 			</div>
 			<div className="space-y-4">
 				{faqs.map((faq) => (
