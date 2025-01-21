@@ -1,22 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../SupabaseClient";
+import { Spinner } from "../../components/ui/spinner";
 
 export default function LoginPage() {
 	const [username, setUsername] = useState("");
+	const [loading, setLoading] = useState(false);
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
-	useEffect(() => {
-		localStorage.setItem("isAuthenticated", "false");
-	}, []);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (username === "admin" && password === "admin") {
+		setLoading(true);
+		const { error } = await supabase.auth.signInWithPassword({
+			email: username,
+			password,
+		});
+		if (error) {
+			toast.error(error.message);
+			setLoading(false);
+			return;
+		} else {
+			toast.success("Login successful!");
 			navigate("/admin");
-			localStorage.setItem("isAuthenticated", "true");
-			toast.success("Login successful");
+			setLoading(false);
 		}
+		setLoading(false);
 	};
 
 	return (
@@ -52,7 +62,7 @@ export default function LoginPage() {
 					type="submit"
 					className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
 				>
-					Login
+					{loading ? <Spinner /> : "Login"}
 				</button>
 			</form>
 		</div>
