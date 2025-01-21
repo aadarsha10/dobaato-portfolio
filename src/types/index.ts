@@ -5,7 +5,11 @@ export interface Testimonial {
 	position: string;
 	company: string;
 }
-
+export interface FAQ {
+	id: string;
+	question: string;
+	answer: string;
+}
 export interface Project {
 	id: string;
 	title: string;
