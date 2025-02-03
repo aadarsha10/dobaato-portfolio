@@ -208,7 +208,11 @@ export default function PortfolioManager() {
 					}
 				/>
 				<div className="flex gap-2">
-					<Button variant="outline" onClick={handleAddOrUpdateItem}>
+					<Button
+						variant="outline"
+						className="bg-primary-300"
+						onClick={handleAddOrUpdateItem}
+					>
 						{editingItemId
 							? "Update Portfolio Item"
 							: "Add Portfolio Item"}
@@ -216,7 +220,7 @@ export default function PortfolioManager() {
 					{editingItemId && (
 						<Button
 							onClick={handleCancelEditing}
-							className="border rounded-lg bg-primary-300"
+							className="border rounded-lg"
 						>
 							Cancel
 						</Button>
