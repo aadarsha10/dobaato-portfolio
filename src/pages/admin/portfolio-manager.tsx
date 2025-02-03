@@ -215,9 +215,8 @@ export default function PortfolioManager() {
 					</Button>
 					{editingItemId && (
 						<Button
-							variant="secondary"
 							onClick={handleCancelEditing}
-							className="border rounded-lg"
+							className="border rounded-lg bg-primary-300"
 						>
 							Cancel
 						</Button>
