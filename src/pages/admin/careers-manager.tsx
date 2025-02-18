@@ -165,10 +165,11 @@ export default function CareersManager() {
 
 			{/* Job Form - for Adding or Editing */}
 			<div className="bg-white p-6 shadow rounded grid gap-4">
-				<h3 className="text-xl font-semibold">
+				<h3 className="text-xl font-semibold text-dark-300">
 					{editingJobId ? "Edit Job" : "Add New Job"}
 				</h3>
 				<Input
+					className="text-black"
 					placeholder="Job Title"
 					value={newJob.title}
 					onChange={(e) =>
@@ -176,6 +177,7 @@ export default function CareersManager() {
 					}
 				/>
 				<Input
+					className="text-black"
 					placeholder="Job Type"
 					value={newJob.type}
 					onChange={(e) =>
@@ -186,6 +188,7 @@ export default function CareersManager() {
 					}
 				/>
 				<Input
+					className="text-black"
 					placeholder="Location"
 					value={newJob.location}
 					onChange={(e) =>
@@ -196,6 +199,7 @@ export default function CareersManager() {
 					}
 				/>
 				<Textarea
+					className="text-black"
 					placeholder="Job Description"
 					value={newJob.description}
 					onChange={(e) =>
@@ -231,7 +235,7 @@ export default function CareersManager() {
 				{jobs.map((job) => (
 					<div
 						key={job.id}
-						className="bg-gray-50 border border-gray-200 p-4 rounded shadow-sm"
+						className="bg-gray-50 text-black border border-gray-200 p-4 rounded shadow-sm"
 					>
 						<h3 className="text-lg font-bold mb-2">{job.title}</h3>
 						<p className="mb-2">{job.description}</p>

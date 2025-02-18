@@ -156,7 +156,7 @@ export default function PortfolioManager() {
 
 			{/* Portfolio Item Form (Add / Edit) */}
 			<div className="bg-white p-6 shadow rounded grid gap-4">
-				<h3 className="text-xl font-semibold">
+				<h3 className="text-xl text-black font-semibold">
 					{editingItemId
 						? "Edit Portfolio Item"
 						: "Add New Portfolio Item"}
@@ -233,7 +233,7 @@ export default function PortfolioManager() {
 				{portfolioItems.map((item) => (
 					<div
 						key={item.id}
-						className="bg-gray-50 border border-gray-200 p-4 rounded shadow-sm"
+						className="bg-gray-50 text-gray-800 border border-gray-200 p-4 rounded shadow-sm"
 					>
 						<h3 className="text-xl font-semibold">{item.title}</h3>
 						<p className="text-sm text-gray-500 mt-1">

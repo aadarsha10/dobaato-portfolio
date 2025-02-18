@@ -186,7 +186,7 @@ export default function BlogManager() {
 
 			{/* Blog Post Form (Add / Edit) */}
 			<div className="bg-white p-6 shadow rounded grid gap-4">
-				<h3 className="text-xl font-semibold">
+				<h3 className="text-xl font-semibold text-gray-800">
 					{editingPostId ? "Edit Blog Post" : "Add New Blog Post"}
 				</h3>
 				<Input
@@ -281,7 +281,7 @@ export default function BlogManager() {
 				{blogPosts.map((post) => (
 					<div
 						key={post.id}
-						className="bg-gray-50 border border-gray-200 p-4 rounded shadow-sm"
+						className="bg-gray-50 border border-gray-200 text-gray-800 p-4 rounded shadow-sm"
 					>
 						<h3 className="text-lg font-bold mb-2">{post.title}</h3>
 						<p className="mb-2">{post.excerpt}</p>

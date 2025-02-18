@@ -170,7 +170,7 @@ export default function TestimonialsManager() {
 
 			{/* Testimonial Form (Add / Edit) */}
 			<div className="bg-white p-6 shadow rounded grid gap-4">
-				<h3 className="text-xl font-semibold">
+				<h3 className="text-xl font-semibold text-gray-700">
 					{editingTestimonialId
 						? "Edit Testimonial"
 						: "Add New Testimonial"}
@@ -249,7 +249,7 @@ export default function TestimonialsManager() {
 				{testimonials.map((testimonial) => (
 					<div
 						key={testimonial.id}
-						className="bg-gray-50 border border-gray-200 p-4 rounded shadow-sm"
+						className="bg-gray-50 border text-gray-800 border-gray-200 p-4 rounded shadow-sm"
 					>
 						<h3 className="text-xl font-semibold">
 							{testimonial.author}

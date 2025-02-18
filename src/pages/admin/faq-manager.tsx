@@ -121,7 +121,7 @@ export default function FAQManager() {
 
 			{/* FAQ Form (Add / Edit) */}
 			<div className="bg-white p-6 shadow rounded grid gap-4">
-				<h3 className="text-xl font-semibold">
+				<h3 className="text-xl font-semibold text-gray-900">
 					{editingFAQId ? "Edit FAQ" : "Add New FAQ"}
 				</h3>
 				<Input
@@ -170,7 +170,7 @@ export default function FAQManager() {
 				{faqs.map((faq) => (
 					<div
 						key={faq.id}
-						className="bg-gray-50 border border-gray-200 p-4 rounded shadow-sm"
+						className="bg-gray-50 border text-gray-700 border-gray-200 p-4 rounded shadow-sm"
 					>
 						<h3 className="text-xl font-semibold">
 							{faq.question}
