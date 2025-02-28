@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import SectionTitle from "../ui/SectionTitle";
 import ProjectCard from "../ui/ProjectCard";
 import { useState, useEffect } from "react";
+import { projects as localProject } from "../../data/projects";
 import { supabase } from "../../SupabaseClient";
 import { Project } from "../../types"; // Adjust the import path as necessary
 
@@ -17,6 +18,7 @@ export default function Portfolio() {
 				.select("*");
 
 			if (error) {
+				setProjects(localProject);
 				console.error("Error fetching projects:", error);
 			} else {
 				setProjects(data);
