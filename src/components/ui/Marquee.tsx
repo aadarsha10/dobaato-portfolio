@@ -23,7 +23,21 @@ const skills = [
 
 export const MarqueeSkills = () => {
   return (
-    <div className="overflow-hidden whitespace-nowrap py-8 bg-white text-neutral-800 border-t border-b border-neutral-300">
+    <div className="relative overflow-hidden py-10 bg-white dark:bg-[#10172A] text-neutral-800 dark:text-white">
+      {/* Smooth Fade Start */}
+      <div
+        className="absolute left-0 top-0 h-full w-40 z-10 pointer-events-none 
+				bg-gradient-to-r from-white via-white/70 to-transparent 
+				dark:from-[#10172A] dark:via-[#10172A]/70 dark:to-transparent"
+      />
+
+      {/* Smooth Fade End */}
+      <div
+        className="absolute right-0 top-0 h-full w-40 z-10 pointer-events-none 
+				bg-gradient-to-l from-white via-white/70 to-transparent 
+				dark:from-[#10172A] dark:via-[#10172A]/70 dark:to-transparent"
+      />
+
       <motion.div
         className="flex space-x-20 text-lg font-semibold items-center h-20"
         animate={{ x: [0, -1000] }}
