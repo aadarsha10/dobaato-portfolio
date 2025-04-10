@@ -12,28 +12,27 @@ import Footer from "../components/sections/Footer";
 import Introduction from "../components/sections/Introduction";
 import WelcomeMessage from "../components/sections/WelcomeMessage";
 import UniqueAspect from "../components/sections/UniqueAspect";
-import { MarqueeSkills } from "../components/ui/Marquee";
-// import Testimonials from "../components/sections/Testimonials";
+import { MarqueeSkills } from "../components/ui/marquee";
 
 export default function Home() {
-	return (
-		<>
-			<Navbar />
-			<Hero />
-			<Introduction />
-			<WelcomeMessage />
-			<About />
-			<Services />
-			<ProjectJourney />
-			<UniqueAspect />
-			<Portfolio />
-			<Industries />
-			<Experience />
-			<MarqueeSkills />
-			<CompanyHighlights />
-			{/* <Testimonials /> */}
-			<Contact />
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <Introduction />
+      <WelcomeMessage />
+      <About />
+      <Services />
+      <ProjectJourney />
+      <UniqueAspect />
+      <Portfolio />
+      <Industries />
+      <Experience />
+      <MarqueeSkills />
+      <CompanyHighlights />
+      {/* <Testimonials /> */}
+      <Contact />
+      <Footer />
+    </>
+  );
 }
