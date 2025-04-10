@@ -1,42 +1,44 @@
-import * as React from "react";
-import { cn } from "../../utils";
+import { motion } from "framer-motion";
+import { FaReact, FaNodeJs, FaAws, FaHtml5, FaCss3Alt } from "react-icons/fa";
+import {
+	SiFramer,
+	SiTypescript,
+	SiJavascript,
+	SiTailwindcss,
+	SiExpress,
+} from "react-icons/si";
 
-interface MarqueeProps extends React.HTMLAttributes<HTMLDivElement> {
-	children: React.ReactNode;
-	pauseOnHover?: boolean;
-	direction?: "left" | "right";
-	speed?: number;
-}
+const skills = [
+	{ name: "React", icon: <FaReact /> },
+	{ name: "Node.js", icon: <FaNodeJs /> },
+	{ name: "AWS", icon: <FaAws /> },
+	{ name: "Framer Motion", icon: <SiFramer /> },
+	{ name: "HTML", icon: <FaHtml5 /> },
+	{ name: "CSS", icon: <FaCss3Alt /> },
+	{ name: "TypeScript", icon: <SiTypescript /> },
+	{ name: "JavaScript", icon: <SiJavascript /> },
+	{ name: "Tailwind CSS", icon: <SiTailwindcss /> },
+	{ name: "Express.js", icon: <SiExpress /> },
+];
 
-export function Marquee({
-	children,
-	pauseOnHover = false,
-	direction = "left",
-	speed = 30,
-	className,
-	...props
-}: MarqueeProps) {
+export const MarqueeSkills = () => {
 	return (
-		<div
-			className={cn(
-				"w-full overflow-hidden sm:mt-24 mt-10 z-10",
-				className
-			)}
-			{...props}
-		>
-			<div className="relative flex max-w-[90vw] overflow-hidden py-5">
-				<div
-					className={cn(
-						"flex w-max animate-marquee",
-						pauseOnHover && "hover:[animation-play-state:paused]",
-						direction === "right" && "animate-marquee-reverse"
-					)}
-					style={{ "--duration": `${speed}s` } as React.CSSProperties}
-				>
-					{children}
-					{children}
-				</div>
-			</div>
+		<div className="overflow-hidden whitespace-nowrap py-8 bg-white text-neutral-800 border-t border-b border-neutral-300">
+			<motion.div
+				className="flex space-x-20 text-lg font-semibold items-center h-20"
+				animate={{ x: [0, -1000] }}
+				transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+			>
+				{[...skills, ...skills].map((skill, index) => (
+					<div
+						key={index}
+						className="flex items-center space-x-3 px-8 text-2xl"
+					>
+						<span>{skill.icon}</span>
+						<span>{skill.name}</span>
+					</div>
+				))}
+			</motion.div>
 		</div>
 	);
-}
+};
