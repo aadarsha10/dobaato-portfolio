@@ -23,7 +23,7 @@ const skills = [
 
 export const MarqueeSkills = () => {
 	return (
-		<div className="overflow-hidden whitespace-nowrap py-8 bg-white text-neutral-800 border-t border-b border-neutral-300">
+		<div className="overflow-hidden whitespace-nowrap py-8 bg-white text-neutral-800">
 			<motion.div
 				className="flex space-x-20 text-lg font-semibold items-center h-20"
 				animate={{ x: [0, -1000] }}
