@@ -10,61 +10,61 @@ import {
 	UserCircle,
 } from "lucide-react";
 import SectionTitle from "../ui/SectionTitle";
-import ServiceCard from "../ui/ServiceCard";
+import { Feature } from "./Feature";
 
 const services = [
 	{
 		title: "Web Development",
 		description:
 			"Create powerful web applications using cutting-edge technologies.",
-		icon: Globe,
+		icon: <Globe />,
 		color: "from-purple-600 to-blue-500",
 	},
 	{
 		title: "Mobile Development",
 		description:
 			"Build native and cross-platform mobile applications that users love.",
-		icon: Smartphone,
+		icon: <Smartphone />,
 		color: "from-pink-600 to-purple-500",
 	},
 	{
-		title: "BespokeSoftware Development",
+		title: "Software Development",
 		description: "Custom software development for your specific needs.",
-		icon: AppWindow,
+		icon: <AppWindow />,
 		color: "from-pink-600 to-purple-500",
 	},
 	{
 		title: "UI/UX Design",
 		description:
 			"Design intuitive and beautiful user interfaces that enhance user experience.",
-		icon: Palette,
+		icon: <Palette />,
 		color: "from-orange-600 to-pink-500",
 	},
 	{
 		title: "Data Analytics",
 		description:
 			"Transform your data into actionable insights with our advanced analytics solutions.",
-		icon: BarChart3,
+		icon: <BarChart3 />,
 		color: "from-blue-600 to-cyan-500",
 	},
 	{
 		title: "DevOps / SecOps",
 		description:
 			"Improve security and reliability with our DevOps and SecOps services.",
-		icon: Computer,
+		icon: <Computer />,
 		color: "from-blue-600 to-cyan-500",
 	},
 	{
 		title: "Security Audits    ",
 		description:
 			"Protect your business from cyber threats with our comprehensive security audits.",
-		icon: Shield,
+		icon: <Shield />,
 		color: "from-blue-600 to-cyan-500",
 	},
 	{
 		title: "Many More Services",
 		description: "Explore our comprehensive range of services",
-		icon: UserCircle,
+		icon: <UserCircle />,
 		color: "from-blue-600 to-cyan-500",
 	},
 ];
@@ -90,7 +90,7 @@ export default function Services() {
 							transition={{ duration: 0.5, delay: index * 0.2 }}
 							viewport={{ once: true }}
 						>
-							<ServiceCard {...service} />
+							<Feature {...service} index={index} />
 						</motion.div>
 					))}
 				</div>
