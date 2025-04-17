@@ -1,10 +1,9 @@
-import { motion } from "framer-motion";
 import SectionTitle from "../ui/SectionTitle";
-import ProjectCard from "../ui/ProjectCard";
 import { useState, useEffect } from "react";
 import { projects as localProject } from "../../data/projects";
 import { supabase } from "../../SupabaseClient";
 import { Project } from "../../types"; // Adjust the import path as necessary
+import PortfolioCard from "../three/portfolio-card";
 
 export default function Portfolio() {
 	const [activeFilter, setActiveFilter] = useState("all");
@@ -41,7 +40,7 @@ export default function Portfolio() {
 					subtitle="Recent Projects & Case Studies"
 				/>
 
-				<div className="flex justify-center gap-4 mt-8">
+				{/* <div className="flex justify-center gap-4 mt-8">
 					{categories.map((category) => (
 						<button
 							key={category}
@@ -55,20 +54,9 @@ export default function Portfolio() {
 							{category}
 						</button>
 					))}
-				</div>
+				</div> */}
 
-				<div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-					{filteredProjects.map((project, index) => (
-						<motion.div
-							key={project.id}
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: index * 0.3 }}
-						>
-							<ProjectCard {...project} />
-						</motion.div>
-					))}
-				</div>
+				<PortfolioCard projects={filteredProjects} />
 			</div>
 		</section>
 	);

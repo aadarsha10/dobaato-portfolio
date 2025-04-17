@@ -1,30 +1,49 @@
-import { LucideIcon } from "lucide-react";
+import React from "react";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "./Cards";
 
-interface HighlightCardProps {
-  icon: LucideIcon;
-  title: string;
-  items: string[];
-}
+type HighlightCardProps = {
+	title: string;
+	items: string[];
+	icon: React.ElementType;
+};
 
 export default function HighlightCard({
-  icon: Icon,
-  title,
-  items,
+	title,
+	items,
+	icon: Icon,
 }: HighlightCardProps) {
-  return (
-    <div className="p-6 rounded-lg bg-green-1000 dark:bg-[#1E293B]  hover:dark:bg-dark-200 hover:opacity-90 transition-colors">
-      <div className="w-12 h-12 rounded-lg  bg-gray-50/20 dark:bg-primary-500/10 flex items-center justify-center mb-4">
-        <Icon className="h-6 w-6 text-gray-50 dark:text-primary-1000" />
-      </div>
-      <h3 className="text-xl font-semibold text-white mb-4">{title}</h3>
-      <ul className="space-y-3">
-        {items.map((item) => (
-          <li key={item} className="flex items-start gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-gray-500/20 dark:bg-primary-1000 mt-2" />
-            <span className="text-gray-200 dark:text-gray-400">{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+	return (
+		<Card className="bg-white dark:bg-[#1E293B] text-gray-900 dark:text-white">
+			<CardHeader>
+				<div className="flex items-center gap-2">
+					<Icon className="h-6 w-6 text-primary dark:text-blue-400" />
+					<CardTitle className="text-gray-900 dark:text-white">
+						{title}
+					</CardTitle>
+				</div>
+				<CardDescription className="text-muted-foreground dark:text-gray-400">
+					{items.length} key points
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<ul className="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
+					{items.map((item, index) => (
+						<li key={index}>{item}</li>
+					))}
+				</ul>
+			</CardContent>
+			<CardFooter>
+				<span className="text-xs text-muted-foreground dark:text-gray-400">
+					Explore more
+				</span>
+			</CardFooter>
+		</Card>
+	);
 }
