@@ -23,7 +23,7 @@ export default function HighlightCard({
 		<Card className="bg-white dark:bg-[#1E293B] text-gray-900 dark:text-white">
 			<CardHeader>
 				<div className="flex items-center gap-2">
-					<Icon className="h-6 w-6 text-primary dark:text-blue-400" />
+					<Icon className="h-6 w-6 text-primary-500 dark:text-blue-400" />
 					<CardTitle className="text-gray-900 dark:text-white">
 						{title}
 					</CardTitle>

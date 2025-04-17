@@ -13,7 +13,7 @@ import Introduction from "../components/sections/Introduction";
 import WelcomeMessage from "../components/sections/WelcomeMessage";
 import UniqueAspect from "../components/sections/UniqueAspect";
 import { MarqueeSkills } from "../components/ui/Marquee";
-import Testimonials from "../components/sections/Testimonials";
+// import Testimonials from "../components/sections/Testimonials";
 
 export default function Home() {
 	return (

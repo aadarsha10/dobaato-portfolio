@@ -6,9 +6,8 @@ import { Project } from "../../types"; // Adjust the import path as necessary
 import PortfolioCard from "../three/portfolio-card";
 
 export default function Portfolio() {
-	const [activeFilter, setActiveFilter] = useState("all");
+	const [activeFilter, _] = useState("all");
 	const [projects, setProjects] = useState<Project[]>([]);
-	const categories = ["all", "web", "mobile", "analytics"];
 
 	useEffect(() => {
 		const fetchProjects = async () => {
