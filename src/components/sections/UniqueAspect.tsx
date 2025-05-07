@@ -1,9 +1,10 @@
 import SectionTitle from "../ui/SectionTitle";
 import { motion } from "framer-motion";
-import FeatureCard from "../ui/FeatureCard";
+
 import Icon1 from "../../assets/images/steps.png";
 import Icon2 from "../../assets/images/icon2.png";
 import Icon3 from "../../assets/images/search.png";
+import FeatureCard from "../ui/FeatureCard";
 
 const features = [
 	{

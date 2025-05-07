@@ -32,3 +32,19 @@
 	--sky-400: #38bdf8;
 	--sky-500: #0ea5e9;
 }
+
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-30px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+.animate-float {
+	animation: float 6s ease-in-out infinite;
+}
