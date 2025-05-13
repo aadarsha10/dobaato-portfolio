@@ -25,6 +25,7 @@ export function useContactForm() {
       setSuccess(true);
       e.currentTarget.reset();
     } catch (err) {
+      console.error(err);
       setError('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);

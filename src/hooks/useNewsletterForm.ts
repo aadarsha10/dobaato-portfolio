@@ -20,6 +20,7 @@ export function useNewsletterForm() {
       setSuccess(true);
       e.currentTarget.reset();
     } catch (err) {
+      console.error(err);
       setError('Failed to subscribe. Please try again.');
     } finally {
       setIsLoading(false);
