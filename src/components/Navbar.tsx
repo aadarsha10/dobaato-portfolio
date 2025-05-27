@@ -99,7 +99,7 @@ export default function Navbar() {
       <header
         className={`fixed  top-4 left-1/2 transform -translate-x-1/2 w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#F5F6FA] dark:bg-[#1a24409d] backdrop-blur-sm shadow-lg border-b border-gray-200 dark:border-gray-800 rounded-full max-w-7xl justify-center items-center  "
+            ? "bg-[#f5f6fa94] dark:bg-[#1f2d529d]  shadow-lg border-b border-gray-200 dark:border-gray-800 rounded-full max-w-7xl justify-center items-center backdrop-blur-sm "
             : "bg-transparent max-w-7xl justify-center items-center rounded-ful"
         }`}
       >
@@ -111,8 +111,8 @@ export default function Navbar() {
             <Link
               to={"/"}
               className={cn(
-                isScrolled && "text-gray-800 dark:text-white",
-                handleTheme() && "text-gray-800 dark:text-white"
+                isScrolled && "text-black dark:text-white",
+                handleTheme() && "text-black dark:text-white"
               )}
             >
               <svg
@@ -166,30 +166,29 @@ export default function Navbar() {
                     ? "text-[#0A45EC]"
                     : cn(
                         " hover:text-blue-800",
-                        isScrolled && " text-gray-400 dark:text-white",
-                        handleTheme() && "text-gray-400"
+                        isScrolled && " text-black dark:text-white",
+                        handleTheme() && "text-black dark:text-white"
                       )
                 }`}
               >
                 {item.name}
               </a>
             ))}
-            <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
+            <div className="h-6 w-px bg-black dark:bg-white" />
 
             {externalLinks.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 className={`text-sm font-medium  hover:text-blue-800 transition-colors font-domine ${
-                  (isScrolled || handleTheme()) &&
-                  " text-gray-400 dark:text-white"
+                  (isScrolled || handleTheme()) && " text-black dark:text-white"
                 }`}
               >
                 {item.name}
               </a>
             ))}
             <div className="flex items-center gap-5">
-              <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
+              <div className="h-6 w-px bg-black dark:bg-white" />
               <button
                 onClick={() => setIsDark((prev) => !prev)}
                 className=" p-2 rounded-md transition-all ease-in-out duration-200 block"
