@@ -91,11 +91,11 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-20">
             <div className="flex flex-col relative">
               <div className="absolute top-0 left-0 w-12 md:w-16 h-12 md:h-16 -mt-3 -ml-3 md:-mt-4 md:-ml-4 bg-primary/10 dark:bg-primary-500/20 rounded-lg -z-10"></div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 relative">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 relative font-domine">
                 Our Vision
                 <span className="absolute -bottom-2 left-0 w-8 md:w-12 h-1 bg-primary dark:bg-primary-400"></span>
               </h2>
-              <p className="text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6 md:mb-8">
+              <p className="text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6 md:mb-8 font-manrope">
                 To be the leading digital transformation partner in Nepal and a
                 global player, delivering innovative solutions that redefine
                 industries and empower businesses to achieve unprecedented
@@ -113,11 +113,11 @@ export default function About() {
 
             <div className="flex flex-col relative mt-12 md:mt-0">
               <div className="absolute top-0 right-0 w-12 md:w-16 h-12 md:h-16 -mt-3 -mr-3 md:-mt-4 md:-mr-4 bg-primary/10 dark:bg-primary-500/20 rounded-lg -z-10"></div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 relative">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 relative font-domine">
                 Our Mission
                 <span className="absolute -bottom-2 left-0 w-8 md:w-12 h-1 bg-primary dark:bg-primary-400"></span>
               </h2>
-              <p className="text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6 md:mb-8">
+              <p className="text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6 md:mb-8 font-manrope">
                 Our mission is to redefine IT services in Nepal and expand our
                 global footprint with impactful solutions that create lasting
                 value for our clients. We aim to foster innovation, excellence,
@@ -143,7 +143,7 @@ export default function About() {
           viewport={{ once: true }}
           className="mb-16 md:mb-20 lg:mb-24"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-8 md:mb-12 relative">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-8 md:mb-12 font-domine   relative">
             <span className=" inline-block">Our Core Values</span>
           </h2>
 

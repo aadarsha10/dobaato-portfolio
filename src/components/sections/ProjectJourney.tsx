@@ -26,7 +26,6 @@ const steps = [
     title: "Seamless Delivery and Support",
     description: "Providing ongoing maintenance and optimization",
   },
-
 ];
 
 export default function ProjectJourney() {
@@ -40,7 +39,11 @@ export default function ProjectJourney() {
   }, [inView, controls]);
 
   return (
-    <section id="journey" className="py-24 bg-white dark:bg-[#10172A]" ref={ref}>
+    <section
+      id="journey"
+      className="py-24 bg-white dark:bg-[#10172A]"
+      ref={ref}
+    >
       <div className="container mx-auto px-6 w-full md:w-[70%]">
         <SectionTitle
           title="Our Project Approach"
@@ -50,7 +53,7 @@ export default function ProjectJourney() {
         <div className="mt-16 relative">
           {/* Animated Line */}
           <motion.div
-            className="absolute top-[20%] left-[10%] h-0.5 bg-primary-500 -translate-y-1/2 hidden md:block z-10"
+            className="absolute top-[15%] left-[10%] h-0.5 bg-primary-500 -translate-y-1/2 hidden md:block z-10"
             initial={{ width: 0 }}
             animate={controls}
             variants={{

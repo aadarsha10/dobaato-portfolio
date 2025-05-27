@@ -1,10 +1,11 @@
 import SectionTitle from "../ui/SectionTitle";
 import image from "../../assets/images/ceo.png";
+import arrow from "../../assets/images/curveArrow.svg";
 import { motion } from "framer-motion";
 export default function WelcomeMessage() {
   return (
     <section className="py-24 bg-[#F5F6FA] dark:bg-[#10172A]">
-      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
+      <div className="container mx-auto px-6 md:px-0 w-full max-w-7xl">
         <SectionTitle
           title="CEO Welcome Message"
           subtitle="Mr. Aadarsha Man Shrestha"
@@ -16,13 +17,8 @@ export default function WelcomeMessage() {
         transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        <div className="flex items-center flex-col md:flex-row w-full md:w-[70%]  gap-10 mx-auto mt-12 px-6 md:px-0">
-          <img
-            src={image}
-            alt="adrash-man-shrestha"
-            className="max-w-[100px] aspect-square md:aspect-auto rounded-full md:max-w-[360px] md:rounded-full shadow-xl hover:shadow-2xl transition-all ease-in-out duration-300 hover:-translate-y-1"
-          />
-          <p className="text-gray-600 dark:text-gray-200 text-[16px] mx-auto w-full md:w-[50%] font-light">
+        <div className="flex items-center justify-between flex-col md:flex-row w-full max-w-7xl    mx-auto mt-16 px-6 md:px-0 relative">
+          <p className="text-gray-600 dark:text-gray-200 text-[16px] mx-auto w-full md:w-[50%] font-manrope font-light">
             At Dobaato, we bring together a team with decades of collective
             experience in data-centric projects across a range of industries.
             From previous work with Banking and Financial Institutions (BFIs) to
@@ -45,6 +41,16 @@ export default function WelcomeMessage() {
             excellence. Together, we will continue to explore new avenues, serve
             diverse industries, and make a lasting difference.
           </p>
+          <img
+            src={image}
+            alt="adrash-man-shrestha"
+            className="max-w-[100px] aspect-square md:aspect-auto rounded-full md:max-w-[360px] md:rounded-full shadow-xl hover:shadow-2xl transition-all ease-in-out duration-300 hover:-translate-y-1 "
+          />
+          <img
+            src={arrow}
+            alt="arrow"
+            className="absolute -top-60 right-80 w-[150px] h-full"
+          />
         </div>
       </motion.div>
     </section>

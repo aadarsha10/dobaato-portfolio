@@ -35,7 +35,7 @@ export default function FeatureCard({
 
         <CardItem
           translateZ="50"
-          className="text-lg font-semibold text-gray-700 dark:text-white"
+          className="text-lg font-semibold text-gray-700 dark:text-white font-domine"
         >
           {title}
         </CardItem>
@@ -43,7 +43,7 @@ export default function FeatureCard({
         <CardItem
           translateZ="40"
           as="p"
-          className="text-sm text-gray-500 dark:text-gray-400 mt-1"
+          className="text-sm text-gray-500 dark:text-gray-400 mt-1 font-manrope"
         >
           {description}
         </CardItem>

@@ -158,7 +158,7 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={handleNavClick}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-sm font-medium transition-colors font-domine ${
                   activeSection === item.href.slice(1) ||
                   (activeSection === "journey" && item.name === "Services") ||
                   (activeSection === "team" && item.name === "Experience") ||
@@ -180,7 +180,7 @@ export default function Navbar() {
               <a
                 key={item.name}
                 href={item.href}
-                className={`text-sm font-medium  hover:text-blue-800 transition-colors ${
+                className={`text-sm font-medium  hover:text-blue-800 transition-colors font-domine ${
                   (isScrolled || handleTheme()) &&
                   " text-gray-400 dark:text-white"
                 }`}
