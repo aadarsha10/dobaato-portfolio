@@ -16,24 +16,24 @@ import { MarqueeSkills } from "../components/ui/Marquee";
 // import Testimonials from "../components/sections/Testimonials";
 
 export default function Home() {
-	return (
-		<>
-			<Navbar />
-			<Hero />
-			<Introduction />
-			<WelcomeMessage />
-			<About />
-			<Services />
-			<ProjectJourney />
-			<UniqueAspect />
-			<Portfolio />
-			<Industries />
-			<Experience />
-			<MarqueeSkills />
-			<CompanyHighlights />
-			{/* <Testimonials /> */}
-			<Contact />
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <Introduction />
+      <WelcomeMessage />
+      <About />
+      <Services />
+      <ProjectJourney />
+      <UniqueAspect />
+      <Portfolio />
+      <Industries />
+      <Experience />
+      <MarqueeSkills />
+      <CompanyHighlights />
+      {/* <Testimonials /> */}
+      <Contact />
+      <Footer />
+    </>
+  );
 }

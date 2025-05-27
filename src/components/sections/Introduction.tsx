@@ -1,29 +1,41 @@
+"use client";
 import SectionTitle from "../ui/SectionTitle";
-import { motion } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { GoogleGeminiEffect } from "../ui/google-gemini-effect";
 
 export default function Introduction() {
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const pathLengthFirst = useTransform(scrollYProgress, [0, 0.8], [0.2, 1.2]);
+  const pathLengthSecond = useTransform(scrollYProgress, [0, 0.8], [0.15, 1.2]);
+  const pathLengthThird = useTransform(scrollYProgress, [0, 0.8], [0.1, 1.2]);
+  const pathLengthFourth = useTransform(scrollYProgress, [0, 0.8], [0.05, 1.2]);
+  const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
+
   return (
-    <section className="py-24 bg-gray-50 dark:bg-[#10172A]">
-      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
-        <SectionTitle title="Introduction" />
-      </div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        <div className="flex flex-col gap-8 px-6 md:px-0  md:flex-row w-full md:w-[70%] md:gap-20 md:mx-auto mt-12  items-center">
-          <p className="text-gray-700 dark:text-gray-200 text-[16px] md:text-[20px] w-full md:max-w-[600px] text-start ">
-            <span className="font-semibold">Dobaato</span> is a leading IT
-            services company, committed to delivering high-quality, innovative
-            solutions tailored to the unique needs of our clients. With over 9
-            years of collective experience, our seasoned team delivers
-            innovative solutions at the crossroads of technology. Our mission is
-            to redefine IT services in Nepal and expand our global footprint
-            with impactful solutions.
-          </p>
-          <div className="text-gray-900 dark:text-white">
+    <section
+      className="py-24 bg-gray-50 dark:bg-[#10172A] relative overflow-hidden"
+      ref={ref}
+    >
+      <div className="  mx-auto px-6 md:px-0 w-full h-[80vh] relative z-10">
+        <GoogleGeminiEffect
+          pathLengths={[
+            pathLengthFirst,
+            pathLengthSecond,
+            pathLengthThird,
+            pathLengthFourth,
+            pathLengthFifth,
+          ]}
+          title="Leading IT Services Company"
+          description="With over 9 years of collective experience, our seasoned team delivers innovative solutions at the crossroads of technology. Our mission is to redefine IT services in Nepal and expand our global footprint with impactful solutions."
+          className="w-full"
+        >
+          <div className=" dark:text-black text-white bg-blue-950 dark:bg-white rounded-full px-10 py-2  z-30 md:text-base text-xs w-fit mx-auto -mt-44 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="153"
@@ -49,8 +61,8 @@ export default function Introduction() {
               </defs>
             </svg>
           </div>
-        </div>
-      </motion.div>
+        </GoogleGeminiEffect>
+      </div>
     </section>
   );
 }
