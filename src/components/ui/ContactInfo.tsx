@@ -7,10 +7,10 @@ export default function ContactInfo() {
       <div className="flex items-start gap-4">
         <MapPin className="h-5 w-5 mt-1 text-[#0A45EC] flex-shrink-0" />
         <div>
-          <h3 className="font-medium text-gray-500 dark:text-white mb-1">
+          <h3 className="font-medium text-gray-500 dark:text-white mb-1 font-domine">
             Visit Us
           </h3>
-          <p className="text-gray-400">
+          <p className="text-gray-400 font-manrope">
             Ranibari 26, Samakhushi, Kathmandu, Nepal
           </p>
         </div>
@@ -19,30 +19,34 @@ export default function ContactInfo() {
       <div className="flex items-start gap-4">
         <Phone className="h-5 w-5 mt-1 text-[#0A45EC] flex-shrink-0" />
         <div>
-          <h3 className="font-medium text-gray-500 dark:text-white mb-1">
+          <h3 className="font-medium text-gray-500 dark:text-white mb-1 font-domine">
             Call Us
           </h3>
-          <p className="text-gray-400">+977 9849088717, +977 9861495735</p>
+          <p className="text-gray-400 font-manrope">
+            +977 9849088717, +977 9861495735
+          </p>
         </div>
       </div>
 
       <div className="flex items-start gap-4">
         <Mail className="h-5 w-5 mt-1 text-[#0A45EC] flex-shrink-0" />
         <div>
-          <h3 className="font-medium text-gray-500 dark:text-white mb-1">
+          <h3 className="font-medium text-gray-500 dark:text-white mb-1 font-domine">
             Email Us
           </h3>
-          <p className="text-gray-400">hello@dobaato.com</p>
+          <p className="text-gray-400 font-manrope">hello@dobaato.com</p>
         </div>
       </div>
 
       <div className="flex items-start gap-4">
         <Clock className="h-5 w-5 mt-1 text-[#0A45EC] flex-shrink-0" />
         <div>
-          <h3 className="font-medium text-gray-500 dark:text-white mb-1">
+          <h3 className="font-medium text-gray-500 dark:text-white mb-1 font-domine">
             Working Hours
           </h3>
-          <p className="text-gray-400">Mon - Fri: 9:00 AM - 6:00 PM</p>
+          <p className="text-gray-400 font-manrope">
+            Mon - Fri: 9:00 AM - 6:00 PM
+          </p>
         </div>
       </div>
       {/* <div className="flex items-start gap-4">

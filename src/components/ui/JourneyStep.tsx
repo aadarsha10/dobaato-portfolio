@@ -11,7 +11,6 @@ export default function JourneyStep({
   icon: Icon,
   title,
   description,
-  stepNumber,
 }: JourneyStepProps) {
   return (
     <div className="relative text-center">
@@ -19,10 +18,10 @@ export default function JourneyStep({
         <Icon className="h-8 w-8 text-primary-1000 dark:text-primary-1000 z-30" />
       </div>
 
-      <h3 className="text-lg font-medium  text-gray-600 dark:text-white mb-2">
+      <h3 className="text-lg font-medium  text-gray-600 dark:text-white mb-2 font-domine">
         {title}
       </h3>
-      <p className="text-gray-400">{description}</p>
+      <p className="text-gray-400 font-manrope">{description}</p>
     </div>
   );
 }

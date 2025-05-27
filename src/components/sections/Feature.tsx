@@ -26,11 +26,11 @@ export const Feature = ({
       <Grid size={20} />
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
         <div className="absolute left-0 inset-y-0 h-6 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700" />
-        <span className="inline-block text-neutral-800 dark:text-neutral-100">
+        <span className="inline-block text-neutral-800 dark:text-neutral-100 font-domine">
           {title}
         </span>
       </div>
-      <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs relative z-10 px-10">
+      <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs relative z-10 px-10 font-manrope">
         {description}
       </p>
     </div>

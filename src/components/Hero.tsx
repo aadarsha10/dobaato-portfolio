@@ -44,7 +44,7 @@ export default function Hero() {
       <ThreeBackground />
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center">
-          <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 font-domine">
             The Crossroads of{" "}
             <span className="text-[#0A45EC] inline-block min-w-[2ch]">
               {typedText}
@@ -53,7 +53,7 @@ export default function Hero() {
           </h1>
           <p
             className={
-              "text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+              "text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto font-manrope"
             }
           >
             Where innovation meets excellence in digital transformation

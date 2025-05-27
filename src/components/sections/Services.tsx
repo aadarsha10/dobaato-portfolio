@@ -16,54 +16,56 @@ const services = [
   {
     title: "Web Development",
     description:
-      "Create powerful web applications using cutting-edge technologies.",
+      "Develop scalable web applications leveraging modern frontend and backend frameworks for optimal performance and user engagement.",
     icon: <Globe />,
     color: "from-purple-600 to-blue-500",
   },
   {
     title: "Mobile Development",
     description:
-      "Build native and cross-platform mobile applications that users love.",
+      "Deliver responsive mobile solutions for iOS and Android platforms with seamless functionality and intuitive user interfaces.",
     icon: <Smartphone />,
     color: "from-pink-600 to-purple-500",
   },
   {
     title: "Software Development",
-    description: "Custom software development for your specific needs.",
+    description:
+      "Engineer customized software solutions tailored to address your business challenges and operational requirements.",
     icon: <AppWindow />,
     color: "from-pink-600 to-purple-500",
   },
   {
     title: "UI/UX Design",
     description:
-      "Design intuitive and beautiful user interfaces that enhance user experience.",
+      "Create visually appealing interfaces with user-centered design principles that enhance accessibility and customer satisfaction.",
     icon: <Palette />,
     color: "from-orange-600 to-pink-500",
   },
   {
     title: "Data Analytics",
     description:
-      "Transform your data into actionable insights with our advanced analytics solutions.",
+      "Implement powerful analytics tools to extract meaningful patterns from complex datasets for informed business decision-making.",
     icon: <BarChart3 />,
     color: "from-blue-600 to-cyan-500",
   },
   {
     title: "DevOps / SecOps",
     description:
-      "Improve security and reliability with our DevOps and SecOps services.",
+      "Streamline development workflows and enhance system security through automated deployment pipelines and continuous integration.",
     icon: <Computer />,
     color: "from-blue-600 to-cyan-500",
   },
   {
     title: "Security Audits    ",
     description:
-      "Protect your business from cyber threats with our comprehensive security audits.",
+      "Conduct thorough vulnerability assessments and penetration testing to identify and mitigate potential security risks.",
     icon: <Shield />,
     color: "from-blue-600 to-cyan-500",
   },
   {
     title: "Many More Services",
-    description: "Explore our comprehensive range of services",
+    description:
+      "Discover additional specialized IT solutions including cloud infrastructure, AI integration, and enterprise architecture.",
     icon: <UserCircle />,
     color: "from-blue-600 to-cyan-500",
   },
