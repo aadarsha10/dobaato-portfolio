@@ -22,13 +22,13 @@ export default function Home() {
       <Introduction />
       <WelcomeMessage />
       <About />
+      <Experience />
       <Services />
       <ProjectJourney />
       <UniqueAspect />
+      <MarqueeSkills />
       <Portfolio />
       <Industries />
-      <Experience />
-      <MarqueeSkills />
       <CompanyHighlights />
       {/* <Testimonials /> */}
       <Contact />
