@@ -12,7 +12,7 @@ import Footer from "../components/sections/Footer";
 import Introduction from "../components/sections/Introduction";
 import WelcomeMessage from "../components/sections/WelcomeMessage";
 import UniqueAspect from "../components/sections/UniqueAspect";
-import { MarqueeSkills } from "../components/ui/marquee";
+import { MarqueeSkills } from "../components/ui/Marquee";
 
 export default function Home() {
   return (
