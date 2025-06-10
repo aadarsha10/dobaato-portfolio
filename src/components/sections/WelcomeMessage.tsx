@@ -44,7 +44,7 @@ export default function WelcomeMessage() {
           <img
             src={image}
             alt="adrash-man-shrestha"
-            className="max-w-[200px]  h-full aspect-auto rounded-full md:max-w-[360px] md:rounded-full shadow-xl hover:shadow-2xl transition-all ease-in-out duration-300 hover:-translate-y-1 mb-10 md:mb-0 "
+            className="max-w-[200px]  aspect-auto rounded-full md:max-w-[360px] md:rounded-full shadow-xl hover:shadow-2xl transition-all ease-in-out duration-300 hover:-translate-y-1 mb-10 md:mb-0 "
           />
           <img
             src={arrow}
