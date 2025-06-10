@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ReactNode, useEffect, useState } from "react";
 import { supabase } from "./SupabaseClient";
+import { setupSupabaseResources } from "./utils/setupSupabase";
 import Home from "./pages/Home";
 import Careers from "./pages/careers";
 import Blog from "./pages/blog";
@@ -11,6 +12,16 @@ import Login from "./pages/Login/";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  // Setup Supabase resources on app initialization
+  useEffect(() => {
+    setupSupabaseResources()
+      .then(() => console.log("Supabase resources setup complete"))
+      .catch((err) =>
+        console.error("Error setting up Supabase resources:", err)
+      );
+  }, []);
+
   const PublicRoute = ({ children }: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(
       null

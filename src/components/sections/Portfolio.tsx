@@ -6,40 +6,38 @@ import { Project } from "../../types"; // Adjust the import path as necessary
 import PortfolioCard from "../three/portfolio-card";
 
 export default function Portfolio() {
-	const [activeFilter, _] = useState("all");
-	const [projects, setProjects] = useState<Project[]>([]);
+  const [activeFilter] = useState("all");
+  const [projects, setProjects] = useState<Project[]>([]);
 
-	useEffect(() => {
-		const fetchProjects = async () => {
-			const { data, error } = await supabase
-				.from("Portfolio")
-				.select("*");
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { data, error } = await supabase.from("Portfolio").select("*");
 
-			if (error) {
-				setProjects(localProject);
-				console.error("Error fetching projects:", error);
-			} else {
-				setProjects(data);
-			}
-		};
+      if (error) {
+        setProjects(localProject);
+        console.error("Error fetching projects:", error);
+      } else {
+        setProjects(data);
+      }
+    };
 
-		fetchProjects();
-	}, []);
+    fetchProjects();
+  }, []);
 
-	const filteredProjects =
-		activeFilter === "all"
-			? projects
-			: projects.filter((project) => project.category === activeFilter);
+  const filteredProjects =
+    activeFilter === "all"
+      ? projects
+      : projects.filter((project) => project.category === activeFilter);
 
-	return (
-		<section id="portfolio" className="py-24 bg-white dark:bg-[#10172A]">
-			<div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
-				<SectionTitle
-					title="Our Portfolio"
-					subtitle="Recent Projects & Case Studies"
-				/>
+  return (
+    <section id="portfolio" className="py-24 bg-white dark:bg-[#10172A]">
+      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
+        <SectionTitle
+          title="Our Portfolio"
+          subtitle="Recent Projects & Case Studies"
+        />
 
-				{/* <div className="flex justify-center gap-4 mt-8">
+        {/* <div className="flex justify-center gap-4 mt-8">
 					{categories.map((category) => (
 						<button
 							key={category}
@@ -55,8 +53,8 @@ export default function Portfolio() {
 					))}
 				</div> */}
 
-				<PortfolioCard projects={filteredProjects} />
-			</div>
-		</section>
-	);
+        <PortfolioCard projects={filteredProjects} />
+      </div>
+    </section>
+  );
 }
