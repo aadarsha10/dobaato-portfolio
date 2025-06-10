@@ -23,13 +23,13 @@ export const GoogleGeminiEffect = ({
 }) => {
   return (
     <div className={cn("sticky top-12", className)}>
-      <p className="text-lg md:text-7xl  font-domine pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b  from-black to-neutral-900 font-bold w-full dark:bg-gradient-to-b dark:from-neutral-100 dark:via-white dark:to-neutral-600">
+      <p className="text-3xl md:text-7xl  font-domine pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b  from-black to-neutral-900 font-bold w-full dark:bg-gradient-to-b dark:from-neutral-100 dark:via-white dark:to-neutral-600">
         {title}
       </p>
       <p className="text-md  max-w-[800px] font-light text-center text-neutral-800 dark:text-neutral-100 mt-4 w-full mx-auto">
         {description}
       </p>
-      <div className="w-full h-[1200px] -top-60 md:-top-40 flex items-center justify-center absolute">
+      <div className="w-full h-[1200px] -top-0 md:-top-20 flex items-center justify-center absolute">
         {children}
       </div>
       <svg
@@ -37,7 +37,7 @@ export const GoogleGeminiEffect = ({
         height="1200"
         viewBox="0 0 1440 1200"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute -top-60 md:-top-40 w-full"
+        className="absolute -top-0 md:-top-20 w-full "
         preserveAspectRatio="none"
       >
         <motion.path

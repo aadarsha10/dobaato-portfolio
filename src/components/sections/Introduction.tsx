@@ -35,7 +35,7 @@ export default function Introduction() {
           description="With over 9 years of collective experience, our seasoned team delivers innovative solutions at the crossroads of technology. Our mission is to redefine IT services in Nepal and expand our global footprint with impactful solutions."
           className="w-full"
         >
-          <div className=" dark:text-black text-white bg-blue-950 dark:bg-white rounded-full px-10 py-2  z-30 md:text-base text-xs w-fit mx-auto -mt-44 ">
+          <div className=" dark:text-black text-white bg-blue-950 dark:bg-white rounded-full px-2 md:px-10 py-2  z-30 md:text-base text-xs w-fit mx-auto -mt-44 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="153"

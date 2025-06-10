@@ -17,8 +17,8 @@ export default function WelcomeMessage() {
         transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        <div className="flex items-center justify-between flex-col md:flex-row w-full max-w-7xl    mx-auto mt-16 px-6 md:px-0 relative">
-          <p className="text-gray-600 dark:text-gray-200 text-[16px] mx-auto w-full md:w-[50%] font-manrope font-light">
+        <div className="flex items-center justify-between flex-col-reverse md:flex-row w-full max-w-7xl    mx-auto mt-16 px-6 md:px-0 relative">
+          <p className="text-gray-600 dark:text-gray-200 text-[16px] mx-auto w-full md:w-[50%] font-manrope font-light ">
             At Dobaato, we bring together a team with decades of collective
             experience in data-centric projects across a range of industries.
             From previous work with Banking and Financial Institutions (BFIs) to
@@ -44,12 +44,12 @@ export default function WelcomeMessage() {
           <img
             src={image}
             alt="adrash-man-shrestha"
-            className="max-w-[100px] aspect-square md:aspect-auto rounded-full md:max-w-[360px] md:rounded-full shadow-xl hover:shadow-2xl transition-all ease-in-out duration-300 hover:-translate-y-1 "
+            className="max-w-[200px]  h-full aspect-auto rounded-full md:max-w-[360px] md:rounded-full shadow-xl hover:shadow-2xl transition-all ease-in-out duration-300 hover:-translate-y-1 mb-10 md:mb-0 "
           />
           <img
             src={arrow}
             alt="arrow"
-            className="absolute -top-60 right-80 w-[150px] h-full"
+            className="absolute -top-96 md:-top-60 right-80 w-[150px] h-full"
           />
         </div>
       </motion.div>
