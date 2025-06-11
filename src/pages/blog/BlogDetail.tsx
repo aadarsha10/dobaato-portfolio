@@ -254,15 +254,7 @@ export default function BlogDetail() {
               </div>
             </div>
 
-            {/* Article Progress Indicator */}
-            <motion.div
-              className="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="h-full bg-gradient-to-r from-blue-500 to-purple-600" style={{ width: '30%' }} />
-            </motion.div>
+
 
             {/* Reading Progress */}
             <div className="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
@@ -315,7 +307,7 @@ export default function BlogDetail() {
               <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-domine">
                 Related Articles
               </h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+              <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 auto-rows-fr">
                 {relatedPosts.map((relatedPost) => (
                   <Link
                     key={relatedPost.id}
@@ -393,8 +385,9 @@ export default function BlogDetail() {
             </Link>
           </motion.div>
         </article>
-      </main>
       <Footer />
+
+      </main>
     </>
   );
 }

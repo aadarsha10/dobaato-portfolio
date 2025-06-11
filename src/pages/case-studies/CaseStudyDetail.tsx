@@ -272,7 +272,7 @@ export default function CaseStudyDetail() {
               <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center font-domine">
                 Related Case Studies
               </h2>
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-2">
                 {relatedCaseStudies.map((relatedCaseStudy) => (
                   <Link
                     key={relatedCaseStudy.id}
