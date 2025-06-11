@@ -1,11 +1,36 @@
 import FooterLinks from "../ui/FooterLinks";
 import FooterSocial from "../ui/FooterSocial";
 import FooterNewsletter from "../ui/FooterNewsletter";
+
 import { Link } from "react-router-dom";
 export default function Footer() {
   return (
-    <footer className="bg-[#1B1D1E] bg-gradient-to-br dark:from-blue-900 dark:to-neutral-900  pt-16 pb-8">
-      <div className="container mx-auto px-6">
+    <div className="bg-white dark:bg-[#10172A] py-8">
+      <footer className="bg-[#1B1D1E] bg-gradient-to-br dark:from-blue-900 dark:to-neutral-900 pt-16 pb-8 relative overflow-hidden rounded-3xl max-w-7xl mx-auto">
+        {/* Background Vector */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="1920" 
+            height="142" 
+            viewBox="0 0 1920 142" 
+            fill="none"
+            className="opacity-20"
+          >
+            <path 
+              d="M-6 138.325L463.617 1.00003M1927 139.57L1447.82 1.00003M1664.07 140.762L1322.24 1.00003M1431.87 140.762L1186.19 1.00002M1246.12 139.808L1050.15 1.00005M1057.75 141L963.566 2.00612M733.336 139.808L896.606 1.00003M512.262 140.285L754.021 1M271.567 139.093L600.97 1.00003M91.7001 110.245L1826.27 110.245M229.053 69.715L1687.61 69.715M349.401 34.4301L1576.42 34.43" 
+              stroke="url(#paint0_linear_427_3001)" 
+              strokeOpacity="0.5"
+            />
+            <defs>
+              <linearGradient id="paint0_linear_427_3001" x1="960.5" y1="1" x2="960.5" y2="141" gradientUnits="userSpaceOnUse">
+                <stop stopColor="white" stopOpacity="0"/>
+                <stop offset="0.867009" stopColor="white" stopOpacity="0.6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div className="container mx-auto px-6 relative z-10">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link to="/">
@@ -47,7 +72,6 @@ export default function Footer() {
             links={[
               { label: "About", href: "#about" },
               { label: "Services", href: "#services" },
-              { label: "Team", href: "#team" },
               { label: "Contact", href: "#contact" },
             ]}
           />
@@ -65,12 +89,13 @@ export default function Footer() {
           <FooterNewsletter />
         </div>
 
-        <div className="mt-12 pt-8 border-t border-dark-200">
+        <div className="mt-12 pt-8 ">
           <p className="text-center text-gray-400 font-manrope">
             © {new Date().getFullYear()} Dobaato. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
+    </div>
   );
 }

@@ -5,9 +5,14 @@ import { setupSupabaseResources } from "./utils/setupSupabase";
 import Home from "./pages/Home";
 import Careers from "./pages/careers";
 import Blog from "./pages/blog";
+import BlogDetail from "./pages/blog/BlogDetail";
+import CaseStudies from "./pages/case-studies";
+import CaseStudyDetail from "./pages/case-studies/CaseStudyDetail";
 import ScrollToTop from "./components/ui/ScrollToTop";
 import Admin from "./pages/admin";
 import Login from "./pages/Login/";
+import Documentation from "./pages/Documentation";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 // import SignUp from "./components/SignUp";
 
 export default function App() {
@@ -73,6 +78,11 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+          <Route path="/docs" element={<Documentation />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route
             path="/admin"
             element={

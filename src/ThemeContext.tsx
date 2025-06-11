@@ -7,7 +7,7 @@ interface ThemeContextType {
 
 // Create a default value for the context
 const defaultThemeContextValue: ThemeContextType = {
-  isDark: true, // Changed to dark mode as default
+  isDark: false, // Changed to light mode as default
   toggleTheme: () => {},
 };
 
@@ -15,9 +15,9 @@ const ThemeContext = createContext<ThemeContextType>(defaultThemeContextValue);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(() => {
-    // Check localStorage, if not set, default to dark mode
+    // Check localStorage, if not set, default to light mode
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme ? savedTheme === "dark" : true;
+    return savedTheme ? savedTheme === "dark" : true; // Default to dark mode if not set
   });
 
   useEffect(() => {

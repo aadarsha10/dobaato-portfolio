@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Home, Info, Briefcase, FolderOpen, Phone, Building2, GraduationCap } from 'lucide-react';
+import { Home, Info, Briefcase, FolderOpen, Phone, Building2, GraduationCap, FileText } from 'lucide-react';
 
 const navItems = [
   { icon: Home, label: 'Home', href: '#home' },
@@ -9,6 +9,7 @@ const navItems = [
   { icon: Building2, label: 'Industries', href: '#industries' },
   { icon: Phone, label: 'Contact', href: '#contact' },
   { icon: GraduationCap, label: 'Careers', href: '/careers' },
+  { icon: FileText, label: 'Case Studies', href: '/case-studies' },
 ];
 
 export default function MobileNav() {

@@ -13,6 +13,8 @@ import Introduction from "../components/sections/Introduction";
 import WelcomeMessage from "../components/sections/WelcomeMessage";
 import UniqueAspect from "../components/sections/UniqueAspect";
 import { MarqueeSkills } from "../components/ui/Marquee";
+import Testimonials from "../components/sections/Testimonials";
+import FAQ from "../components/sections/FAQ";
 
 export default function Home() {
   return (
@@ -30,7 +32,8 @@ export default function Home() {
       <Portfolio />
       <Industries />
       <CompanyHighlights />
-      {/* <Testimonials /> */}
+      <Testimonials />
+      <FAQ />
       <Contact />
       <Footer />
     </>

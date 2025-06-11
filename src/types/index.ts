@@ -28,3 +28,17 @@ export interface TeamMember {
 	linkedin?: string;
 	twitter?: string;
 }
+
+export interface CaseStudy {
+	id: string;
+	title: string;
+	description: string;
+	imageUrl: string;
+	slug: string;
+	content?: string;
+	technologies?: string[];
+	clientName?: string;
+	projectDate?: string;
+	projectUrl?: string;
+	githubUrl?: string;
+}

@@ -11,6 +11,7 @@ import PortfolioManager from "./portfolio-manager";
 import FAQManager from "./faq-manager";
 import TestimonialsManager from "./testimonials-manager";
 import BlogManager from "./blog-manager";
+import CaseStudiesManager from "./case-studies-manager";
 import toast from "react-hot-toast";
 
 export default function AdminPage() {
@@ -68,6 +69,12 @@ export default function AdminPage() {
 						>
 							Blog
 						</TabsTrigger>
+						<TabsTrigger
+							value="case-studies"
+							className="text-base w-full transition-colors rounded-lg  duration-200 hover:bg-primary-200 data-[state=active]:bg-primary-100"
+						>
+							Case Studies
+						</TabsTrigger>
 					</TabsList>
 				</div>
 				{/* Sign Out Button */}
@@ -95,6 +102,9 @@ export default function AdminPage() {
 				</TabsContent>
 				<TabsContent value="blog" className="space-y-4">
 					<BlogManager />
+				</TabsContent>
+				<TabsContent value="case-studies" className="space-y-4">
+					<CaseStudiesManager />
 				</TabsContent>
 			</div>
 		</Tabs>
