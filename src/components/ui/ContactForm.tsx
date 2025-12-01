@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import {Turnstile} from "@marsidev/react-turnstile";
+import {useEffect, useState} from "react";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const ContactForm = () => {
     error: null,
     success: false,
   });
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   // Initialize EmailJS on component mount
   useEffect(() => {
@@ -41,7 +43,18 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ ...status, isSubmitting: true });
+
+    // Validate Turnstile token
+    if (!turnstileToken) {
+      setStatus({
+        isSubmitting: false,
+        error: "Please complete the security verification.",
+        success: false,
+      });
+      return;
+    }
+
+    setStatus({...status, isSubmitting: true});
 
     try {
       const templateParams = {
@@ -70,14 +83,17 @@ const ContactForm = () => {
       setFormData({
         name: "",
         email: "",
-        services: "",
+        services: "Web Development",
         message: "",
         phone: "",
       });
 
+      // Reset turnstile token
+      setTurnstileToken(null);
+
       // Reset success message after 3 seconds
       setTimeout(() => {
-        setStatus((prev) => ({ ...prev, success: false }));
+        setStatus((prev) => ({...prev, success: false}));
       }, 3000);
     } catch (error) {
       setStatus({
@@ -117,7 +133,7 @@ const ContactForm = () => {
             Phone Number
           </label>
           <input
-            type="phone"
+            type="tel"
             id="phone"
             name="phone"
             value={formData.phone}
@@ -185,6 +201,16 @@ const ContactForm = () => {
             rows={4}
             required
             className="mt-1 block w-full rounded-lg bg-gray-200 py-2 px-3 dark:bg-[#1E293B] border-dark-100 text-gray-800 dark:text-white focus:ring-primary-500 focus:border-primary-500"
+          />
+        </div>
+
+        <div className="flex flex-col items-center">
+          <Turnstile
+            siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || ""}
+            onSuccess={(token) => setTurnstileToken(token)}
+            onError={() => setTurnstileToken(null)}
+            onExpire={() => setTurnstileToken(null)}
+            theme="auto"
           />
         </div>
 

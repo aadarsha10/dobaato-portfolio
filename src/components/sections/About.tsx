@@ -1,7 +1,7 @@
-import { Code2, Gem, Users, ArrowRight } from "lucide-react";
-import SectionTitle from "../ui/SectionTitle";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
+import {Code2, Gem, Users} from "lucide-react";
 import FeatureCard from "../ui/FeatureCard";
+import SectionTitle from "../ui/SectionTitle";
 
 const features = [
   {
@@ -53,10 +53,10 @@ export default function About() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full md:w-[90%] lg:w-[80%]">
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          initial={{opacity: 0}}
+          whileInView={{opacity: 1}}
+          transition={{duration: 0.7}}
+          viewport={{once: true}}
           className="relative mb-16 md:mb-20 lg:mb-24"
         >
           <SectionTitle
@@ -80,67 +80,190 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Vision and Mission with Graphics */}
+        {/* Vision, Mission and Values Cards */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+          initial={{opacity: 0, y: 40}}
+          whileInView={{opacity: 1, y: 0}}
+          transition={{duration: 0.6, delay: 0.2}}
+          viewport={{once: true}}
           className="mb-16 md:mb-20 lg:mb-24"
         >
-          <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-20">
-            <div className="flex flex-col relative">
-              <div className="absolute top-0 left-0 w-12 md:w-16 h-12 md:h-16 -mt-3 -ml-3 md:-mt-4 md:-ml-4 bg-primary/10 dark:bg-primary-500/20 rounded-lg -z-10"></div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 relative font-domine">
-                Our Vision
-                <span className="absolute -bottom-2 left-0 w-8 md:w-12 h-1 bg-primary dark:bg-primary-400"></span>
-              </h2>
-              <p className="text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6 md:mb-8 font-manrope">
-                To be the leading digital transformation partner in Nepal and a
-                global player, delivering innovative solutions that redefine
-                industries and empower businesses to achieve unprecedented
-                growth and success.
-              </p>
-              <div className="mt-auto relative h-56 sm:h-64 md:h-72 overflow-hidden rounded-xl shadow-md">
-                <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop"
-                  alt="Team collaboration"
-                  className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-50"></div>
+          <div className="grid md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
+            {/* Mission Card */}
+            <motion.div
+              initial={{opacity: 0, y: 20}}
+              whileInView={{opacity: 1, y: 0}}
+              transition={{duration: 0.5, delay: 0.2}}
+              viewport={{once: true}}
+              className="flex flex-col items-center text-center p-8 rounded-xl bg-white dark:bg-[#1A2F4A] border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="mb-6">
+                <svg
+                  width="80"
+                  height="80"
+                  viewBox="0 0 80 80"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-16 h-16 md:w-20 md:h-20"
+                >
+                  {/* Target Icon */}
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r="35"
+                    stroke="#EF4444"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r="24"
+                    stroke="#EF4444"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r="13"
+                    stroke="#EF4444"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                  <circle cx="40" cy="40" r="4" fill="#EF4444" />
+                  <path
+                    d="M40 5 L45 18 L59 18 L48 27 L52 40 L40 31 L28 40 L32 27 L21 18 L35 18 Z"
+                    fill="#EF4444"
+                  />
+                </svg>
               </div>
-            </div>
-
-            <div className="flex flex-col relative mt-12 md:mt-0">
-              <div className="absolute top-0 right-0 w-12 md:w-16 h-12 md:h-16 -mt-3 -mr-3 md:-mt-4 md:-mr-4 bg-primary/10 dark:bg-primary-500/20 rounded-lg -z-10"></div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 relative font-domine">
-                Our Mission
-                <span className="absolute -bottom-2 left-0 w-8 md:w-12 h-1 bg-primary dark:bg-primary-400"></span>
-              </h2>
-              <p className="text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6 md:mb-8 font-manrope">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 font-domine">
+                Our <span className="text-red-500">Mission</span>
+              </h3>
+              <p className="text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-300 font-manrope">
                 Our mission is to redefine IT services in Nepal and expand our
                 global footprint with impactful solutions that create lasting
                 value for our clients. We aim to foster innovation, excellence,
                 and sustainable growth through technology.
               </p>
-              <div className="mt-auto relative h-56 sm:h-64 md:h-72 overflow-hidden rounded-xl shadow-md">
-                <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop"
-                  alt="Business meeting"
-                  className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-50"></div>
+            </motion.div>
+
+            {/* Vision Card */}
+            <motion.div
+              initial={{opacity: 0, y: 20}}
+              whileInView={{opacity: 1, y: 0}}
+              transition={{duration: 0.5, delay: 0.3}}
+              viewport={{once: true}}
+              className="flex flex-col items-center text-center p-8 rounded-xl bg-white dark:bg-[#1A2F4A] border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="mb-6">
+                <svg
+                  width="80"
+                  height="80"
+                  viewBox="0 0 80 80"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-16 h-16 md:w-20 md:h-20"
+                >
+                  {/* Eye Icon */}
+                  <path
+                    d="M40 25C30 25 21 32 15 40C21 48 30 55 40 55C50 55 59 48 65 40C59 32 50 25 40 25Z"
+                    stroke="#3B82F6"
+                    strokeWidth="2.5"
+                    fill="none"
+                    strokeLinejoin="round"
+                  />
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r="8"
+                    stroke="#3B82F6"
+                    strokeWidth="2.5"
+                    fill="none"
+                  />
+                  <circle cx="40" cy="40" r="4" fill="#3B82F6" />
+                  <path
+                    d="M20 20 L25 25 M60 20 L55 25 M20 60 L25 55 M60 60 L55 55"
+                    stroke="#3B82F6"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </div>
-            </div>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 font-domine">
+                Our <span className="text-blue-500">Vision</span>
+              </h3>
+              <p className="text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-300 font-manrope">
+                To be the leading digital transformation partner in Nepal and a
+                global player, delivering innovative solutions that redefine
+                industries and empower businesses to achieve unprecedented
+                growth and success.
+              </p>
+            </motion.div>
+
+            {/* Values Card */}
+            <motion.div
+              initial={{opacity: 0, y: 20}}
+              whileInView={{opacity: 1, y: 0}}
+              transition={{duration: 0.5, delay: 0.4}}
+              viewport={{once: true}}
+              className="flex flex-col items-center text-center p-8 rounded-xl bg-white dark:bg-[#1A2F4A] border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="mb-6">
+                <svg
+                  width="80"
+                  height="80"
+                  viewBox="0 0 80 80"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-16 h-16 md:w-20 md:h-20"
+                >
+                  {/* Star Medal Icon */}
+                  <circle
+                    cx="40"
+                    cy="35"
+                    r="20"
+                    stroke="#10B981"
+                    strokeWidth="2.5"
+                    fill="none"
+                  />
+                  <path
+                    d="M40 15 L45 28 L59 28 L48 37 L53 50 L40 41 L27 50 L32 37 L21 28 L35 28 Z"
+                    fill="#10B981"
+                  />
+                  <path
+                    d="M30 55 L35 65 M50 55 L45 65"
+                    stroke="#10B981"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M35 65 Q40 70 45 65"
+                    stroke="#10B981"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 font-domine">
+                Our <span className="text-emerald-500">Values</span>
+              </h3>
+              <p className="text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-300 font-manrope">
+                We are driven by modular development, client-focused solutions,
+                and quality-first approaches. Our core values emphasize
+                innovation, excellence, integrity, and sustainable growth.
+              </p>
+            </motion.div>
           </div>
         </motion.div>
 
         {/* Our Core Values */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
+          initial={{opacity: 0, y: 40}}
+          whileInView={{opacity: 1, y: 0}}
+          transition={{duration: 0.6, delay: 0.3}}
+          viewport={{once: true}}
           className="mb-16 md:mb-20 lg:mb-24"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-8 md:mb-12 font-domine   relative">
@@ -151,10 +274,10 @@ export default function About() {
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
-                viewport={{ once: true }}
+                initial={{opacity: 0, y: 20}}
+                whileInView={{opacity: 1, y: 0}}
+                transition={{duration: 0.5, delay: index * 0.2 + 0.4}}
+                viewport={{once: true}}
                 className="flex justify-center"
               >
                 <FeatureCard {...feature} />

@@ -1,9 +1,9 @@
-import SectionTitle from "../ui/SectionTitle";
-import { useState, useEffect } from "react";
-import { projects as localProject } from "../../data/projects";
-import { supabase } from "../../SupabaseClient";
-import { Project } from "../../types"; // Adjust the import path as necessary
+import {useEffect, useState} from "react";
+import {projects as localProject} from "../../data/projects";
+import {supabase} from "../../SupabaseClient";
+import {Project} from "../../types"; // Adjust the import path as necessary
 import PortfolioCard from "../three/portfolio-card";
+import SectionTitle from "../ui/SectionTitle";
 
 export default function Portfolio() {
   const [activeFilter] = useState("all");
@@ -11,7 +11,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const { data, error } = await supabase.from("Portfolio").select("*");
+      const {data, error} = await supabase.from("Portfolio").select("*");
 
       if (error) {
         setProjects(localProject);
@@ -29,9 +29,11 @@ export default function Portfolio() {
       ? projects
       : projects.filter((project) => project.category === activeFilter);
 
+  const reversedProjects = [...filteredProjects].reverse();
+
   return (
     <section id="portfolio" className="py-24 bg-white dark:bg-[#10172A]">
-      <div className="container mx-auto px-6 md:px-0 w-full md:w-[70%]">
+      <div className="container  mx-auto flex flex-col gap-10 px-6 md:px-0 w-full md:w-[70%]">
         <SectionTitle
           title="Our Portfolio"
           subtitle="Recent Projects & Case Studies"
@@ -53,7 +55,7 @@ export default function Portfolio() {
 					))}
 				</div> */}
 
-        <PortfolioCard projects={filteredProjects} />
+        <PortfolioCard projects={reversedProjects} />
       </div>
     </section>
   );

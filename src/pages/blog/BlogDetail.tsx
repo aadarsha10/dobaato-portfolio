@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Clock, User, Share2, BookmarkPlus, Eye } from 'lucide-react';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/sections/Footer';
-import { BlogPost } from '../../types/blog';
-import { supabase } from '../../SupabaseClient';
-import toast from 'react-hot-toast';
+import {motion} from "framer-motion";
+import {ArrowLeft, Calendar, Clock, Eye, Share2, User} from "lucide-react";
+import {useEffect, useState} from "react";
+import toast from "react-hot-toast";
+import {Link, useParams} from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/sections/Footer";
+import {supabase} from "../../SupabaseClient";
+import {BlogPost} from "../../types/blog";
 
 export default function BlogDetail() {
-  const { slug } = useParams<{ slug: string }>();
+  const {slug} = useParams<{slug: string}>();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
@@ -18,10 +18,10 @@ export default function BlogDetail() {
   const formatDate = (dateString: string) => {
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
     } catch {
       return dateString; // Return original if parsing fails
@@ -34,23 +34,23 @@ export default function BlogDetail() {
     if (words.length <= maxWords) {
       return text;
     }
-    return words.slice(0, maxWords).join(' ') + '...';
+    return words.slice(0, maxWords).join(" ") + "...";
   };
 
   useEffect(() => {
     const fetchBlogPost = async () => {
       if (!slug) return;
-      
+
       try {
         // Fetch the blog post by slug from Supabase
-        const { data, error } = await supabase
-          .from('BlogPost')
-          .select('*')
-          .eq('slug', slug)
+        const {data, error} = await supabase
+          .from("BlogPost")
+          .select("*")
+          .eq("slug", slug)
           .single();
 
         if (error || !data) {
-          toast.error('Blog post not found');
+          toast.error("Blog post not found");
           setLoading(false);
           return;
         }
@@ -58,16 +58,16 @@ export default function BlogDetail() {
         setPost(data);
 
         // Fetch related posts (excluding current post)
-        const { data: related } = await supabase
-          .from('BlogPost')
-          .select('*')
-          .neq('slug', slug)
+        const {data: related} = await supabase
+          .from("BlogPost")
+          .select("*")
+          .neq("slug", slug)
           .limit(3);
 
         setRelatedPosts(related || []);
       } catch (error) {
-        toast.error('Error loading blog post');
-        console.error('Error fetching blog post:', error);
+        toast.error("Error loading blog post");
+        console.error("Error fetching blog post:", error);
       } finally {
         setLoading(false);
       }
@@ -82,7 +82,7 @@ export default function BlogDetail() {
       document.title = `${post.title} | Dobaato Blog`;
     }
     return () => {
-      document.title = 'Dobaato - Digital Solutions';
+      document.title = "Dobaato - Digital Solutions";
     };
   }, [post]);
 
@@ -95,12 +95,12 @@ export default function BlogDetail() {
           url: window.location.href,
         });
       } catch (err) {
-        console.log('Error sharing:', err);
+        console.log("Error sharing:", err);
       }
     } else {
       // Fallback to copying URL
       navigator.clipboard.writeText(window.location.href);
-      toast.success('Link copied to clipboard!');
+      toast.success("Link copied to clipboard!");
     }
   };
 
@@ -156,12 +156,13 @@ export default function BlogDetail() {
     <>
       <Navbar />
       <main className="pt-24 min-h-screen bg-[#F5F6FA] dark:bg-inherit">
-        <article className="container mx-auto px-4 sm:px-6 max-w-4xl">{/* Improved responsive padding */}
+        <article className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          {/* Improved responsive padding */}
           {/* Back to Blog */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.5}}
             className="mb-8"
           >
             <Link
@@ -175,9 +176,9 @@ export default function BlogDetail() {
 
           {/* Article Header */}
           <motion.header
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={{opacity: 0, y: 30}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.6, delay: 0.1}}
             className="mb-12"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-white mb-6 font-domine leading-tight">
@@ -213,15 +214,14 @@ export default function BlogDetail() {
                 <Share2 className="h-4 w-4" />
                 Share Article
               </button>
-             
             </div>
           </motion.header>
 
           {/* Featured Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{opacity: 0, scale: 0.95}}
+            animate={{opacity: 1, scale: 1}}
+            transition={{duration: 0.6, delay: 0.2}}
             className="mb-12"
           >
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
@@ -230,7 +230,8 @@ export default function BlogDetail() {
                 alt={post.title}
                 className="w-full h-64 md:h-96 object-cover"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800';
+                  (e.target as HTMLImageElement).src =
+                    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800";
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -239,22 +240,23 @@ export default function BlogDetail() {
 
           {/* Article Content */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{opacity: 0, y: 30}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.6, delay: 0.3}}
             className="mb-16"
           >
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <div className="text-gray-700 dark:text-gray-300 font-manrope leading-relaxed text-lg space-y-6">
-                {post.content.split(/\n\s*\n/).filter(paragraph => paragraph.trim()).map((paragraph, index) => (
-                  <p key={index} className="first:mt-0 text-justify">
-                    {paragraph.trim()}
-                  </p>
-                ))}
+                {post.content
+                  .split(/\n\s*\n/)
+                  .filter((paragraph) => paragraph.trim())
+                  .map((paragraph, index) => (
+                    <p key={index} className="first:mt-0 text-justify">
+                      {paragraph.trim()}
+                    </p>
+                  ))}
               </div>
             </div>
-
-
 
             {/* Reading Progress */}
             <div className="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
@@ -267,18 +269,18 @@ export default function BlogDetail() {
 
           {/* Author Bio */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={{opacity: 0, y: 30}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.6, delay: 0.4}}
             className="bg-gradient-to-br from-gray-200 to-white dark:from-blue-900 dark:to-neutral-900 rounded-2xl p-8 mb-16 border border-gray-200 dark:border-slate-500"
           >
             <div className="flex items-start gap-6">
               <img
-                src={post.author.avatar || '/default-avatar.png'}
+                src={post.author.avatar || "/default-avatar.png"}
                 alt={post.author.name}
                 className="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-gray-700 shadow-lg"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/default-avatar.png';
+                  (e.target as HTMLImageElement).src = "/default-avatar.png";
                 }}
               />
               <div className="flex-1">
@@ -287,10 +289,9 @@ export default function BlogDetail() {
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 font-manrope">
                   {/* Dynamic author bio based on the author or default bio */}
-                  {post.author.name ? 
-                    `${post.author.name} is a passionate writer and technology enthusiast. They share insights on the latest trends in development, innovation, and digital transformation.` :
-                    'Content writer and technology enthusiast. Passionate about sharing insights on the latest trends in web development and digital innovation.'
-                  }
+                  {post.author.name
+                    ? `${post.author.name} is a passionate writer and technology enthusiast. They share insights on the latest trends in development, innovation, and digital transformation.`
+                    : "Content writer and technology enthusiast. Passionate about sharing insights on the latest trends in web development and digital innovation."}
                 </p>
               </div>
             </div>
@@ -299,9 +300,9 @@ export default function BlogDetail() {
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
             <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              initial={{opacity: 0, y: 30}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.6, delay: 0.5}}
               className="mb-16"
             >
               <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-domine">
@@ -321,7 +322,8 @@ export default function BlogDetail() {
                           alt={relatedPost.title}
                           className="w-full h-48 rounded-lg object-cover"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800';
+                            (e.target as HTMLImageElement).src =
+                              "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800";
                           }}
                         />
                       </div>
@@ -336,19 +338,19 @@ export default function BlogDetail() {
                             {relatedPost.readTime} min read
                           </span>
                         </div>
-                        
+
                         {/* Title with fixed word limit */}
                         <h3 className="text-lg font-medium text-gray-800 dark:text-white font-domine mb-2 group-hover:text-blue-500 transition-colors leading-tight min-h-[3.5rem]">
                           {truncateToWords(relatedPost.title, 8)}
                         </h3>
-                        
+
                         {/* Description with fixed word limit */}
                         <div className="flex-1 mb-4">
                           <p className="text-sm text-gray-600 dark:text-gray-400 font-manrope leading-relaxed min-h-[4rem]">
                             {truncateToWords(relatedPost.excerpt, 20)}
                           </p>
                         </div>
-                        
+
                         <div className="mt-auto">
                           <span className="text-blue-500 hover:underline font-medium">
                             Read More
@@ -364,17 +366,18 @@ export default function BlogDetail() {
 
           {/* Call to Action */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            initial={{opacity: 0, y: 30}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.6, delay: 0.6}}
             className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 text-center text-white mb-16"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-4 font-domine">
               Stay Updated with Our Latest Insights
             </h2>
             <p className="text-blue-100 mb-6 font-manrope max-w-2xl mx-auto">
-              Subscribe to our newsletter and never miss out on the latest trends, 
-              tips, and insights from the world of technology and development.
+              Subscribe to our newsletter and never miss out on the latest
+              trends, tips, and insights from the world of technology and
+              development.
             </p>
             <Link
               to="/blog"
@@ -385,8 +388,7 @@ export default function BlogDetail() {
             </Link>
           </motion.div>
         </article>
-      <Footer />
-
+        <Footer />
       </main>
     </>
   );
