@@ -12,3 +12,5 @@ We partner with leading companies like Saahitt and Ghumfare in the hospitality, 
 At Dobaato, we are committed to empowering businesses with tailored digital solutions that drive growth and efficiency. Our mission is to be a trusted partner in navigating the ever-evolving digital landscape, enabling our clients to stay ahead of the curve.
 
 ## Misc:
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aa8d4b9d-e23d-4adb-803d-98069d7c506d/deploy-status)](https://app.netlify.com/projects/dobaato/deploys)
