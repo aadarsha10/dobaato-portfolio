@@ -1,26 +1,51 @@
-import {AnimatePresence, motion} from "framer-motion";
-import {ExternalLink, Github, X} from "lucide-react";
-import {useEffect, useId, useRef, useState} from "react";
-import {useOutsideClick} from "../../hooks/useOutsideClick";
-import {Project} from "../../types";
+import { AnimatePresence, motion } from "framer-motion";
+import { ExternalLink, Github, X } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { Project } from "../../types";
 
-export default function PortfolioProjects({projects}: {projects: Project[]}) {
+export default function PortfolioProjects({
+  projects,
+}: {
+  projects: Project[];
+}) {
   const [active, setActive] = useState<Project | null>(null);
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) =>
       e.key === "Escape" && setActive(null);
     document.body.style.overflow = active ? "hidden" : "auto";
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener("resize", checkMobile);
+    };
   }, [active]);
 
   useEffect(() => {
+    // Disable auto-scroll on mobile, only enable on hover for desktop
+    if (isMobile) {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+        scrollIntervalRef.current = null;
+      }
+      return;
+    }
+
     if (!isHovering && scrollRef.current) {
       scrollIntervalRef.current = setInterval(() => {
         if (scrollRef.current) {
@@ -39,7 +64,17 @@ export default function PortfolioProjects({projects}: {projects: Project[]}) {
         clearInterval(scrollIntervalRef.current);
       }
     };
-  }, [isHovering]);
+  }, [isHovering, isMobile]);
+
+  // const scroll = (direction: "left" | "right") => {
+  //   if (scrollRef.current) {
+  //     const scrollAmount = 320; // Card width (w-80 = 320px) + gap (gap-6 = 24px)
+  //     scrollRef.current.scrollBy({
+  //       left: direction === "left" ? -scrollAmount : scrollAmount,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   useOutsideClick(ref, () => setActive(null));
 
@@ -49,9 +84,9 @@ export default function PortfolioProjects({projects}: {projects: Project[]}) {
       <AnimatePresence>
         {active && (
           <motion.div
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/40 z-40 backdrop-blur-sm"
           />
         )}
@@ -64,9 +99,9 @@ export default function PortfolioProjects({projects}: {projects: Project[]}) {
             <motion.div
               ref={ref}
               layoutId={`card-${active.title}-${id}`}
-              initial={{scale: 0.9, opacity: 0}}
-              animate={{scale: 1, opacity: 1}}
-              exit={{scale: 0.9, opacity: 0}}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               className="max-w-2xl w-full bg-white dark:bg-[#0F172A] rounded-2xl overflow-hidden shadow-2xl relative border border-gray-200 dark:border-slate-700"
             >
               <motion.img
@@ -125,81 +160,104 @@ export default function PortfolioProjects({projects}: {projects: Project[]}) {
         )}
       </AnimatePresence>
 
-      {/* Horizontal Scrolling Container */}
-      <div
-        className="mt-8 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden"
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-4 px-6 scrollbar-hide"
-          style={{
-            scrollBehavior: "smooth",
-            msOverflowStyle: "none",
-            scrollbarWidth: "none",
-          }}
+      {/* Horizontal Scrolling Container with Navigation */}
+      <div className="mt-8 relative group">
+        {/* Left Button - Commented out for now */}
+        {/* <motion.button
+          onClick={() => scroll("left")}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-[#1A2F4A] p-2 md:p-3 text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-[#2A3F5A] transition-all rounded-lg shadow-lg border border-gray-300 dark:border-slate-600 flex items-center justify-center"
         >
-          {projects.map((project) => (
-            <motion.div
-              layoutId={`card-${project.title}-${id}`}
-              key={project.title}
-              onClick={() => setActive(project)}
-              className="flex-shrink-0 w-80 bg-white dark:bg-[#1A2F4A] rounded-xl overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-blue-900/20 border border-gray-200 dark:border-slate-700 transition-all hover:scale-105"
-              whileHover={{y: -4}}
-            >
+          <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+        </motion.button> */}
+
+        {/* Right Button - Commented out for now */}
+        {/* <motion.button
+          onClick={() => scroll("right")}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-[#1A2F4A] p-2 md:p-3 text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-[#2A3F5A] transition-all rounded-lg shadow-lg border border-gray-300 dark:border-slate-600 flex items-center justify-center"
+        >
+          <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+        </motion.button> */}
+
+        {/* Scroll Container */}
+        <div
+          className="w-full overflow-hidden"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto pb-4 px-6 scrollbar-hide"
+            style={{
+              scrollBehavior: "smooth",
+              msOverflowStyle: "none",
+              scrollbarWidth: "none",
+            }}
+          >
+            {projects.map((project) => (
               <motion.div
-                layoutId={`image-${project.title}-${id}`}
-                className="w-full h-48 overflow-hidden bg-gray-200 dark:bg-slate-700"
+                layoutId={`card-${project.title}-${id}`}
+                key={project.title}
+                onClick={() => setActive(project)}
+                className="flex-shrink-0 w-80 bg-white dark:bg-[#1A2F4A] rounded-xl overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-blue-900/20 border border-gray-200 dark:border-slate-700 transition-all hover:scale-105"
+                whileHover={{ y: -4 }}
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                />
-              </motion.div>
-              <div className="p-5">
-                <motion.h3
-                  layoutId={`title-${project.title}-${id}`}
-                  className="text-lg font-semibold text-gray-900 dark:text-white font-domine truncate"
+                <motion.div
+                  layoutId={`image-${project.title}-${id}`}
+                  className="w-full h-48 overflow-hidden bg-gray-200 dark:bg-slate-700"
                 >
-                  {project.title}
-                </motion.h3>
-                <motion.p
-                  layoutId={`description-${project.description}-${id}`}
-                  className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 font-manrope mt-2 line-clamp-2"
-                >
-                  {project.description}
-                </motion.p>
-                <div className="flex gap-3 mt-4">
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      onClick={(e) => e.stopPropagation()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-blue-500 hover:text-blue-600 text-sm"
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                      Demo
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      onClick={(e) => e.stopPropagation()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-sm"
-                    >
-                      <Github className="h-3 w-3" />
-                      Code
-                    </a>
-                  )}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  />
+                </motion.div>
+                <div className="p-5">
+                  <motion.h3
+                    layoutId={`title-${project.title}-${id}`}
+                    className="text-lg font-semibold text-gray-900 dark:text-white font-domine truncate"
+                  >
+                    {project.title}
+                  </motion.h3>
+                  <motion.p
+                    layoutId={`description-${project.description}-${id}`}
+                    className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 font-manrope mt-2 line-clamp-2"
+                  >
+                    {project.description}
+                  </motion.p>
+                  <div className="flex gap-3 mt-4">
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        onClick={(e) => e.stopPropagation()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-blue-500 hover:text-blue-600 text-sm"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        Demo
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        onClick={(e) => e.stopPropagation()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-sm"
+                      >
+                        <Github className="h-3 w-3" />
+                        Code
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 
