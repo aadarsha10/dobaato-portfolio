@@ -11,7 +11,7 @@ export function JobCard({job}: JobCardProps) {
     <div className="bg-blue-100 dark:bg-[#1E293B]  rounded-lg p-6 hover:dark:bg-dark-200 transition-colors">
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-white font-domine">
             {job.title}
           </h3>
           <div className="flex gap-4 mt-2 text-gray-500 dark:text-gray-400">
@@ -49,7 +49,7 @@ export function JobCard({job}: JobCardProps) {
       </div>
       {job.requirements && job.requirements.length > 0 && (
         <div className="mt-6 pt-6 border-t border-gray-300 dark:border-gray-600">
-          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 font-domine">
             Key Requirements ({job.requirements.length}):
           </h4>
           <ul className="space-y-2">

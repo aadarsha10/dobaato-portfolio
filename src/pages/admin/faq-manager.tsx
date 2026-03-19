@@ -142,7 +142,7 @@ export default function FAQManager() {
             className="relative flex min-h-[280px] h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-900"
           >
             <div className="pointer-events-none absolute right-0 top-0 h-14 w-20 bg-gradient-to-bl from-primary-500/20 to-sky-400/10 [clip-path:polygon(100%_0,0_0,100%_100%)]" />
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 font-domine">
               {faq.question}
             </h3>
             <p className="mt-2 line-clamp-6 text-sm leading-6 text-slate-600 dark:text-slate-300">

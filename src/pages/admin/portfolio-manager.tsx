@@ -11,6 +11,11 @@ import {supabase} from "../../SupabaseClient";
 import type {Project} from "../../types";
 import {cleanupOrphanedPortfolioImages} from "../../utils/setupSupabase";
 
+const sortFeaturedFirst = (items: Project[]) =>
+  [...items].sort(
+    (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
+  );
+
 export default function PortfolioManager() {
   const [portfolioItems, setPortfolioItems] = useState<Project[]>([]);
   const [newItem, setNewItem] = useState<Omit<Project, "id">>({
@@ -18,6 +23,7 @@ export default function PortfolioManager() {
     description: "",
     image: "",
     category: "web",
+    featured: false,
     demoUrl: "",
   });
   // Holds the id of the portfolio item being edited (if any)
@@ -32,7 +38,7 @@ export default function PortfolioManager() {
       if (error) {
         toast.error("Error fetching portfolio items: " + error.message);
       } else {
-        setPortfolioItems(data || []);
+        setPortfolioItems(sortFeaturedFirst(data || []));
       }
     };
 
@@ -81,7 +87,11 @@ export default function PortfolioManager() {
           return;
         }
         setPortfolioItems((prev) =>
-          prev.map((item) => (item.id === editingItemId ? updatedItem : item)),
+          sortFeaturedFirst(
+            prev.map((item) =>
+              item.id === editingItemId ? updatedItem : item,
+            ),
+          ),
         );
         toast.success("Portfolio item updated successfully!");
         // Reset edit mode and clear form.
@@ -91,6 +101,7 @@ export default function PortfolioManager() {
           description: "",
           image: "",
           category: "web",
+          featured: false,
           demoUrl: "",
         });
         setIsModalOpen(false);
@@ -106,7 +117,7 @@ export default function PortfolioManager() {
           toast.error("Error adding portfolio item: " + error.message);
           return;
         }
-        setPortfolioItems((prev) => [...prev, item]);
+        setPortfolioItems((prev) => sortFeaturedFirst([...prev, item]));
         toast.success(`${item.title} has been added to the portfolio.`);
         // Reset form.
         setNewItem({
@@ -114,6 +125,7 @@ export default function PortfolioManager() {
           description: "",
           image: "",
           category: "web",
+          featured: false,
           demoUrl: "",
         });
         setIsModalOpen(false);
@@ -169,6 +181,7 @@ export default function PortfolioManager() {
           description: "",
           image: "",
           category: "web",
+          featured: false,
           demoUrl: "",
         });
       }
@@ -189,6 +202,7 @@ export default function PortfolioManager() {
       description: item.description,
       image: item.image,
       category: item.category,
+      featured: item.featured ?? false,
       demoUrl: item.demoUrl,
     });
     setIsModalOpen(true);
@@ -202,6 +216,7 @@ export default function PortfolioManager() {
       description: "",
       image: "",
       category: "web",
+      featured: false,
       demoUrl: "",
     });
     setIsModalOpen(false);
@@ -214,6 +229,7 @@ export default function PortfolioManager() {
       description: "",
       image: "",
       category: "web",
+      featured: false,
       demoUrl: "",
     });
     setIsModalOpen(true);
@@ -242,7 +258,7 @@ export default function PortfolioManager() {
                 className="w-full h-48 object-cover rounded mb-4"
               />
             )}
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100 font-domine">
               {item.title}
             </h3>
             <p className="mt-2 line-clamp-3 text-sm text-slate-600 dark:text-slate-300">
@@ -252,6 +268,11 @@ export default function PortfolioManager() {
               <span className="rounded bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
                 {item.category}
               </span>
+              {item.featured && (
+                <span className="ml-2 rounded bg-amber-100 px-2 py-1 text-xs font-medium text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                  Featured
+                </span>
+              )}
             </div>
             {item.demoUrl && (
               <a
@@ -323,6 +344,17 @@ export default function PortfolioManager() {
               })
             }
           />
+          <label className="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+            <input
+              type="checkbox"
+              checked={newItem.featured ?? false}
+              onChange={(e) =>
+                setNewItem({...newItem, featured: e.target.checked})
+              }
+              className="h-4 w-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500 dark:border-slate-600"
+            />
+            Mark as featured project
+          </label>
           <Input
             placeholder="Demo URL (optional)"
             value={newItem.demoUrl || ""}

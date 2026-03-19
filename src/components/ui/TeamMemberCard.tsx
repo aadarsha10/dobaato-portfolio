@@ -1,7 +1,13 @@
-import { Linkedin, Twitter } from 'lucide-react';
-import { TeamMember } from '../../types';
+import {Linkedin, Twitter} from "lucide-react";
+import {TeamMember} from "../../types";
 
-export default function TeamMemberCard({ name, role, image, linkedin, twitter }: TeamMember) {
+export default function TeamMemberCard({
+  name,
+  role,
+  image,
+  linkedin,
+  twitter,
+}: TeamMember) {
   return (
     <div className="group relative rounded-lg overflow-hidden bg-[#1E293B] ">
       <div className="aspect-square overflow-hidden">
@@ -13,7 +19,9 @@ export default function TeamMemberCard({ name, role, image, linkedin, twitter }:
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-dark-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
         <div className="absolute bottom-0 left-0 right-0 p-6">
-          <h3 className="text-lg font-semibold text-white mb-1">{name}</h3>
+          <h3 className="text-lg font-semibold text-white mb-1 font-domine">
+            {name}
+          </h3>
           <p className="text-gray-100 mb-4">{role}</p>
           <div className="flex gap-4">
             {linkedin && (

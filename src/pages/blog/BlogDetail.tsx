@@ -132,7 +132,7 @@ export default function BlogDetail() {
         <Navbar />
         <main className="pt-24 min-h-screen bg-[#F5F6FA] dark:bg-inherit">
           <div className="container mx-auto px-6 max-w-4xl text-center py-16">
-            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4 font-domine">
               Blog Post Not Found
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-8">

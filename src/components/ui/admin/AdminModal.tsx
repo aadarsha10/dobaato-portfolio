@@ -47,7 +47,7 @@ export default function AdminModal({
         <div className="pointer-events-none absolute right-0 top-0 h-16 w-24 bg-gradient-to-bl from-primary-500/20 to-sky-400/10 [clip-path:polygon(100%_0,0_0,100%_100%)]" />
         <div className="mb-4 flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100 font-domine">
               {title}
             </h3>
             {description && (
