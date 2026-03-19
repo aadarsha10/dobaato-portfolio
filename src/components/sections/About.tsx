@@ -60,8 +60,8 @@ export default function About() {
           className="relative mb-16 md:mb-20 lg:mb-24"
         >
           <SectionTitle
-            title="About Us"
-            subtitle="Delivering Excellence in IT Solutions"
+            title="Our Mission, Vision & Values"
+            subtitle="What Drives Us Forward"
           />
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 md:w-16 h-12 md:h-16 opacity-20 -z-10">
             <svg

@@ -1,31 +1,29 @@
-import { useState, useEffect } from "react";
-import { useScrollSpy } from "../hooks/useScrollSpy";
-import MobileNav from "./ui/MobileNav";
-import { Link } from "react-router-dom";
-import SunSvg from "../assets/svg/sun.svg";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import MoonSvg from "../assets/svg/moon.svg";
-import { cn } from "../utils";
+import SunSvg from "../assets/svg/sun.svg";
+import {useScrollSpy} from "../hooks/useScrollSpy";
+import {cn} from "../utils";
+import MobileNav from "./ui/MobileNav";
 
 const navigation = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Industries", href: "#industries" },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  {name: "Home", href: "#home"},
+  {name: "Services", href: "#services"},
+  {name: "Contact", href: "#contact"},
 ];
 
+const aboutLink = {name: "About", href: "/about"};
+
 const externalLinks = [
-  { name: "Careers", href: "/careers" },
-  { name: "Blog", href: "/blog" },
+  {name: "Careers", href: "/careers"},
+  {name: "Blog", href: "/blog"},
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const activeSection = useScrollSpy();
   const [isDark, setIsDark] = useState(
-    () => localStorage.getItem("theme") === "dark"
+    () => localStorage.getItem("theme") === "dark",
   );
 
   useEffect(() => {
@@ -41,7 +39,7 @@ export default function Navbar() {
     document.documentElement.setAttribute("class", isDark ? "dark" : "light");
     document.documentElement.setAttribute(
       "data-theme",
-      isDark ? "dark" : "light"
+      isDark ? "dark" : "light",
     );
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
@@ -70,13 +68,13 @@ export default function Navbar() {
         // If already on the homepage, perform smooth scrolling
         const targetElement = document.querySelector(href);
         if (targetElement) {
-          targetElement.scrollIntoView({ behavior: "smooth" });
+          targetElement.scrollIntoView({behavior: "smooth"});
         } else {
           // Retry in case the element is dynamically loaded
           const observer = new MutationObserver(() => {
             const target = document.querySelector(href);
             if (target) {
-              target.scrollIntoView({ behavior: "smooth" });
+              target.scrollIntoView({behavior: "smooth"});
               observer.disconnect(); // Stop observing once found
             }
           });
@@ -112,7 +110,7 @@ export default function Navbar() {
               to={"/"}
               className={cn(
                 isScrolled && "text-black dark:text-white",
-                handleTheme() && "text-black dark:text-white"
+                handleTheme() && "text-black dark:text-white",
               )}
             >
               <svg
@@ -123,7 +121,7 @@ export default function Navbar() {
                 fill="none"
                 className="w-28"
               >
-                <g clip-path="url(#clip0_23_93)">
+                <g clipPath="url(#clip0_23_93)">
                   <path
                     d="M7.99037 34.7487C7.43809 35.7053 7.76237 36.9423 8.78389 37.3625C10.5867 38.1041 12.523 38.4897 14.4852 38.4904C17.1165 38.4913 19.7018 37.8 21.9815 36.4859C24.2611 35.1718 26.155 33.2812 27.473 31.0037C28.791 28.7263 29.4868 26.1423 29.4904 23.5109C29.494 20.8796 28.8053 18.2937 27.4936 16.0127C26.1818 13.7316 24.2931 11.8358 22.0171 10.5155C19.741 9.19511 17.1577 8.49674 14.5264 8.49042C12.5642 8.48571 10.6268 8.86597 8.82195 9.60265C7.79929 10.0201 7.47161 11.2562 8.02127 12.2143L8.991 13.9046C9.54066 14.8627 10.7612 15.1694 11.8165 14.8431C12.6859 14.5742 13.5945 14.4369 14.5121 14.4391C16.0999 14.4429 17.6587 14.8643 19.0321 15.6611C20.4056 16.4578 21.5452 17.6018 22.3368 18.9782C23.1283 20.3546 23.5438 21.915 23.5416 23.5028C23.5395 25.0906 23.1197 26.6498 22.3244 28.0241C21.5291 29.3983 20.3862 30.5392 19.0106 31.3321C17.635 32.1251 16.0751 32.5422 14.4873 32.5417C13.5697 32.5413 12.6614 32.4015 11.7928 32.1303C10.7384 31.8011 9.51701 32.1045 8.96473 33.0611L7.99037 34.7487Z"
                     fill="currentColor"
@@ -167,13 +165,21 @@ export default function Navbar() {
                     : cn(
                         " hover:text-blue-800",
                         isScrolled && " text-black dark:text-white",
-                        handleTheme() && "text-black dark:text-white"
+                        handleTheme() && "text-black dark:text-white",
                       )
                 }`}
               >
                 {item.name}
               </a>
             ))}
+            <Link
+              to={aboutLink.href}
+              className={`text-sm font-medium transition-colors font-domine hover:text-blue-800 ${
+                (isScrolled || handleTheme()) && " text-black dark:text-white"
+              }`}
+            >
+              {aboutLink.name}
+            </Link>
             <div className="h-6 w-px bg-black dark:bg-white" />
 
             {externalLinks.map((item) => (

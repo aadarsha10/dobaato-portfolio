@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Textarea } from "../../components/ui/textarea";
-import type { Project } from "../../types";
-import { v4 as uuid } from "uuid";
-import { supabase } from "../../SupabaseClient";
-import { toast } from "react-hot-toast";
-import { ImageUpload } from "../../components/ui/image-upload";
-import { cleanupOrphanedPortfolioImages } from "../../utils/setupSupabase";
+import {useEffect, useState} from "react";
+import {toast} from "react-hot-toast";
+import {v4 as uuid} from "uuid";
+import AdminModal from "../../components/ui/admin/AdminModal";
+import AdminSectionHeader from "../../components/ui/admin/AdminSectionHeader";
+import {Button} from "../../components/ui/button";
+import {ImageUpload} from "../../components/ui/image-upload";
+import {Input} from "../../components/ui/input";
+import {Textarea} from "../../components/ui/textarea";
+import {supabase} from "../../SupabaseClient";
+import type {Project} from "../../types";
+import {cleanupOrphanedPortfolioImages} from "../../utils/setupSupabase";
 
 export default function PortfolioManager() {
   const [portfolioItems, setPortfolioItems] = useState<Project[]>([]);
@@ -21,11 +23,12 @@ export default function PortfolioManager() {
   // Holds the id of the portfolio item being edited (if any)
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch portfolio items from Supabase on component mount.
   useEffect(() => {
     const fetchPortfolioItems = async () => {
-      const { data, error } = await supabase.from("Portfolio").select("*");
+      const {data, error} = await supabase.from("Portfolio").select("*");
       if (error) {
         toast.error("Error fetching portfolio items: " + error.message);
       } else {
@@ -38,13 +41,13 @@ export default function PortfolioManager() {
 
     // Cleanup orphaned images when component mounts (and when user has admin access)
     cleanupOrphanedPortfolioImages().catch((err) =>
-      console.error("Error cleaning up orphaned images:", err)
+      console.error("Error cleaning up orphaned images:", err),
     );
   }, []);
 
   // Handle image upload completion
   const handleImageUploaded = (url: string) => {
-    setNewItem({ ...newItem, image: url });
+    setNewItem({...newItem, image: url});
   };
 
   // Adds or updates a portfolio item
@@ -69,7 +72,7 @@ export default function PortfolioManager() {
           id: editingItemId,
         };
 
-        const { error } = await supabase
+        const {error} = await supabase
           .from("Portfolio")
           .update(updatedItem)
           .eq("id", editingItemId);
@@ -78,7 +81,7 @@ export default function PortfolioManager() {
           return;
         }
         setPortfolioItems((prev) =>
-          prev.map((item) => (item.id === editingItemId ? updatedItem : item))
+          prev.map((item) => (item.id === editingItemId ? updatedItem : item)),
         );
         toast.success("Portfolio item updated successfully!");
         // Reset edit mode and clear form.
@@ -90,6 +93,7 @@ export default function PortfolioManager() {
           category: "web",
           demoUrl: "",
         });
+        setIsModalOpen(false);
       } else {
         // Create a new item.
         const item: Project = {
@@ -97,7 +101,7 @@ export default function PortfolioManager() {
           id: uuid(),
         };
 
-        const { error } = await supabase.from("Portfolio").insert([item]);
+        const {error} = await supabase.from("Portfolio").insert([item]);
         if (error) {
           toast.error("Error adding portfolio item: " + error.message);
           return;
@@ -112,6 +116,7 @@ export default function PortfolioManager() {
           category: "web",
           demoUrl: "",
         });
+        setIsModalOpen(false);
       }
     } catch (error: unknown) {
       const errorMessage =
@@ -135,7 +140,7 @@ export default function PortfolioManager() {
 
         if (pathMatch && pathMatch[1]) {
           // Delete the image from storage
-          const { error: deleteStorageError } = await supabase.storage
+          const {error: deleteStorageError} = await supabase.storage
             .from("images")
             .remove([pathMatch[1]]);
 
@@ -146,7 +151,7 @@ export default function PortfolioManager() {
       }
 
       // Delete the database record
-      const { error } = await supabase.from("Portfolio").delete().eq("id", id);
+      const {error} = await supabase.from("Portfolio").delete().eq("id", id);
 
       if (error) {
         toast.error("Error deleting portfolio item: " + error.message);
@@ -186,6 +191,7 @@ export default function PortfolioManager() {
       category: item.category,
       demoUrl: item.demoUrl,
     });
+    setIsModalOpen(true);
   };
 
   // Cancel editing mode.
@@ -198,93 +204,37 @@ export default function PortfolioManager() {
       category: "web",
       demoUrl: "",
     });
+    setIsModalOpen(false);
+  };
+
+  const handleOpenCreateModal = () => {
+    setEditingItemId(null);
+    setNewItem({
+      title: "",
+      description: "",
+      image: "",
+      category: "web",
+      demoUrl: "",
+    });
+    setIsModalOpen(true);
   };
 
   return (
-    <div className="space-y-8 p-4">
-      <h2 className="text-2xl font-bold">Manage Portfolio</h2>
+    <div className="space-y-6 p-4">
+      <AdminSectionHeader
+        title="Manage Portfolio"
+        description="Add featured projects with image, category, and optional demo link."
+        buttonLabel="Add Project"
+        onButtonClick={handleOpenCreateModal}
+      />
 
-      {/* Portfolio Item Form (Add / Edit) */}
-      <div className="bg-white p-6 shadow rounded grid gap-4">
-        <h3 className="text-xl font-semibold">
-          {editingItemId ? "Edit Portfolio Item" : "Add New Portfolio Item"}
-        </h3>
-        <Input
-          placeholder="Project Title"
-          value={newItem.title}
-          className="text-black"
-          onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
-        />
-        <Textarea
-          placeholder="Project Description"
-          value={newItem.description}
-          className="text-black"
-          onChange={(e) =>
-            setNewItem({ ...newItem, description: e.target.value })
-          }
-        />
-
-        {/* Image Upload Section */}
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Project Image
-          </label>
-          <ImageUpload
-            onImageUploaded={handleImageUploaded}
-            bucketName="images"
-            folderPath="portfolio"
-            currentImageUrl={newItem.image}
-          />
-        </div>
-
-        <Input
-          placeholder="Category (web, mobile, analytics)"
-          value={newItem.category}
-          className="text-black"
-          onChange={(e) =>
-            setNewItem({
-              ...newItem,
-              category: e.target.value as "web" | "mobile" | "analytics",
-            })
-          }
-        />
-        <Input
-          placeholder="Demo URL (optional)"
-          value={newItem.demoUrl || ""}
-          className="text-black"
-          onChange={(e) => setNewItem({ ...newItem, demoUrl: e.target.value })}
-        />
-        <div className="flex gap-2">
-          <Button
-            className="bg-primary-300"
-            onClick={handleAddOrUpdateItem}
-            disabled={loading}
-          >
-            {loading
-              ? "Processing..."
-              : editingItemId
-              ? "Update Item"
-              : "Add Item"}
-          </Button>
-          {editingItemId && (
-            <Button
-              variant="secondary"
-              className="border rounded-lg"
-              onClick={handleCancelEditing}
-            >
-              Cancel
-            </Button>
-          )}
-        </div>
-      </div>
-
-      {/* Portfolio Items List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3">
         {portfolioItems.map((item) => (
           <div
             key={item.id}
-            className="bg-white border border-gray-200 p-4 rounded shadow-sm"
+            className="relative flex min-h-[360px] h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-900"
           >
+            <div className="pointer-events-none absolute right-0 top-0 h-14 w-20 bg-gradient-to-bl from-primary-500/20 to-sky-400/10 [clip-path:polygon(100%_0,0_0,100%_100%)]" />
             {item.image && (
               <img
                 src={item.image}
@@ -292,25 +242,37 @@ export default function PortfolioManager() {
                 className="w-full h-48 object-cover rounded mb-4"
               />
             )}
-            <h3 className="text-xl font-semibold">{item.title}</h3>
-            <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+              {item.title}
+            </h3>
+            <p className="mt-2 line-clamp-3 text-sm text-slate-600 dark:text-slate-300">
               {item.description}
             </p>
             <div className="mt-2">
-              <span className="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded">
+              <span className="rounded bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
                 {item.category}
               </span>
             </div>
-            <div className="flex gap-2 mt-4">
+            {item.demoUrl && (
+              <a
+                href={item.demoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 block text-xs text-primary-600 hover:underline dark:text-primary-400"
+              >
+                {item.demoUrl}
+              </a>
+            )}
+            <div className="mt-auto pt-4 flex gap-2">
               <Button
-                className="bg-primary-300"
+                className="bg-amber-500 text-white hover:bg-amber-600"
                 onClick={() => handleEditItem(item)}
               >
                 Edit
               </Button>
               <Button
                 variant="destructive"
-                className="bg-red-300"
+                className="bg-rose-600 text-white hover:bg-rose-700"
                 onClick={() => handleDeleteItem(item.id)}
                 disabled={loading}
               >
@@ -320,6 +282,74 @@ export default function PortfolioManager() {
           </div>
         ))}
       </div>
+
+      <AdminModal
+        open={isModalOpen}
+        title={editingItemId ? "Edit Portfolio Item" : "Add New Portfolio Item"}
+        description="Fill required project fields and upload/select an image."
+        onClose={handleCancelEditing}
+      >
+        <div className="grid gap-4">
+          <Input
+            placeholder="Project Title"
+            value={newItem.title}
+            onChange={(e) => setNewItem({...newItem, title: e.target.value})}
+          />
+          <Textarea
+            placeholder="Project Description"
+            value={newItem.description}
+            onChange={(e) =>
+              setNewItem({...newItem, description: e.target.value})
+            }
+          />
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+              Project Image
+            </label>
+            <ImageUpload
+              onImageUploaded={handleImageUploaded}
+              bucketName="images"
+              folderPath="portfolio"
+              currentImageUrl={newItem.image}
+            />
+          </div>
+          <Input
+            placeholder="Category (web, mobile, analytics)"
+            value={newItem.category}
+            onChange={(e) =>
+              setNewItem({
+                ...newItem,
+                category: e.target.value as "web" | "mobile" | "analytics",
+              })
+            }
+          />
+          <Input
+            placeholder="Demo URL (optional)"
+            value={newItem.demoUrl || ""}
+            onChange={(e) => setNewItem({...newItem, demoUrl: e.target.value})}
+          />
+          <div className="flex gap-2">
+            <Button
+              className="bg-emerald-600 text-white hover:bg-emerald-700"
+              onClick={handleAddOrUpdateItem}
+              disabled={loading}
+            >
+              {loading
+                ? "Processing..."
+                : editingItemId
+                  ? "Update Item"
+                  : "Add Item"}
+            </Button>
+            <Button
+              variant="secondary"
+              className="bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
+              onClick={handleCancelEditing}
+            >
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </AdminModal>
     </div>
   );
 }
