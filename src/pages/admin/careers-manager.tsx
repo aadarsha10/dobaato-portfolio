@@ -245,16 +245,16 @@ export default function CareersManager() {
             <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
               Posted: {job.postedAt}
             </p>
-            <div className="mt-auto pt-4 flex gap-2">
+            <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row">
               <Button
-                className="bg-amber-500 text-white hover:bg-amber-600"
+                className="w-full bg-amber-500 text-white hover:bg-amber-600 sm:w-auto"
                 onClick={() => handleEditClick(job)}
               >
                 Edit
               </Button>
               <Button
                 variant="destructive"
-                className="bg-rose-600 text-white hover:bg-rose-700"
+                className="w-full bg-rose-600 text-white hover:bg-rose-700 sm:w-auto"
                 onClick={() => handleDeleteJob(job.id)}
               >
                 Delete
@@ -324,7 +324,7 @@ export default function CareersManager() {
               Requirements
             </label>
             {newJob.requirements.map((req, index) => (
-              <div key={index} className="flex gap-2">
+              <div key={index} className="flex flex-col gap-2 sm:flex-row">
                 <Input
                   placeholder={`Requirement ${index + 1}`}
                   value={req}
@@ -336,7 +336,7 @@ export default function CareersManager() {
                 />
                 <Button
                   variant="destructive"
-                  className="bg-rose-600 text-white hover:bg-rose-700 px-3"
+                  className="w-full bg-rose-600 px-3 text-white hover:bg-rose-700 sm:w-auto"
                   onClick={() => {
                     setNewJob({
                       ...newJob,
@@ -362,16 +362,16 @@ export default function CareersManager() {
               + Add Requirement
             </Button>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <Button
-              className="bg-emerald-600 text-white hover:bg-emerald-700"
+              className="w-full bg-emerald-600 text-white hover:bg-emerald-700 sm:w-auto"
               onClick={handleAddOrUpdateJob}
             >
               {loading ? <Spinner /> : editingJobId ? "Update Job" : "Add Job"}
             </Button>
             <Button
               variant="secondary"
-              className="bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
+              className="w-full bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 sm:w-auto"
               onClick={handleCancelEditing}
             >
               Cancel

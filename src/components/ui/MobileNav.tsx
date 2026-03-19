@@ -1,9 +1,7 @@
 import {motion} from "framer-motion";
 import {
   Briefcase,
-  Building2,
   FileText,
-  FolderOpen,
   GraduationCap,
   Home,
   Info,
@@ -15,8 +13,6 @@ const navItems = [
   {icon: Home, label: "Home", href: "#home"},
   {icon: Info, label: "About", href: "/about"},
   {icon: Briefcase, label: "Services", href: "#services"},
-  {icon: FolderOpen, label: "Portfolio", href: "#portfolio"},
-  {icon: Building2, label: "Industries", href: "#industries"},
   {icon: Phone, label: "Contact", href: "#contact"},
   {icon: GraduationCap, label: "Careers", href: "/careers"},
   {icon: FileText, label: "Case Studies", href: "/case-studies"},
@@ -33,9 +29,16 @@ export default function MobileNav() {
     } else if (href?.startsWith("#")) {
       e.preventDefault();
       if (typeof window !== "undefined" && window.location.pathname !== "/") {
+        sessionStorage.setItem("pendingSectionHash", href);
         window.location.href = `/${href}`;
         return;
       }
+
+      if (href === "#home") {
+        window.scrollTo({top: 0, behavior: "smooth"});
+        return;
+      }
+
       document.querySelector(href)?.scrollIntoView({behavior: "smooth"});
     }
   };

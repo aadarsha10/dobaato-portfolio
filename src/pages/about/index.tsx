@@ -4,12 +4,10 @@ import {useEffect} from "react";
 import {Link} from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import About from "../../components/sections/About";
-import CompanyHighlights from "../../components/sections/CompanyHighlights";
 import Experience from "../../components/sections/Experience";
 import Footer from "../../components/sections/Footer";
 import Testimonials from "../../components/sections/Testimonials";
 import WelcomeMessage from "../../components/sections/WelcomeMessage";
-import {MarqueeSkills} from "../../components/ui/Marquee";
 
 export default function AboutPage() {
   useEffect(() => {
@@ -61,24 +59,6 @@ export default function AboutPage() {
           transition={{duration: 0.8, delay: 0.4}}
         >
           <Experience />
-        </motion.section>
-
-        {/* Skills Marquee */}
-        <motion.section
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          transition={{duration: 0.8, delay: 0.6}}
-        >
-          <MarqueeSkills />
-        </motion.section>
-
-        {/* Company Highlights */}
-        <motion.section
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          transition={{duration: 0.8, delay: 0.8}}
-        >
-          <CompanyHighlights />
         </motion.section>
 
         {/* Testimonials */}

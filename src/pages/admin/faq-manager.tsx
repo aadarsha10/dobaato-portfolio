@@ -148,16 +148,16 @@ export default function FAQManager() {
             <p className="mt-2 line-clamp-6 text-sm leading-6 text-slate-600 dark:text-slate-300">
               {faq.answer}
             </p>
-            <div className="mt-auto pt-4 flex gap-2">
+            <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row">
               <Button
-                className="bg-amber-500 text-white hover:bg-amber-600"
+                className="w-full bg-amber-500 text-white hover:bg-amber-600 sm:w-auto"
                 onClick={() => handleEditFAQ(faq)}
               >
                 Edit
               </Button>
               <Button
                 variant="destructive"
-                className="bg-rose-600 text-white hover:bg-rose-700"
+                className="w-full bg-rose-600 text-white hover:bg-rose-700 sm:w-auto"
                 onClick={() => handleDeleteFAQ(faq.id)}
               >
                 Delete
@@ -184,16 +184,16 @@ export default function FAQManager() {
             value={newFAQ.answer}
             onChange={(e) => setNewFAQ({...newFAQ, answer: e.target.value})}
           />
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <Button
-              className="bg-emerald-600 text-white hover:bg-emerald-700"
+              className="w-full bg-emerald-600 text-white hover:bg-emerald-700 sm:w-auto"
               onClick={handleAddOrUpdateFAQ}
             >
               {loading ? <Spinner /> : editingFAQId ? "Update FAQ" : "Add FAQ"}
             </Button>
             <Button
               variant="secondary"
-              className="bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
+              className="w-full bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 sm:w-auto"
               onClick={handleCancelEditing}
             >
               Cancel

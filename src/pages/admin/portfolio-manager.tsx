@@ -284,16 +284,16 @@ export default function PortfolioManager() {
                 {item.demoUrl}
               </a>
             )}
-            <div className="mt-auto pt-4 flex gap-2">
+            <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row">
               <Button
-                className="bg-amber-500 text-white hover:bg-amber-600"
+                className="w-full bg-amber-500 text-white hover:bg-amber-600 sm:w-auto"
                 onClick={() => handleEditItem(item)}
               >
                 Edit
               </Button>
               <Button
                 variant="destructive"
-                className="bg-rose-600 text-white hover:bg-rose-700"
+                className="w-full bg-rose-600 text-white hover:bg-rose-700 sm:w-auto"
                 onClick={() => handleDeleteItem(item.id)}
                 disabled={loading}
               >
@@ -360,9 +360,9 @@ export default function PortfolioManager() {
             value={newItem.demoUrl || ""}
             onChange={(e) => setNewItem({...newItem, demoUrl: e.target.value})}
           />
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <Button
-              className="bg-emerald-600 text-white hover:bg-emerald-700"
+              className="w-full bg-emerald-600 text-white hover:bg-emerald-700 sm:w-auto"
               onClick={handleAddOrUpdateItem}
               disabled={loading}
             >
@@ -374,7 +374,7 @@ export default function PortfolioManager() {
             </Button>
             <Button
               variant="secondary"
-              className="bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
+              className="w-full bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 sm:w-auto"
               onClick={handleCancelEditing}
             >
               Cancel

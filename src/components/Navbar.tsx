@@ -50,38 +50,22 @@ export default function Navbar() {
       e.preventDefault();
 
       if (typeof window !== "undefined") {
-        // Navigate to the homepage if not already on it
+        // Persist target section when navigating from non-home pages.
         if (window.location.pathname !== "/") {
+          sessionStorage.setItem("pendingSectionHash", href);
           window.location.href = `/${href}`;
-          // Delay smooth scrolling until the page has loaded
-          window.addEventListener("load", () => {
-            const targetElement = document.querySelector(href);
-            if (targetElement) {
-              targetElement.scrollIntoView({
-                behavior: "smooth",
-              });
-            }
-          });
           return;
         }
 
-        // If already on the homepage, perform smooth scrolling
+        if (href === "#home") {
+          window.scrollTo({top: 0, behavior: "smooth"});
+          return;
+        }
+
+        // If already on the homepage, perform smooth scrolling.
         const targetElement = document.querySelector(href);
         if (targetElement) {
           targetElement.scrollIntoView({behavior: "smooth"});
-        } else {
-          // Retry in case the element is dynamically loaded
-          const observer = new MutationObserver(() => {
-            const target = document.querySelector(href);
-            if (target) {
-              target.scrollIntoView({behavior: "smooth"});
-              observer.disconnect(); // Stop observing once found
-            }
-          });
-          observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-          });
         }
       }
     }

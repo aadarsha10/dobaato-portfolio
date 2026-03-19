@@ -229,16 +229,16 @@ export default function BlogManager() {
             <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
               Author: {post.author.name}
             </p>
-            <div className="mt-auto pt-4 flex gap-2">
+            <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row">
               <Button
-                className="bg-amber-500 text-white hover:bg-amber-600"
+                className="w-full bg-amber-500 text-white hover:bg-amber-600 sm:w-auto"
                 onClick={() => handleEditClick(post)}
               >
                 Edit
               </Button>
               <Button
                 variant="destructive"
-                className="bg-rose-600 text-white hover:bg-rose-700"
+                className="w-full bg-rose-600 text-white hover:bg-rose-700 sm:w-auto"
                 onClick={() => handleDeletePost(post.id)}
               >
                 Delete
@@ -308,9 +308,9 @@ export default function BlogManager() {
               })
             }
           />
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <Button
-              className="bg-emerald-600 text-white hover:bg-emerald-700"
+              className="w-full bg-emerald-600 text-white hover:bg-emerald-700 sm:w-auto"
               onClick={handleAddOrUpdatePost}
             >
               {loading
@@ -321,7 +321,7 @@ export default function BlogManager() {
             </Button>
             <Button
               variant="secondary"
-              className="bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
+              className="w-full bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 sm:w-auto"
               onClick={handleCancelEditing}
             >
               Cancel

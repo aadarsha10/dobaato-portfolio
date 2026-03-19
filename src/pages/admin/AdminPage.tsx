@@ -39,54 +39,56 @@ export default function AdminPage() {
   return (
     <Tabs
       defaultValue="careers"
-      className="flex w-full flex-col gap-4 md:h-[calc(100vh-3rem)] md:flex-row md:items-stretch mt-2"
+      className="mt-2 flex w-full flex-col gap-4 md:h-[calc(100vh-3rem)] md:flex-row md:items-stretch"
     >
       {/* Sidebar */}
-      <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 text-gray-800 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/80 dark:text-white md:flex md:h-full md:w-60 md:shrink-0 md:flex-col md:justify-between">
+      <div className="rounded-2xl border border-slate-200 bg-white/85 p-3 text-gray-800 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/80 dark:text-white sm:p-4 md:flex md:h-full md:w-60 md:shrink-0 md:flex-col md:justify-between">
         <div>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight">Dashboard</h2>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight md:text-3xl">
+            Dashboard
+          </h2>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
             Manage all content sections from one place.
           </p>
-          <TabsList className="mt-5 flex w-full flex-col items-start justify-start gap-1">
+          <TabsList className="mt-5 flex w-full items-center justify-start gap-2 overflow-x-auto pb-1 md:flex-col md:items-start md:gap-1 md:overflow-visible md:pb-0">
             <TabsTrigger
               value="careers"
-              className="w-full rounded-lg text-start text-base transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white flex items-center justify-start gap-6 px-3"
+              className="flex shrink-0 items-center justify-start gap-3 rounded-lg px-3 text-sm text-start transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 md:w-full md:gap-6 md:text-base data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white"
             >
               <Briefcase className="h-5 w-5 flex-shrink-0" />
               Careers
             </TabsTrigger>
             <TabsTrigger
               value="portfolio"
-              className="w-full rounded-lg text-base transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white flex items-center justify-start gap-6 px-3"
+              className="flex shrink-0 items-center justify-start gap-3 rounded-lg px-3 text-sm transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 md:w-full md:gap-6 md:text-base data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white"
             >
               <FolderOpen className="h-5 w-5 flex-shrink-0" />
               Portfolio
             </TabsTrigger>
             <TabsTrigger
               value="faq"
-              className="w-full rounded-lg text-start text-base transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white flex items-center justify-start gap-6 px-3"
+              className="flex shrink-0 items-center justify-start gap-3 rounded-lg px-3 text-sm text-start transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 md:w-full md:gap-6 md:text-base data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white"
             >
               <HelpCircle className="h-5 w-5 flex-shrink-0" />
               FAQ
             </TabsTrigger>
             <TabsTrigger
               value="testimonials"
-              className="w-full rounded-lg text-base transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white flex items-center justify-start gap-6 px-3"
+              className="flex shrink-0 items-center justify-start gap-3 rounded-lg px-3 text-sm transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 md:w-full md:gap-6 md:text-base data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white"
             >
               <MessageSquare className="h-5 w-5 flex-shrink-0" />
               Testimonials
             </TabsTrigger>
             <TabsTrigger
               value="blog"
-              className="w-full rounded-lg text-base transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white flex items-center justify-start gap-6 px-3"
+              className="flex shrink-0 items-center justify-start gap-3 rounded-lg px-3 text-sm transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 md:w-full md:gap-6 md:text-base data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white"
             >
               <BookOpen className="h-5 w-5 flex-shrink-0" />
               Blog
             </TabsTrigger>
             <TabsTrigger
               value="case-studies"
-              className="w-full rounded-lg text-base transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white flex items-center justify-start gap-6 px-3"
+              className="flex shrink-0 items-center justify-start gap-3 rounded-lg px-3 text-sm transition-colors duration-200 hover:bg-primary-100 dark:hover:bg-slate-800 md:w-full md:gap-6 md:text-base data-[state=active]:bg-primary-100 data-[state=active]:text-primary-900 dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-white"
             >
               <Layers className="h-5 w-5 flex-shrink-0" />
               Case Studies
@@ -96,7 +98,7 @@ export default function AdminPage() {
         {/* Sign Out Button */}
         <button
           onClick={handleSignOut}
-          className="mt-6 w-full rounded-lg bg-red-500 py-2 text-white transition hover:bg-red-600 flex items-center justify-start gap-2 px-3"
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-red-500 px-3 py-2 text-white transition hover:bg-red-600 md:mt-6 md:justify-start"
         >
           <LogOut className="h-5 w-5" />
           Sign Out
@@ -104,7 +106,7 @@ export default function AdminPage() {
       </div>
 
       {/* Main Content */}
-      <div className="min-w-0 flex-1 rounded-2xl border border-slate-200 bg-slate-50/60 p-2 dark:border-slate-700 dark:bg-slate-900/40 md:h-full md:overflow-y-auto">
+      <div className="min-w-0 flex-1 rounded-2xl border border-slate-200 bg-slate-50/60 p-2 sm:p-3 dark:border-slate-700 dark:bg-slate-900/40 md:h-full md:overflow-y-auto">
         <TabsContent value="careers" className="mt-0 w-full space-y-4">
           <CareersManager />
         </TabsContent>

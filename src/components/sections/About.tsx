@@ -24,27 +24,6 @@ const features = [
   },
 ];
 
-const teamMembers = [
-  {
-    name: "John Doe",
-    role: "Founder & CEO",
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1287&auto=format&fit=crop",
-  },
-  {
-    name: "Jane Smith",
-    role: "Lead Developer",
-    image:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1287&auto=format&fit=crop",
-  },
-  {
-    name: "Alex Johnson",
-    role: "UX Designer",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop",
-  },
-];
-
 export default function About() {
   return (
     <section
