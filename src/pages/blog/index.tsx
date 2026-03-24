@@ -1,6 +1,6 @@
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/sections/Footer';
-import BlogList from './BlogList';
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/sections/Footer";
+import BlogList from "./BlogList";
 
 export default function Blog() {
   return (
@@ -8,8 +8,12 @@ export default function Blog() {
       <Navbar />
       <main className="pt-24 min-h-screen bg-[#F5F6FA] dark:bg-inherit">
         <div className="container mx-auto px-6">
-          <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">Blog</h1>
-          <p className="text-gray-400 mb-8">Insights and updates from our team</p>
+          <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2 font-domine">
+            Blog
+          </h1>
+          <p className="text-gray-400 mb-8">
+            Insights and updates from our team
+          </p>
           <BlogList />
         </div>
       </main>

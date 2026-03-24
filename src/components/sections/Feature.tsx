@@ -1,5 +1,5 @@
-import { useId } from "react";
-import { cn } from "../../utils";
+import {useId} from "react";
+import {cn} from "../../utils";
 
 export const Feature = ({
   title,
@@ -17,7 +17,7 @@ export const Feature = ({
       className={cn(
         "flex flex-col lg:border-r py-10 relative dark:border-neutral-800 bg-gradient-to-br from-gray-200 to-white dark:from-blue-900 dark:to-neutral-900 rounded-2xl h-full hover:scale-105 transition-all duration-300 hover:shadow-lg hover:cursor-pointer overflow-hidden",
         (index === 0 || index === 4) && "lg:border-l dark:border-neutral-800",
-        index < 4 && "lg:border-b dark:border-neutral-800"
+        index < 4 && "lg:border-b dark:border-neutral-800",
       )}
     >
       <div className="mb-4 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
@@ -67,7 +67,7 @@ export const Grid = ({
   );
 };
 
-export function GridPattern({ width, height, x, y, squares, ...props }: any) {
+export function GridPattern({width, height, x, y, squares, ...props}: any) {
   const patternId = useId();
 
   return (
@@ -92,14 +92,14 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
       />
       {squares && (
         <svg x={x} y={y} className="overflow-visible">
-          {squares.map(([x, y]: any) => (
+          {squares.map(([gridX, gridY]: any, index: number) => (
             <rect
               strokeWidth="0"
-              key={`${x}-${y}`}
+              key={`${gridX}-${gridY}-${index}`}
               width={width + 1}
               height={height + 1}
-              x={x * width}
-              y={y * height}
+              x={gridX * width}
+              y={gridY * height}
             />
           ))}
         </svg>

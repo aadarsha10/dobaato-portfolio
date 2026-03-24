@@ -1,321 +1,334 @@
-import { useState, useEffect } from "react";
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Textarea } from "../../components/ui/textarea";
-import { supabase } from "../../SupabaseClient";
-import { v4 as uuid } from "uuid";
+import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
-import type { BlogPost } from "../../types/blog";
+import {v4 as uuid} from "uuid";
+import AdminModal from "../../components/ui/admin/AdminModal";
+import AdminSectionHeader from "../../components/ui/admin/AdminSectionHeader";
+import {Button} from "../../components/ui/button";
+import {Input} from "../../components/ui/input";
+import {Textarea} from "../../components/ui/textarea";
+import {supabase} from "../../SupabaseClient";
+import type {BlogPost} from "../../types/blog";
 
 export default function BlogManager() {
-	const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-	const [loading, setLoading] = useState<boolean>(false);
-	// This form state is used for both creating and updating a blog post.
-	const [newPost, setNewPost] = useState<Omit<BlogPost, "id" | "date">>({
-		title: "",
-		slug: "",
-		excerpt: "",
-		content: "",
-		coverImage: "",
-		readTime: 0,
-		author: {
-			name: "",
-			avatar: "",
-		},
-	});
-	// Holds the id of the post being edited (if any).
-	const [editingPostId, setEditingPostId] = useState<string | null>(null);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // This form state is used for both creating and updating a blog post.
+  const [newPost, setNewPost] = useState<Omit<BlogPost, "id" | "date">>({
+    title: "",
+    slug: "",
+    excerpt: "",
+    content: "",
+    coverImage: "",
+    readTime: 0,
+    author: {
+      name: "",
+      avatar: "",
+    },
+  });
+  // Holds the id of the post being edited (if any).
+  const [editingPostId, setEditingPostId] = useState<string | null>(null);
 
-	// Fetch existing blog posts on mount
-	useEffect(() => {
-		const fetchPosts = async () => {
-			const { data, error } = await supabase.from("BlogPost").select("*");
-			if (error) {
-				toast.error("Error fetching blog posts");
-				return;
-			}
-			setBlogPosts(data || []);
-		};
-		fetchPosts();
-	}, []);
+  // Fetch existing blog posts on mount
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const {data, error} = await supabase.from("BlogPost").select("*");
+      if (error) {
+        toast.error("Error fetching blog posts");
+        return;
+      }
+      setBlogPosts(data || []);
+    };
+    fetchPosts();
+  }, []);
 
-	const handleAddOrUpdatePost = async () => {
-		if (
-			!newPost.title ||
-			!newPost.slug ||
-			!newPost.excerpt ||
-			!newPost.content ||
-			!newPost.coverImage ||
-			!newPost.author.name
-		) {
-			toast.error("Please fill in all fields before submitting.");
-			return;
-		}
+  const handleAddOrUpdatePost = async () => {
+    if (
+      !newPost.title ||
+      !newPost.slug ||
+      !newPost.excerpt ||
+      !newPost.content ||
+      !newPost.coverImage ||
+      !newPost.author.name
+    ) {
+      toast.error("Please fill in all fields before submitting.");
+      return;
+    }
 
-		setLoading(true);
-		// Calculate readTime based on content length (words per 100)
-		const readTime = Math.ceil(newPost.content.split(" ").length / 100);
+    setLoading(true);
+    // Calculate readTime based on content length (words per 100)
+    const readTime = Math.ceil(newPost.content.split(" ").length / 100);
 
-		if (editingPostId) {
-			// Update existing post.
-			const updatedPost: BlogPost = {
-				...newPost,
-				readTime,
-				id: editingPostId,
-				date:
-					blogPosts.find((post) => post.id === editingPostId)?.date ||
-					new Date().toISOString().split("T")[0],
-			};
+    if (editingPostId) {
+      // Update existing post.
+      const updatedPost: BlogPost = {
+        ...newPost,
+        readTime,
+        id: editingPostId,
+        date:
+          blogPosts.find((post) => post.id === editingPostId)?.date ||
+          new Date().toISOString().split("T")[0],
+      };
 
-			const { error } = await supabase
-				.from("BlogPost")
-				.update(updatedPost)
-				.eq("id", editingPostId);
-			if (error) {
-				toast.error("Error updating post: " + error.message);
-				setLoading(false);
-				return;
-			}
-			setBlogPosts(
-				blogPosts.map((post) =>
-					post.id === editingPostId ? updatedPost : post
-				)
-			);
-			toast.success("Blog post updated successfully!");
-			// Reset edit mode and clear the form.
-			setEditingPostId(null);
-			setNewPost({
-				title: "",
-				slug: "",
-				excerpt: "",
-				content: "",
-				coverImage: "",
-				readTime: 0,
-				author: { name: "", avatar: "" },
-			});
-		} else {
-			// Adding a new post.
-			const post: BlogPost = {
-				...newPost,
-				readTime,
-				id: uuid(),
-				date: new Date().toISOString().split("T")[0],
-			};
+      const {error} = await supabase
+        .from("BlogPost")
+        .update(updatedPost)
+        .eq("id", editingPostId);
+      if (error) {
+        toast.error("Error updating post: " + error.message);
+        setLoading(false);
+        return;
+      }
+      setBlogPosts(
+        blogPosts.map((post) =>
+          post.id === editingPostId ? updatedPost : post,
+        ),
+      );
+      toast.success("Blog post updated successfully!");
+      // Reset edit mode and clear the form.
+      setEditingPostId(null);
+      setNewPost({
+        title: "",
+        slug: "",
+        excerpt: "",
+        content: "",
+        coverImage: "",
+        readTime: 0,
+        author: {name: "", avatar: ""},
+      });
+      setIsModalOpen(false);
+    } else {
+      // Adding a new post.
+      const post: BlogPost = {
+        ...newPost,
+        readTime,
+        id: uuid(),
+        date: new Date().toISOString().split("T")[0],
+      };
 
-			const { error } = await supabase.from("BlogPost").insert([post]);
-			if (error) {
-				toast.error("Error adding post: " + error.message);
-				setLoading(false);
-				return;
-			}
-			setBlogPosts([...blogPosts, post]);
-			toast.success(`${post.title} has been added successfully!`);
-			setNewPost({
-				title: "",
-				slug: "",
-				excerpt: "",
-				content: "",
-				coverImage: "",
-				readTime: 0,
-				author: { name: "", avatar: "" },
-			});
-		}
-		setLoading(false);
-	};
+      const {error} = await supabase.from("BlogPost").insert([post]);
+      if (error) {
+        toast.error("Error adding post: " + error.message);
+        setLoading(false);
+        return;
+      }
+      setBlogPosts([...blogPosts, post]);
+      toast.success(`${post.title} has been added successfully!`);
+      setNewPost({
+        title: "",
+        slug: "",
+        excerpt: "",
+        content: "",
+        coverImage: "",
+        readTime: 0,
+        author: {name: "", avatar: ""},
+      });
+      setIsModalOpen(false);
+    }
+    setLoading(false);
+  };
 
-	const handleDeletePost = async (id: string) => {
-		setLoading(true);
-		const { error } = await supabase.from("BlogPost").delete().eq("id", id);
-		if (error) {
-			toast.error("Error deleting post: " + error.message);
-			setLoading(false);
-			return;
-		}
-		setBlogPosts(blogPosts.filter((post) => post.id !== id));
-		toast.success("Blog post deleted successfully!");
-		setLoading(false);
-		// If the deleted post was in edit mode, clear the form.
-		if (id === editingPostId) {
-			setEditingPostId(null);
-			setNewPost({
-				title: "",
-				slug: "",
-				excerpt: "",
-				content: "",
-				coverImage: "",
-				readTime: 0,
-				author: { name: "", avatar: "" },
-			});
-		}
-	};
+  const handleDeletePost = async (id: string) => {
+    setLoading(true);
+    const {error} = await supabase.from("BlogPost").delete().eq("id", id);
+    if (error) {
+      toast.error("Error deleting post: " + error.message);
+      setLoading(false);
+      return;
+    }
+    setBlogPosts(blogPosts.filter((post) => post.id !== id));
+    toast.success("Blog post deleted successfully!");
+    setLoading(false);
+    // If the deleted post was in edit mode, clear the form.
+    if (id === editingPostId) {
+      setEditingPostId(null);
+      setNewPost({
+        title: "",
+        slug: "",
+        excerpt: "",
+        content: "",
+        coverImage: "",
+        readTime: 0,
+        author: {name: "", avatar: ""},
+      });
+    }
+  };
 
-	// Populate the form fields with the selected post's data for editing.
-	const handleEditClick = (post: BlogPost) => {
-		setEditingPostId(post.id);
-		setNewPost({
-			title: post.title,
-			slug: post.slug,
-			excerpt: post.excerpt,
-			content: post.content,
-			coverImage: post.coverImage,
-			readTime: post.readTime,
-			author: {
-				name: post.author.name,
-				avatar: post.author.avatar,
-			},
-		});
-	};
+  // Populate the form fields with the selected post's data for editing.
+  const handleEditClick = (post: BlogPost) => {
+    setEditingPostId(post.id);
+    setNewPost({
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      content: post.content,
+      coverImage: post.coverImage,
+      readTime: post.readTime,
+      author: {
+        name: post.author.name,
+        avatar: post.author.avatar,
+      },
+    });
+    setIsModalOpen(true);
+  };
 
-	// Cancel editing mode and reset the form.
-	const handleCancelEditing = () => {
-		setEditingPostId(null);
-		setNewPost({
-			title: "",
-			slug: "",
-			excerpt: "",
-			content: "",
-			coverImage: "",
-			readTime: 0,
-			author: { name: "", avatar: "" },
-		});
-	};
+  // Cancel editing mode and reset the form.
+  const handleCancelEditing = () => {
+    setEditingPostId(null);
+    setNewPost({
+      title: "",
+      slug: "",
+      excerpt: "",
+      content: "",
+      coverImage: "",
+      readTime: 0,
+      author: {name: "", avatar: ""},
+    });
+    setIsModalOpen(false);
+  };
 
-	return (
-		<div className="space-y-8 p-4">
-			<h2 className="text-2xl font-bold">Manage Blog Posts</h2>
+  const handleOpenCreateModal = () => {
+    setEditingPostId(null);
+    setNewPost({
+      title: "",
+      slug: "",
+      excerpt: "",
+      content: "",
+      coverImage: "",
+      readTime: 0,
+      author: {name: "", avatar: ""},
+    });
+    setIsModalOpen(true);
+  };
 
-			{/* Blog Post Form (Add / Edit) */}
-			<div className="bg-white p-6 shadow rounded grid gap-4">
-				<h3 className="text-xl font-semibold">
-					{editingPostId ? "Edit Blog Post" : "Add New Blog Post"}
-				</h3>
-				<Input
-					placeholder="Post Title"
-					value={newPost.title}
-					className="text-black"
-					onChange={(e) =>
-						setNewPost({ ...newPost, title: e.target.value })
-					}
-				/>
-				<Input
-					placeholder="Post Slug"
-					value={newPost.slug}
-					className="text-black"
-					onChange={(e) =>
-						setNewPost({ ...newPost, slug: e.target.value })
-					}
-				/>
-				<Textarea
-					placeholder="Post Excerpt"
-					value={newPost.excerpt}
-					className="text-black"
-					onChange={(e) =>
-						setNewPost({ ...newPost, excerpt: e.target.value })
-					}
-				/>
-				<Textarea
-					placeholder="Post Content"
-					value={newPost.content}
-					className="text-black"
-					onChange={(e) =>
-						setNewPost({ ...newPost, content: e.target.value })
-					}
-				/>
-				<Input
-					placeholder="Cover Image URL"
-					value={newPost.coverImage}
-					className="text-black"
-					onChange={(e) =>
-						setNewPost({ ...newPost, coverImage: e.target.value })
-					}
-				/>
-				<Input
-					placeholder="Author Name"
-					value={newPost.author.name}
-					className="text-black"
-					onChange={(e) =>
-						setNewPost({
-							...newPost,
-							author: { ...newPost.author, name: e.target.value },
-						})
-					}
-				/>
-				<Input
-					placeholder="Author Avatar URL"
-					value={newPost.author.avatar}
-					className="text-black"
-					onChange={(e) =>
-						setNewPost({
-							...newPost,
-							author: {
-								...newPost.author,
-								avatar: e.target.value,
-							},
-						})
-					}
-				/>
-				<div className="flex gap-2">
-					<Button
-						onClick={handleAddOrUpdatePost}
-						className="bg-primary-300"
-					>
-						{loading
-							? "Loading..."
-							: editingPostId
-							? "Update Blog Post"
-							: "Add Blog Post"}
-					</Button>
-					{editingPostId && (
-						<Button
-							onClick={handleCancelEditing}
-							className="border rounded-lg"
-						>
-							Cancel
-						</Button>
-					)}
-				</div>
-			</div>
+  return (
+    <div className="space-y-6 p-4">
+      <AdminSectionHeader
+        title="Manage Blog Posts"
+        description="Create, edit, and curate articles for your blog section."
+        buttonLabel="Add Blog Post"
+        onButtonClick={handleOpenCreateModal}
+      />
 
-			{/* Blog Posts Listing */}
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-6 border p-4">
-				{blogPosts.map((post) => (
-					<div
-						key={post.id}
-						className="bg-gray-50 border border-gray-200 p-4 rounded shadow-sm"
-					>
-						<h3 className="text-lg font-bold mb-2">{post.title}</h3>
-						<p className="mb-2">{post.excerpt}</p>
-						<div className="flex gap-2">
-							<Button
-								onClick={() => handleEditClick(post)}
-								className="bg-primary-300"
-							>
-								Edit
-							</Button>
-							<Button
-								onClick={() => handleDeletePost(post.id)}
-								className="bg-red-300"
-								variant="destructive"
-							>
-								<svg
-									width="15"
-									height="15"
-									viewBox="0 0 15 15"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z"
-										fill="currentColor"
-										fillRule="evenodd"
-										clipRule="evenodd"
-									></path>
-								</svg>
-							</Button>
-						</div>
-					</div>
-				))}
-			</div>
-		</div>
-	);
+      <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
+        {blogPosts.map((post) => (
+          <div
+            key={post.id}
+            className="relative flex min-h-[320px] h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-900"
+          >
+            <div className="pointer-events-none absolute right-0 top-0 h-14 w-20 bg-gradient-to-bl from-primary-500/20 to-sky-400/10 [clip-path:polygon(100%_0,0_0,100%_100%)]" />
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+              {post.title}
+            </h3>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              /{post.slug} - {post.readTime} min read - {post.date}
+            </p>
+            <p className="mt-3 line-clamp-6 text-sm leading-6 text-slate-600 dark:text-slate-300">
+              {post.excerpt}
+            </p>
+            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+              Author: {post.author.name}
+            </p>
+            <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row">
+              <Button
+                className="w-full bg-amber-500 text-white hover:bg-amber-600 sm:w-auto"
+                onClick={() => handleEditClick(post)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="destructive"
+                className="w-full bg-rose-600 text-white hover:bg-rose-700 sm:w-auto"
+                onClick={() => handleDeletePost(post.id)}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <AdminModal
+        open={isModalOpen}
+        title={editingPostId ? "Edit Blog Post" : "Add New Blog Post"}
+        description="Fill all required fields before saving."
+        onClose={handleCancelEditing}
+      >
+        <div className="grid gap-4">
+          <Input
+            placeholder="Post Title"
+            value={newPost.title}
+            onChange={(e) => setNewPost({...newPost, title: e.target.value})}
+          />
+          <Input
+            placeholder="Post Slug"
+            value={newPost.slug}
+            onChange={(e) => setNewPost({...newPost, slug: e.target.value})}
+          />
+          <Textarea
+            placeholder="Post Excerpt"
+            value={newPost.excerpt}
+            onChange={(e) => setNewPost({...newPost, excerpt: e.target.value})}
+          />
+          <Textarea
+            placeholder="Post Content"
+            value={newPost.content}
+            onChange={(e) => setNewPost({...newPost, content: e.target.value})}
+          />
+          <Input
+            placeholder="Cover Image URL"
+            value={newPost.coverImage}
+            onChange={(e) =>
+              setNewPost({...newPost, coverImage: e.target.value})
+            }
+          />
+          <Input
+            placeholder="Author Name"
+            value={newPost.author.name}
+            onChange={(e) =>
+              setNewPost({
+                ...newPost,
+                author: {
+                  ...newPost.author,
+                  name: e.target.value,
+                },
+              })
+            }
+          />
+          <Input
+            placeholder="Author Avatar URL"
+            value={newPost.author.avatar}
+            onChange={(e) =>
+              setNewPost({
+                ...newPost,
+                author: {
+                  ...newPost.author,
+                  avatar: e.target.value,
+                },
+              })
+            }
+          />
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Button
+              className="w-full bg-emerald-600 text-white hover:bg-emerald-700 sm:w-auto"
+              onClick={handleAddOrUpdatePost}
+            >
+              {loading
+                ? "Loading..."
+                : editingPostId
+                  ? "Update Blog Post"
+                  : "Add Blog Post"}
+            </Button>
+            <Button
+              variant="secondary"
+              className="w-full bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 sm:w-auto"
+              onClick={handleCancelEditing}
+            >
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </AdminModal>
+    </div>
+  );
 }

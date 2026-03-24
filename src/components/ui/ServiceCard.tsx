@@ -1,4 +1,4 @@
-import { LucideIcon } from "lucide-react";
+import {LucideIcon} from "lucide-react";
 
 interface ServiceCardProps {
   title: string;
@@ -22,7 +22,9 @@ export default function ServiceCard({
         <div className="w-14 h-14 rounded-lg bg-gray-50/20 dark:bg-primary-500/10 flex items-center justify-center mb-5">
           <Icon className="h-7 w-7 text-gray-50 dark:text-primary-1000" />
         </div>
-        <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
+        <h3 className="text-xl font-semibold text-white mb-3 font-domine">
+          {title}
+        </h3>
         <p className="text-gray-200  dark:text-gray-400 line-clamp-4">
           {description}
         </p>

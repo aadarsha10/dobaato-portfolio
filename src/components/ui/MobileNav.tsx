@@ -1,34 +1,56 @@
-import { motion } from 'framer-motion';
-import { Home, Info, Briefcase, FolderOpen, Phone, Building2, GraduationCap, FileText } from 'lucide-react';
+import {motion} from "framer-motion";
+import {
+  Briefcase,
+  FileText,
+  GraduationCap,
+  Home,
+  Info,
+  Phone,
+} from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
 const navItems = [
-  { icon: Home, label: 'Home', href: '#home' },
-  { icon: Info, label: 'About', href: '#about' },
-  { icon: Briefcase, label: 'Services', href: '#services' },
-  { icon: FolderOpen, label: 'Portfolio', href: '#portfolio' },
-  { icon: Building2, label: 'Industries', href: '#industries' },
-  { icon: Phone, label: 'Contact', href: '#contact' },
-  { icon: GraduationCap, label: 'Careers', href: '/careers' },
-  { icon: FileText, label: 'Case Studies', href: '/case-studies' },
+  {icon: Home, label: "Home", href: "#home"},
+  {icon: Info, label: "About", href: "/about"},
+  {icon: Briefcase, label: "Services", href: "#services"},
+  {icon: Phone, label: "Contact", href: "#contact"},
+  {icon: GraduationCap, label: "Careers", href: "/careers"},
+  {icon: FileText, label: "Case Studies", href: "/case-studies"},
 ];
 
 export default function MobileNav() {
+  const navigate = useNavigate();
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href');
-    if (href?.startsWith('#')) {
+    const href = e.currentTarget.getAttribute("href");
+    if (href?.startsWith("/")) {
       e.preventDefault();
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      navigate(href);
+    } else if (href?.startsWith("#")) {
+      e.preventDefault();
+      if (typeof window !== "undefined" && window.location.pathname !== "/") {
+        sessionStorage.setItem("pendingSectionHash", href);
+        window.location.href = `/${href}`;
+        return;
+      }
+
+      if (href === "#home") {
+        window.scrollTo({top: 0, behavior: "smooth"});
+        return;
+      }
+
+      document.querySelector(href)?.scrollIntoView({behavior: "smooth"});
     }
   };
 
   return (
     <motion.nav
-      initial={{ y: 100 }}
-      animate={{ y: 0 }}
+      initial={{y: 100}}
+      animate={{y: 0}}
       className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#1E293B] /95 backdrop-blur-sm border-t border-dark-200 z-50"
     >
       <div className="flex justify-around py-2 overflow-auto">
-        {navItems.map(({ icon: Icon, label, href }) => (
+        {navItems.map(({icon: Icon, label, href}) => (
           <a
             key={href}
             href={href}

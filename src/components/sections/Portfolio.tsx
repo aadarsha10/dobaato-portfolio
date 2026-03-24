@@ -17,7 +17,12 @@ export default function Portfolio() {
         setProjects(localProject);
         console.error("Error fetching projects:", error);
       } else {
-        setProjects(data);
+        setProjects(
+          (data || []).map((project) => ({
+            ...project,
+            featured: Boolean(project.featured),
+          })),
+        );
       }
     };
 
@@ -29,11 +34,13 @@ export default function Portfolio() {
       ? projects
       : projects.filter((project) => project.category === activeFilter);
 
-  const reversedProjects = [...filteredProjects].reverse();
+  const featuredFirstProjects = [...filteredProjects].sort(
+    (a, b) => Number(b.featured) - Number(a.featured),
+  );
 
   return (
     <section id="portfolio" className="py-24 bg-white dark:bg-[#10172A]">
-      <div className="container  mx-auto flex flex-col gap-10 px-6 md:px-0 w-full md:w-[70%]">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 lg:px-8">
         <SectionTitle
           title="Our Portfolio"
           subtitle="Recent Projects & Case Studies"
@@ -55,7 +62,7 @@ export default function Portfolio() {
 					))}
 				</div> */}
 
-        <PortfolioCard projects={reversedProjects} />
+        <PortfolioCard projects={featuredFirstProjects} />
       </div>
     </section>
   );

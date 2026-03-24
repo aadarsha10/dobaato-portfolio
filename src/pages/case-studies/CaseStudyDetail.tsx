@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, User, Github, Globe } from 'lucide-react';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/sections/Footer';
-import { CaseStudy } from '../../types';
-import { supabase } from '../../SupabaseClient';
-import toast from 'react-hot-toast';
+import {motion} from "framer-motion";
+import {ArrowLeft, Calendar, Github, Globe, User} from "lucide-react";
+import {useEffect, useState} from "react";
+import toast from "react-hot-toast";
+import {Link, useParams} from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/sections/Footer";
+import {supabase} from "../../SupabaseClient";
+import {CaseStudy} from "../../types";
 
 export default function CaseStudyDetail() {
-  const { slug } = useParams<{ slug: string }>();
+  const {slug} = useParams<{slug: string}>();
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
   const [loading, setLoading] = useState(true);
   const [relatedCaseStudies, setRelatedCaseStudies] = useState<CaseStudy[]>([]);
 
   // Helper function to format date
   const formatDate = (dateString: string) => {
-    if (!dateString) return '';
+    if (!dateString) return "";
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
     } catch {
       return dateString;
@@ -32,17 +32,17 @@ export default function CaseStudyDetail() {
   useEffect(() => {
     const fetchCaseStudy = async () => {
       if (!slug) return;
-      
+
       try {
         // Fetch the case study by slug from Supabase
-        const { data, error } = await supabase
-          .from('CaseStudy')
-          .select('*')
-          .eq('slug', slug)
+        const {data, error} = await supabase
+          .from("CaseStudy")
+          .select("*")
+          .eq("slug", slug)
           .single();
 
         if (error || !data) {
-          toast.error('Case study not found');
+          toast.error("Case study not found");
           setLoading(false);
           return;
         }
@@ -50,16 +50,16 @@ export default function CaseStudyDetail() {
         setCaseStudy(data);
 
         // Fetch related case studies (excluding current case study)
-        const { data: related } = await supabase
-          .from('CaseStudy')
-          .select('*')
-          .neq('slug', slug)
+        const {data: related} = await supabase
+          .from("CaseStudy")
+          .select("*")
+          .neq("slug", slug)
           .limit(3);
 
         setRelatedCaseStudies(related || []);
       } catch (error) {
-        toast.error('Error loading case study');
-        console.error('Error fetching case study:', error);
+        toast.error("Error loading case study");
+        console.error("Error fetching case study:", error);
       } finally {
         setLoading(false);
       }
@@ -74,7 +74,7 @@ export default function CaseStudyDetail() {
       document.title = `${caseStudy.title} | Dobaato Case Studies`;
     }
     return () => {
-      document.title = 'Dobaato - Digital Solutions';
+      document.title = "Dobaato - Digital Solutions";
     };
   }, [caseStudy]);
 
@@ -107,11 +107,12 @@ export default function CaseStudyDetail() {
         <Navbar />
         <main className="pt-24 min-h-screen h-full bg-[#F5F6FA] dark:bg-inherit">
           <div className="container mx-auto px-6 max-w-4xl text-center py-16">
-            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4 font-domine">
               Case Study Not Found
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
-              The case study you're looking for doesn't exist or has been removed.
+              The case study you're looking for doesn't exist or has been
+              removed.
             </p>
             <Link
               to="/case-studies"
@@ -134,9 +135,9 @@ export default function CaseStudyDetail() {
         <article className="container mx-auto px-6 max-w-4xl">
           {/* Back Button */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{opacity: 0, x: -20}}
+            animate={{opacity: 1, x: 0}}
+            transition={{duration: 0.5}}
             className="mb-8"
           >
             <Link
@@ -150,9 +151,9 @@ export default function CaseStudyDetail() {
 
           {/* Hero Image */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.6}}
             className="relative h-64 md:h-96 rounded-xl overflow-hidden mb-8 shadow-2xl"
           >
             <img
@@ -165,9 +166,9 @@ export default function CaseStudyDetail() {
 
           {/* Header Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.6, delay: 0.2}}
             className="mb-12"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-white mb-6 font-domine leading-tight">
@@ -225,7 +226,7 @@ export default function CaseStudyDetail() {
             {/* Technologies */}
             {caseStudy.technologies && caseStudy.technologies.length > 0 && (
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 font-domine">
                   Technologies Used
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -245,9 +246,9 @@ export default function CaseStudyDetail() {
           {/* Content */}
           {caseStudy.content && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.6, delay: 0.4}}
               className="prose prose-lg dark:prose-invert max-w-none mb-16"
             >
               <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
@@ -264,9 +265,9 @@ export default function CaseStudyDetail() {
           {/* Related Case Studies */}
           {relatedCaseStudies.length > 0 && (
             <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              initial={{opacity: 0, y: 30}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.6, delay: 0.6}}
               className="mb-16"
             >
               <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center font-domine">
@@ -301,8 +302,7 @@ export default function CaseStudyDetail() {
             </motion.section>
           )}
         </article>
-      <Footer />
-
+        <Footer />
       </main>
     </>
   );

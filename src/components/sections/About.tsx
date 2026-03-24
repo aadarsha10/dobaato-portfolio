@@ -24,27 +24,6 @@ const features = [
   },
 ];
 
-const teamMembers = [
-  {
-    name: "John Doe",
-    role: "Founder & CEO",
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1287&auto=format&fit=crop",
-  },
-  {
-    name: "Jane Smith",
-    role: "Lead Developer",
-    image:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1287&auto=format&fit=crop",
-  },
-  {
-    name: "Alex Johnson",
-    role: "UX Designer",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop",
-  },
-];
-
 export default function About() {
   return (
     <section
@@ -60,8 +39,8 @@ export default function About() {
           className="relative mb-16 md:mb-20 lg:mb-24"
         >
           <SectionTitle
-            title="About Us"
-            subtitle="Delivering Excellence in IT Solutions"
+            title="Our Mission, Vision & Values"
+            subtitle="What Drives Us Forward"
           />
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 md:w-16 h-12 md:h-16 opacity-20 -z-10">
             <svg

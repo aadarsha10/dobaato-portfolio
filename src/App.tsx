@@ -1,18 +1,19 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ReactNode, useEffect, useState } from "react";
-import { supabase } from "./SupabaseClient";
-import { setupSupabaseResources } from "./utils/setupSupabase";
-import Home from "./pages/Home";
-import Careers from "./pages/careers";
+import {ReactNode, useEffect, useState} from "react";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import ScrollToTop from "./components/ui/ScrollToTop";
+import AboutPage from "./pages/about";
+import Admin from "./pages/admin";
 import Blog from "./pages/blog";
 import BlogDetail from "./pages/blog/BlogDetail";
+import Careers from "./pages/careers";
 import CaseStudies from "./pages/case-studies";
 import CaseStudyDetail from "./pages/case-studies/CaseStudyDetail";
-import ScrollToTop from "./components/ui/ScrollToTop";
-import Admin from "./pages/admin";
-import Login from "./pages/Login/";
 import Documentation from "./pages/Documentation";
+import Home from "./pages/Home";
+import Login from "./pages/Login/";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import {supabase} from "./SupabaseClient";
+import {setupSupabaseResources} from "./utils/setupSupabase";
 // import SignUp from "./components/SignUp";
 
 export default function App() {
@@ -23,18 +24,18 @@ export default function App() {
     setupSupabaseResources()
       .then(() => console.log("Supabase resources setup complete"))
       .catch((err) =>
-        console.error("Error setting up Supabase resources:", err)
+        console.error("Error setting up Supabase resources:", err),
       );
   }, []);
 
-  const PublicRoute = ({ children }: { children: ReactNode }) => {
+  const PublicRoute = ({children}: {children: ReactNode}) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(
-      null
+      null,
     );
 
     useEffect(() => {
       const checkSession = async () => {
-        const { data: sessionData } = await supabase.auth.getSession();
+        const {data: sessionData} = await supabase.auth.getSession();
         setIsAuthenticated(!!sessionData.session); // True if session exists
       };
 
@@ -54,10 +55,10 @@ export default function App() {
     return <>{children}</>;
   };
 
-  const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+  const ProtectedRoute = ({children}: {children: ReactNode}) => {
     useEffect(() => {
       const checkSession = async () => {
-        const { data: sessionData } = await supabase.auth.getSession();
+        const {data: sessionData} = await supabase.auth.getSession();
         setIsAuthenticated(!!sessionData.session);
       };
 
@@ -76,6 +77,7 @@ export default function App() {
       <div className="bg-dark-300 text-white">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
